@@ -1,0 +1,64 @@
+# DRS library Makefile
+#
+# Usage:
+#
+# To make DRS library (libdrs.a) for Linux, with Absoft FORTRAN:
+#	% make
+#
+#--------------------------------------------------------------------
+
+DEBUG = -O
+# Requires Absoft FORTRAN
+FFLAGS = $(DEBUG) $(FOPTS) -Dhpux -D__linux -D__linux_absoft -N26 -s
+CFLAGS = $(DEBUG)
+INSTALL_LIB = /usr/local/lib
+INSTALL_INC = /usr/local/include
+CPPFLAGS = -Dhpux -D__linux -D__linux_absoft
+CPP = /usr/bin/cpp
+
+FOBJECTS = getdat.o idenc.o putdat.o clavdb.o getdim.o iflun.o setdim.o getnam.o mvnbc.o cluvdb.o getnd.o bnsrch.o drserr.o seterr.o getind.o compnm.o dictlk.o putvdm.o setnam.o setdat.o setvdm.o getrge.o savdb.o putdat1.o getdat1.o getvdim.o inqlun.o inqdict.o prdict.o rdtrans.o wrtrans.o setrep.o gettbuf.o getrge2.o getelemd.o setcdim.o getcdim.o getedim.o confnm.o putdic.o getpelem.o mimem.o redat.o wrdat.o cllun.o readhd.o writehd.o wrdic.o redic.o aslun.o drssync.o drsreadb.o drsautosync.o midate.o d_floor.o
+FINCLUDES = drsdef.h drscom.h cycle.h
+FSOURCES = $(FOBJECTS:.o=.F)
+
+COBJECTS = ctoi.o getslab.o drsc.o drstrunc.o
+CINCLUDES = drscdf.h
+CSOURCES = $(COBJECTS:.o=.c)
+
+OBJECTS = $(FOBJECTS) $(COBJECTS)
+SOURCES = $(FSOURCES) $(CSOURCES)
+INCLUDES = $(FINCLUDES) $(CINCLUDES)
+#--------------------------------------------------------------------
+
+all: drsdef.h libdrs.a
+
+libdrs.a: $(OBJECTS)
+	ar rv libdrs.a $?
+
+drsdef.h: drsdef.H
+	$(CPP) -P $(CPPFLAGS) drsdef.H drsdef.h
+#--------------------------------------------------------------------
+
+install: libdrs.a
+	cp libdrs.a $(INSTALL_LIB); chmod 644 $(INSTALL_LIB)/libdrs.a
+	cp drsdef.h $(INSTALL_INC); chmod 644 $(INSTALL_INC)/drsdef.h
+	cp drscdf.h $(INSTALL_INC); chmod 644 $(INSTALL_INC)/drscdf.h
+#	install -f $(INSTALL_LIB) -m 644 libdrs.a
+#	install -f $(INSTALL_INC) -m 644 drsdef.h
+#	install -f $(INSTALL_INC) -m 644 drscdf.h
+
+#--------------------------------------------------------------------------
+
+# Miscellaneous junk
+
+tags:
+	etags $(SOURCES) $(INCLUDES)
+
+clean:
+	-rm -f *.o
+	-rm -f *~
+	-rm -f core
+	
+.SUFFIXES: .F .o
+
+.F.o:
+	$(FC) $(FFLAGS) -c $<

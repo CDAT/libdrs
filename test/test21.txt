@@ -1,0 +1,68 @@
+ Data file: test20.dat                                                  
+                                                                            
+ Number of variables:     5, Written by DRS version  2.1
+ *******************************************************************
+ Source: test                                                                   
+                                                  
+ Name: hflxsen         
+ Title: Sensible heat flux                                                      
+         
+ Units: W/m^2                                    Date: 05/21/92 Time: 10:37:00
+ Type: R*4     , Number of dimensions:     1
+   - - - - - - - - - - - - - - - - - - - - - - - - - -
+   Dimension 1 is equally spaced.
+    Name: test            ,  Units: test                                    
+    Length:        1
+    First element:     1.00,  Last element:     1.00
+ *******************************************************************
+ Source: test2                                                                  
+                                                  
+ Name: hflxsen         
+ Title: Sensible heat flux                                                      
+         
+ Units: W/m^2                                    Date: 05/21/92 Time: 10:37:00
+ Type: R*4     , Number of dimensions:     1
+   - - - - - - - - - - - - - - - - - - - - - - - - - -
+   Dimension 1 is equally spaced.
+    Name: test            ,  Units: test                                    
+    Length:        1
+    First element:     1.00,  Last element:     1.00
+ *******************************************************************
+ Source: test                                                                   
+                                                  
+ Name: hflxsenz        
+ Title: Sensible heat flux                                                      
+         
+ Units: W/m^2                                    Date: 05/21/92 Time: 10:37:00
+ Type: R*4     , Number of dimensions:     1
+   - - - - - - - - - - - - - - - - - - - - - - - - - -
+   Dimension 1 is equally spaced.
+    Name: test            ,  Units: test                                    
+    Length:        1
+    First element:     1.00,  Last element:     1.00
+ *******************************************************************
+ Source: test                                                                   
+                                                  
+ Name: hflxsen         
+ Title: Sensible heat flux, zonal                                               
+         
+ Units: W/m^2                                    Date: 05/21/92 Time: 10:37:00
+ Type: R*4     , Number of dimensions:     1
+   - - - - - - - - - - - - - - - - - - - - - - - - - -
+   Dimension 1 is equally spaced.
+    Name: test            ,  Units: test                                    
+    Length:        1
+    First element:     1.00,  Last element:     1.00
+ *******************************************************************
+ Source: test                                                                   
+                                                  
+ Name: hflxsen         
+ Title: Sensible heat flux                                                      
+         
+ Units: Watts/m^2                                Date: 05/21/92 Time: 10:37:00
+ Type: R*4     , Number of dimensions:     1
+   - - - - - - - - - - - - - - - - - - - - - - - - - -
+   Dimension 1 is equally spaced.
+    Name: test            ,  Units: test                                    
+    Length:        1
+    First element:     1.00,  Last element:     1.00

@@ -1,0 +1,47 @@
+# drsed Makefile
+# 
+# Usage: make [DRSDIR=<DRS library directory>] [INCDIR=<DRS include directory>]
+#
+# To install drsed:
+#
+#	make [INSTALL_DIR=<install directory>] install
+
+.c.o:
+	$(CC) $(CFLAGS) $(CPPFLAGS) -c $<
+
+CC = cc
+DRSDIR = /usr/local/drs/drs/lib
+INSTALL_DIR = /usr/local/drs/drs/util
+INCDIR = /usr/local/drs/drs/include
+CFLAGS = -O -Aa -I$(INCDIR)
+LINTFLAGS=
+YFLAGS = -v
+
+LDFLAGS = -L$(DRSDIR) -ll -ldrs -lU77 -lcl -lc -lm
+
+CSRCS = main.c files.c vars.c dims.c error.c strings.c io.c hashSearch.c
+SRCS =  drsed.tab.c $(CSRCS)
+TAGSRCS = Makefile drsed.h drsed.y drsed.l $(CSRCS)
+OBJS = drsed.tab.o $(CSRCS:.c=.o)
+
+drsed: drsed.h $(SRCS) $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) -o $@
+
+drsed.tab.c drsed.tab.h: drsed.y drsed.yy.c
+	yacc -d drsed.y
+	mv y.tab.c drsed.tab.c
+	mv y.tab.h drsed.tab.h
+
+drsed.yy.c: drsed.l
+	lex drsed.l
+	mv lex.yy.c drsed.yy.c
+
+install: drsed
+	/etc/install -f $(INSTALL_DIR) drsed
+
+clean:
+	-rm -f *.o
+	-rm -f drsed.tab.c drsed.tab.h drsed.yy.c
+
+
+

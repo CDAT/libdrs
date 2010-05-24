@@ -1,0 +1,16 @@
+Note: <param> indicates a parameter to be replaced, [ arg ] indicates an optional argument.
+
+To compile drsed:
+
+	% make -f Makefile.<platform> DRSDIR=<directory containing libdrs.a> INCDIR=<directory containing drscdf.h>
+
+
+To install the executable in directory INSTALL_DIR:
+
+	% make -f Makefile.<platform> INSTALL_DIR=<installation directory> install
+
+To execute drsed:
+
+	% drsed [DRS-dictionary-file]
+
+Type 'help' within drsed for more information.

@@ -1,0 +1,182 @@
+ Data file: dvtest1.dat                                                 
+                                                                            
+ Number of variables:     8, Written by DRS version  2.1
+ *******************************************************************
+ Source: test10                                                                 
+                                                  
+ Name: dv1             
+ Title: dimension variable 1                                                    
+         
+ Units: none                                     Date: 10/31/89 Time: 15:17:00
+ Type: R*4     , Number of dimensions:     1
+   - - - - - - - - - - - - - - - - - - - - - - - - - -
+   Dimension 1 is equally spaced.
+    Name: internal        ,  Units: internal                                
+    Length:       12
+    First element:     1.00,  Last element:    12.00
+ *******************************************************************
+ Source: test10                                                                 
+                                                  
+ Name: dv2             
+ Title: dimension variable 2                                                    
+         
+ Units: none                                     Date: 10/31/89 Time: 15:17:00
+ Type: R*4     , Number of dimensions:     1
+   - - - - - - - - - - - - - - - - - - - - - - - - - -
+   Dimension 1 is equally spaced.
+    Name: internal        ,  Units: internal                                
+    Length:       15
+    First element:     1.00,  Last element:    15.00
+ *******************************************************************
+ Source: test10                                                                 
+                                                  
+ Name: dv3             
+ Title: dimension variable 3                                                    
+         
+ Units: none                                     Date: 10/31/89 Time: 15:17:00
+ Type: R*4     , Number of dimensions:     1
+   - - - - - - - - - - - - - - - - - - - - - - - - - -
+   Dimension 1 is equally spaced.
+    Name: internal        ,  Units: internal                                
+    Length:       18
+    First element:     1.00,  Last element:    18.00
+ *******************************************************************
+ Source: test10                                                                 
+                                                  
+ Name: dv4             
+ Title: dimension variable 4                                                    
+         
+ Units: none                                     Date: 10/31/89 Time: 15:17:00
+ Type: R*4     , Number of dimensions:     1
+   - - - - - - - - - - - - - - - - - - - - - - - - - -
+   Dimension 1 is equally spaced.
+    Name: internal        ,  Units: internal                                
+    Length:       21
+    First element:     1.00,  Last element:    21.00
+ *******************************************************************
+ Source: test10                                                                 
+                                                  
+ Name: a               
+ Title: data variable a                                                         
+         
+ Units: aunits                                   Date: 10/31/89 Time: 15:17:00
+ Type: R*4     , Number of dimensions:     1
+   - - - - - - - - - - - - - - - - - - - - - - - - - -
+   Dimension 1 is unequally spaced.
+    Name: dv1             
+    Source: test10                                                              
+                                                       
+    Title: dimension variable 1                                                 
+              
+    Units: none                                    
+    Length:       12
+    First element:     1.00,  Last element:    23.00
+ *******************************************************************
+ Source: test10                                                                 
+                                                  
+ Name: b               
+ Title: data variable b                                                         
+         
+ Units: bunits                                   Date: 10/31/89 Time: 15:17:00
+ Type: R*4     , Number of dimensions:     2
+   - - - - - - - - - - - - - - - - - - - - - - - - - -
+   Dimension 1 is unequally spaced.
+    Name: dv1             
+    Source: test10                                                              
+                                                       
+    Title: dimension variable 1                                                 
+              
+    Units: none                                    
+    Length:       12
+    First element:     1.00,  Last element:    23.00
+   - - - - - - - - - - - - - - - - - - - - - - - - - -
+   Dimension 2 is unequally spaced.
+    Name: dv2             
+    Source: test10                                                              
+                                                       
+    Title: dimension variable 2                                                 
+              
+    Units: none                                    
+    Length:       15
+    First element:    10.00,  Last element:   -18.00
+ *******************************************************************
+ Source: test10                                                                 
+                                                  
+ Name: c               
+ Title: data variable c                                                         
+         
+ Units: cunits                                   Date: 10/31/89 Time: 15:17:00
+ Type: R*4     , Number of dimensions:     3
+   - - - - - - - - - - - - - - - - - - - - - - - - - -
+   Dimension 1 is unequally spaced.
+    Name: dv1             
+    Source: test10                                                              
+                                                       
+    Title: dimension variable 1                                                 
+              
+    Units: none                                    
+    Length:       12
+    First element:     1.00,  Last element:    23.00
+   - - - - - - - - - - - - - - - - - - - - - - - - - -
+   Dimension 2 is equally spaced.
+    Name: longitude       ,  Units: lunits                                  
+    Length:       15
+    First element:     1.00,  Last element:    15.00
+   - - - - - - - - - - - - - - - - - - - - - - - - - -
+   Dimension 3 is unequally spaced.
+    Name: dv3             
+    Source: test10                                                              
+                                                       
+    Title: dimension variable 3                                                 
+              
+    Units: none                                    
+    Length:       18
+    First element:    11.00,  Last element:    45.00
+ *******************************************************************
+ Source: test10                                                                 
+                                                  
+ Name: d               
+ Title: data variable d                                                         
+         
+ Units: dunits                                   Date: 10/31/89 Time: 15:17:00
+ Type: R*4     , Number of dimensions:     4
+   - - - - - - - - - - - - - - - - - - - - - - - - - -
+   Dimension 1 is unequally spaced.
+    Name: dv1             
+    Source: test10                                                              
+                                                       
+    Title: dimension variable 1                                                 
+              
+    Units: none                                    
+    Length:       12
+    First element:     1.00,  Last element:    23.00
+   - - - - - - - - - - - - - - - - - - - - - - - - - -
+   Dimension 2 is unequally spaced.
+    Name: dv2             
+    Source: test10                                                              
+                                                       
+    Title: dimension variable 2                                                 
+              
+    Units: none                                    
+    Length:       15
+    First element:    10.00,  Last element:   -18.00
+   - - - - - - - - - - - - - - - - - - - - - - - - - -
+   Dimension 3 is unequally spaced.
+    Name: dv3             
+    Source: test10                                                              
+                                                       
+    Title: dimension variable 3                                                 
+              
+    Units: none                                    
+    Length:       18
+    First element:    11.00,  Last element:    45.00
+   - - - - - - - - - - - - - - - - - - - - - - - - - -
+   Dimension 4 is unequally spaced.
+    Name: dv4             
+    Source: test10                                                              
+                                                       
+    Title: dimension variable 4                                                 
+              
+    Units: none                                    
+    Length:       21
+    First element:    24.00,  Last element:   -16.00

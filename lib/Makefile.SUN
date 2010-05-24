@@ -1,0 +1,101 @@
+# DRS library Makefile
+#
+# Usage:
+#
+# To make the DRS library (libdrs.a) for the Sun/SunOS 4.1.3:
+#	% make -f Makefile.SUN
+#
+# To make the DRS library for Sun/Solaris 2.3, follow the instructions
+# written below, then type
+#	% make -f Makefile.SUN
+#
+# To make an EMACS tags file:
+#       % make tags
+#
+# To install drs (library in directory INSTALL_LIB, 
+#   include files in directory INSTALL_INC)
+#	% make install
+#
+#--------------------------------------------------------------------
+#
+# Notes on compilation/linking under Solaris 2.3:
+# 
+# Compilation and linking currently uses the
+# SunOS/BSD Source Compatibility Package in directories
+# /usr/ucb and /usr/ucblib. To use this package, ensure 
+# that the directory /usr/ucb precedes /usr/bin in your
+# PATH environment variable.
+#
+# To link executables with libdrs.a, add -lucb and -lsunmath
+# to your list of external libraries. libucb.a should be in
+# a directory such as /usr/ucblib. libsunmath.a should be in
+# a directory such as /opt/SUNWspro/SC3.0/lib.
+#
+# To compile under Solaris 2.3, uncomment the following line:
+# RANLIB = touch
+# and comment out the following line:
+RANLIB = ranlib
+#--------------------------------------------------------------------
+
+DEBUG = -O2
+FFLAGS = -e $(DEBUG)
+CFLAGS = $(DEBUG)
+INSTALL_LIB = /cirrus/drs
+INSTALL_INC = $(INSTALL_LIB)
+TARFILE = drs.tar
+CPP = /usr/lib/cpp
+
+.PRECIOUS: libdrs.a
+
+FOBJECTS = getdat.o idenc.o putdat.o clavdb.o getdim.o iflun.o setdim.o getnam.o mvnbc.o cluvdb.o getnd.o bnsrch.o drserr.o seterr.o getind.o compnm.o dictlk.o putvdm.o setnam.o setdat.o setvdm.o getrge.o savdb.o putdat1.o getdat1.o getvdim.o inqlun.o inqdict.o prdict.o rdtrans.o wrtrans.o setrep.o gettbuf.o getrge2.o getelemd.o setcdim.o getcdim.o getedim.o confnm.o putdic.o getpelem.o mimem.o redat.o wrdat.o cllun.o readhd.o writehd.o wrdic.o redic.o aslun.o midate.o drssync.o drsreadb.o drsautosync.o
+FINCLUDES = drsdef.h drscom.h cycle.h
+FSOURCES = $(FOBJECTS:.o=.F)
+
+COBJECTS = ctoi.o getslab.o drsc.o drstrunc.o
+CINCLUDES = drscdf.h
+CSOURCES = $(COBJECTS:.o=.c)
+
+OBJECTS = $(FOBJECTS) $(COBJECTS)
+SOURCES = $(FSOURCES) $(CSOURCES)
+INCLUDES = $(FINCLUDES) $(CINCLUDES)
+#--------------------------------------------------------------------
+
+libdrs.a: drsdef.h $(OBJECTS)
+	ar rv libdrs.a $?
+	$(RANLIB) libdrs.a
+	touch libdrs.a
+
+$(FOBJECTS): drscom.h drsdef.h cycle.h
+$(COBJECTS): drscdf.h
+
+drsdef.h: drsdef.H
+	$(CPP) -P drsdef.H drsdef.h
+
+#--------------------------------------------------------------------
+
+install: libdrs.a
+	install -m 644 libdrs.a $(INSTALL_LIB)
+	ranlib $(INSTALL_LIB)/libdrs.a
+	install -m 644 drsdef.h $(INSTALL_INC)
+	install -m 644 drscdf.h $(INSTALL_INC)
+
+#--------------------------------------------------------------------------
+
+# Miscellaneous junk
+
+tags:
+	etags $(SOURCES) $(INCLUDES) drsdef.H
+
+tar:
+	-cp Rtag.log VERSION
+	tar cvf $(TARFILE) README VERSION ./*.F ./*.c ./cycle.h ./drscdf.h ./drscom.h ./drsdef.H ./Makefile.SUN ./Makefile.UNICOS ./Makefile.SGI ./Makefile.HP ./Makefile.NSL ./Makefile.SOL
+
+clean:
+	-rm -f *.o
+	-rm -f *~
+	-rm -f core
+	
+.SUFFIXES: .F .o
+
+.F.o:
+	$(FC) $(FFLAGS) -c $<

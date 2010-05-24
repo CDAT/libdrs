@@ -1,0 +1,65 @@
+**********************************************************************
+
+To make the DRS library libdrs.a, type:
+
+  make -f Makefile.<machine>
+
+where <machine is either SUN, HP, UNICOS, IBM, LINUX.ABSOFT (Absoft f77),
+LINUX.PGI (Portland Group pgf77), or SGI. For example:
+
+  make -f Makefile.SUN
+
+To install the library, set values for INSTALL_LIB (directory to contain libdrs.a)
+and INSTALL_INC (directory to contain the include files), and type:
+
+  make -f Makefile.<machine> install
+
+**********************************************************************
+
+*** BUILDING EXECUTABLES ***
+
+On most platforms, there are no special libraries or flags required to
+use the DRS library (an exception is SUN/Solaris - see below). When
+linking C programs to DRS, it is necessary to specify the Fortran
+libraries. Here are some sample compilation/linking instructions for C
+programs (assuming that libdrs.a and drscdf.h are in directories
+/usr/local/lib and /usr/local/include, respectively):
+
+  -- SUN SunOS 4.1 --
+
+	% cc -I/usr/local/drs -target sun4 -o myprog myprog.c -L/usr/local/drs -ldrs -lF77 -lm
+
+Note: A bug in SunOS 4.1.3/Fortran 1.4 may cause the linker to report a missing external '_MAIN_'. The simplest workaround for this problem is to define a global integer variable 'MAIN_' in your program; the compiler will prepend the underscore. Sun has a patch (#100332) to correct this problem.
+
+  -- SUN Solaris 2.X --
+     (Fortran)
+	% f77 -I/cirrus/drs  -o myprog myprog.f -L/cirrus/drs -ldrs -L/usr/ucblib -lucb
+     (C)
+	% cc -I/cirrus/drs  -o myprog myprog.c -L/cirrus/drs -ldrs -lF77 -lm -L/usr/ucblib -lucb -L/opt/SUNWspro/SC3.0/lib -lsunmath
+
+  -- UNICOS --
+
+	% cc -g -I/usr/local/drs -L /usr/local/drs -l drs -l f myprog.c -o myprog
+
+  -- SGI --
+
+	% cc I/usr/local/drs myprog.c -L/usr/local/drs -ldrs -lF77 -lm -lU77 -lI77 -lisam -lc -o myprog
+
+  -- HP9000 --
+
+	% cc -I/usr/local/drs myprog.c -L/usr/local/drs -ldrs -lU77 -lcl -lm -o myprog
+
+  -- RS/6000 --
+     (C)
+	% cc -g -I/pcmdi/drach/devel/drs/lib -c myprog.c -o myprog.o
+	% xlf myprog.o -o myprog -g -L/usr/local/drs -ldrs -lm
+	
+  -- DEC Alpha --
+
+     (C)
+	% cc -c -g -I/pcmdi/drach/drs/lib -o myprog.o myprog.c
+	% f77 -nofor_main myprog.o -L/pcmdi/drach/drs/lib -ldrs -o myprog
+
+  -- LINUX (Portland Group pgf77) --
+
+	% cc -g -I/usr/local/include myprog.c -L/usr/local/lib -ldrs -L/usr/pgi/linux86/lib -lpgftnrtl -lpgc -lm -o myprog

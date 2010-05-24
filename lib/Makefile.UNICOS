@@ -1,0 +1,64 @@
+# Makefile.UNICOS,v 2.7 1995/01/30 19:14:21 drach Exp
+#
+# DRS Makefile
+#
+# Usage:
+#
+# To make DRS library (libdrs.a) for UNICOS
+#       make libdrs.a
+#
+# To install drs (library in directory INSTALL_LIB, 
+#   include files in directory INSTALL_INC)
+#	% make install
+#
+# To make the NSL version of the library, use Makefile.NSL
+#
+#--------------------------------------------------------------------
+ 
+FFLAGS = -Zv
+CFLAGS = -O2
+CF77PPFLAGS = -N -P
+INSTALL_LIB = /cirrus/drs
+INSTALL_INC = $(INSTALL_LIB)
+AR = bld
+ 
+.PRECIOUS: libdrs.a
+ 
+#----------------------------------------------------------------------
+ 
+libdrs.a: drsdef.h libdrs.a(getdat.o) libdrs.a(idenc.o) libdrs.a(putdat.o) \
+	libdrs.a(clavdb.o) libdrs.a(getdim.o) libdrs.a(iflun.o) \
+	libdrs.a(setdim.o) libdrs.a(getnam.o) libdrs.a(mvnbc.o) \
+	libdrs.a(cluvdb.o) libdrs.a(getnd.o) libdrs.a(bnsrch.o) \
+	libdrs.a(drserr.o) libdrs.a(seterr.o) libdrs.a(getind.o) \
+	libdrs.a(compnm.o) libdrs.a(dictlk.o) libdrs.a(putvdm.o) \
+	libdrs.a(setnam.o) libdrs.a(setdat.o) libdrs.a(setvdm.o) \
+	libdrs.a(getrge.o) libdrs.a(savdb.o) libdrs.a(putdat1.o) \
+	libdrs.a(getdat1.o) libdrs.a(getvdim.o) libdrs.a(inqlun.o) \
+	libdrs.a(inqdict.o) libdrs.a(prdict.o) libdrs.a(rdtrans.o) \
+	libdrs.a(wrtrans.o) libdrs.a(setrep.o) libdrs.a(gettbuf.o) \
+	libdrs.a(getrge2.o) libdrs.a(getelemd.o) libdrs.a(setcdim.o) \
+	libdrs.a(getcdim.o) libdrs.a(getedim.o) libdrs.a(confnm.o) \
+	libdrs.a(putdic.o) libdrs.a(getpelem.o) libdrs.a(mimem.o) \
+	libdrs.a(redat.o) libdrs.a(wrdat.o) libdrs.a(cllun.o) \
+	libdrs.a(readhd.o) libdrs.a(writehd.o) libdrs.a(wrdic.o) \
+	libdrs.a(redic.o) libdrs.a(aslun.o) libdrs.a(midate.o) \
+	libdrs.a(ctoi.o) libdrs.a(getslab.o) libdrs.a(drsc.o) \
+	libdrs.a(d_floor.o) libdrs.a(drssync.o) libdrs.a(drsreadb.o) \
+	libdrs.a(drstrunc.o) libdrs.a(drsautosync.o)
+
+drsdef.h: drsdef.H
+	/lib/cpp $(CF77PPFLAGS) drsdef.H drsdef.h
+
+#------------------------------------------------------------------------
+
+install: libdrs.a
+	install libdrs.a $(INSTALL_LIB)
+	install drsdef.h $(INSTALL_INC)
+	install drscdf.h $(INSTALL_INC)
+
+#--------------------------------------------------------------------------
+ 
+clean:
+	rm -f *.o
+

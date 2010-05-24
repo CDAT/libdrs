@@ -1,0 +1,402 @@
+
+aslun.F,38
+      integer function aslun 81,2981
+
+bdata.F,0
+
+bnsrch.F,39
+      integer function bnsrch(48,1812
+
+clavdb.F,32
+      subroutine clavdb39,1619
+
+cllun.F,38
+      integer function cllun 65,2537
+
+cluvdb.F,39
+      integer function cluvdb(39,1619
+
+compnm.F,40
+      logical function compnam(49,1840
+
+confnm.F,40
+      logical function confnam(44,1715
+
+ctoi.c,835
+#define MINEXP 157,6526
+#define MAXEXP 158,6616
+#define MINCEXP 159,6706
+#define MAXCEXP 160,6781
+#define C_FMASK 162,6857
+#define C_EMASK 165,7029
+#define C_SMASK 166,7092
+#define C_IMPLICIT 167,7151
+#define NAN 168,7213
+#define INFINITY 169,7271
+#define I_FMASK 171,7335
+#define I_EMASK 172,7398
+#define I_SMASK 173,7461
+#define IEEE_BIAS 175,7525
+#define CRAY_BIAS 176,7573
+#define CRAY_INTMASK 178,7624
+#define CRAY_INTMASK2 179,7688
+C8TOF4(187,7947
+F4TOC8(233,8952
+I8TOI4(268,9614
+I4TOI8(309,10554
+#define CBIAS	372,12456
+#define MBIAS	373,12510
+#define CSIGNMASK	374,12562
+#define LCDIF	375,12619
+int C8TOF4(385,12852
+int I8TOI4(393,13019
+int F4TOC8(400,13185
+int I4TOI8(407,13351
+int c8tof4_(416,13590
+int i8toi4_(501,15695
+int f4toc8_(568,17242
+int i4toi8_(575,17335
+void byteswap4_(583,17499
+
+cycle.h,28
+     $     reqcyle(41,1664
+
+d_floor.F,135
+      real function d_floor(46,1747
+      double precision function d_floor(83,2480
+      double precision function d_floor(91,2671
+
+dictlk.F,41
+      integer function dictlook(46,1792
+
+drsautosync.F,43
+      integer function drsautosync(11,251
+
+drsc.c,777
+#define TOFCD(TOFCD101,3489
+#define TOFCDOUT(TOFCDOUT102,3530
+#define TOCPOUT(TOCPOUT103,3616
+Aslun(111,3740
+Cllun(139,4323
+Cluvdb(157,4584
+Drsautosync(174,4827
+Drssync(192,5134
+Drstest(210,5379
+Getdat(230,5695
+Getcdim(248,6022
+Getdim(292,7295
+Getedim(332,8090
+Getelemd(378,9263
+Getpelem(396,9572
+Getname(415,9882
+Getrge2(473,11565
+Getslab(508,12263
+Getvdim(529,12793
+Inqdict(567,13656
+Inqlun(585,13965
+Prdict(615,14629
+Putdic(633,14955
+Putdat(651,15257
+Putvdim(669,15543
+Setdate(688,15944
+Setdim(712,16382
+Seterr(754,17146
+Setname(772,17509
+Setrep(802,18258
+Setvdim(820,18536
+bcopy_(874,19544
+bzero_(879,19633
+d_floor_(888,19789
+bcopy_(893,19841
+bzero_(898,19930
+int NSLDRSOPEN 904,20082
+int DRSN2LCP 922,20755
+int DRSL2NCP 952,21552
+
+drscdf.h,3886
+#define __drscdf_h75,2549
+#define IDRS_NOVALUE 77,2569
+#define IDRS_DEFAULT 78,2592
+#define IDRS_EQUALLY_SPACED 82,2651
+#define IDRS_UNEQUALLY_SPACED 83,2681
+#define IDRS_READ 86,2735
+#define IDRS_CREATE 87,2755
+#define IDRS_EXTEND 88,2777
+#define IDRS_SUN 91,2822
+#define IDRS_CRAY 92,2841
+#define IDRS_MACHINE 96,2875
+#define IDRS_BYTES_PER_WORD 97,2906
+#define IDRS_NSL 98,2936
+#define IDRS_NOCOPY 99,3003
+#define IDRS_MACHINE 101,3097
+#define IDRS_BYTES_PER_WORD 102,3127
+#define DRS_VERSION 110,3328
+#define DRS_MAXVERSION 111,3352
+#define IDRS_GETFIRSTVAR 114,3424
+#define IDRS_GETNEXTVAR 115,3451
+#define IDRS_SOURCELEN 118,3514
+#define IDRS_NAMELEN 119,3541
+#define IDRS_TITLELEN 120,3565
+#define IDRS_UNITSLEN 121,3590
+#define IDRS_DATELEN 122,3615
+#define IDRS_TIMELEN 123,3638
+#define IDRS_TYPELEN 124,3661
+#define IDRS_FILENAMELEN 128,3698
+#define IDRS_FILENAMELEN 130,3733
+typedef char DRS_SOURCE[DRS_SOURCE135,3773
+typedef char DRS_NAME[DRS_NAME136,3814
+typedef char DRS_TITLE[DRS_TITLE137,3851
+typedef char DRS_UNITS[DRS_UNITS138,3890
+typedef char DRS_DATE[DRS_DATE139,3929
+typedef char DRS_TIME[DRS_TIME140,3966
+typedef char DRS_TYPE[DRS_TYPE141,4003
+typedef char DRS_FILENAME[DRS_FILENAME142,4040
+#define IDRS_LEFTHALFWORD 145,4144
+#define IDRS_RIGHTHALFWORD 146,4172
+#define IDRS_I4 149,4224
+#define IDRS_I8 150,4242
+#define IDRS_IEEE_R4 151,4260
+#define IDRS_CRAY_R8 152,4283
+#define IDRS_ASCII 153,4306
+#define IDRS_USER 154,4327
+#define __EXTENDED_DRS_DATATYPES156,4380
+#define IDRS_I1 157,4413
+#define IDRS_I2 158,4431
+#define IDRS_IEEE_R8 159,4449
+#define IDRS_CRAY_R16 160,4472
+#define IDRS_IEEE_R16 161,4497
+#define IDRS_SYNC_OFF 165,4564
+#define IDRS_SYNC_ON 166,4588
+#define IDRS_NOREPORT 169,4638
+#define IDRS_FATAL 170,4662
+#define IDRS_WARNING 171,4683
+#define IDRS_INTERNAL 172,4706
+#define IDRS_BLANKS_ARE_NULL 175,4761
+#define IDRS_BLANKS_ARE_LITERAL 176,4792
+#define IDRS_SUCCESS 179,4855
+#define IDRS_NOMEMORY 180,4878
+#define IDRS_BINFAILED 181,4902
+#define IDRS_BADLEN 182,4930
+#define IDRS_NOMONO 183,4952
+#define IDRS_NOCOMPARISON 184,4974
+#define IDRS_VDBNOTFOUND 185,5005
+#define IDRS_BADDIM 186,5032
+#define IDRS_NOTMONOTONE 187,5054
+#define IDRS_DICTREADERROR 188,5081
+#define IDRS_NODICTFILE 189,5110
+#define IDRS_BADLU 190,5137
+#define IDRS_BADTYPE 191,5159
+#define IDRS_AMBIGUITYEXISTS 192,5183
+#define IDRS_CANNOTADDDATA 193,5215
+#define IDRS_DICTFULL 194,5245
+#define IDRS_VERSION1FILE 195,5270
+#define IDRS_NEWFILEFORMAT 196,5301
+#define IDRS_CANNOTREADHEADER 197,5333
+#define IDRS_CANNOTREADDATA 198,5366
+#define IDRS_BADDIMNAME 199,5397
+#define IDRS_TOOMANYFILES 200,5424
+#define IDRS_CANNOTOPENDICT 201,5453
+#define IDRS_CANNOTOPENDATA 202,5484
+#define IDRS_BADSTATUS 203,5515
+#define IDRS_BADDIMTYPE 204,5541
+#define IDRS_INDEXHIGH 205,5568
+#define IDRS_INDEXLOW 206,5596
+#define IDRS_INDEXBETWEEN 207,5623
+#define IDRS_NORANGE 208,5654
+#define IDRS_SAVEBUFOVERFLOW 209,5678
+#define IDRS_BADERRLEVEL 210,5710
+#define IDRS_ERROROUTOFRANGE 211,5738
+#define IDRS_CANNOTWRITEHEADER 212,5770
+#define IDRS_CANNOTWRITEDATA 213,5804
+#define IDRS_BADCHARLEN 214,5836
+#define IDRS_BADOPER 215,5863
+#define IDRS_NOMOREVARS 216,5887
+#define IDRS_DICTALREADYOPEN 217,5916
+#define IDRS_LOOKUPFAILED 218,5948
+#define IDRS_DICTWRITEERROR 219,5979
+#define IDRS_DICTEXTENDERROR 220,6010
+#define IDRS_DATEXTENDERROR 221,6042
+#define IDRS_DICTRUNCATEERR 222,6073
+#define IDRS_DATTRUNCATEERR 223,6104
+#define IDRS_BADIEEEFP 224,6135
+#define IDRS_BADCRAYFP 225,6161
+#define IDRS_BADCRAYINT 226,6187
+#define IDRS_CANNOTCONVERT 227,6214
+#define IDRS_INEXACTMATCH 228,6244
+#define IDRS_DUPLICATEVAR 229,6275
+#define IDRS_CANNOTWRITEDIC 230,6304
+#define IDRS_BADSYNCOPT 231,6335
+#define PROTO(PROTO235,6392
+#define PROTO(PROTO237,6417
+
+drscom.h,25
+      parameter 58,2193
+
+drsdef.h,25
+      parameter(76,2646
+
+drserr.F,190
+      integer function drserr(54,1978
+      subroutine drsrout(93,2678
+      logical function drstest(110,2993
+      subroutine drstest2(149,3754
+      integer function drsrep(173,4381
+
+drsreadb.F,40
+      integer function drsreadb(17,430
+
+drssync.F,39
+      integer function drssync(20,510
+
+drstrunc.c,76
+#define DRS_BYTE_MULT 78,2391
+int DRSTRUNC(96,2954
+int drstrunc(151,4068
+
+getcdim.F,40
+      integer function getcdim(48,1823
+
+getdat.F,39
+      integer function getdat(52,2015
+
+getdat1.F,36
+      integer function gd1 49,1965
+
+getdim.F,39
+      integer function getdim 39,1619
+
+getedim.F,40
+      integer function getedim 42,1652
+
+getelemd.F,41
+      integer function getelemd(42,1654
+
+getind.F,41
+      integer function getindex(45,1743
+
+getnam.F,40
+      integer function getname 39,1619
+
+getnd.F,38
+      integer function getnd 42,1705
+
+getpelem.F,41
+      integer function getpelem(43,1656
+
+getrge.F,41
+      integer function getrange(45,1738
+
+getrge2.F,40
+      integer function getrge2(45,1735
+
+getslab.c,376
+#define Drscall(Drscall66,2320
+#define Drscall2(Drscall271,2457
+#define Drscall(Drscall82,2666
+#define Drscall2(Drscall287,2805
+#define Drscall(Drscall96,2994
+#define Drscall2(Drscall2101,3132
+#define Swap(Swap109,3304
+#define SetRoutine(SetRoutine110,3339
+#define MXDIM 111,3377
+GETSLAB(124,3893
+int getslab(154,4664
+getslab1(435,12322
+copybuf(678,19003
+
+gettbuf.F,40
+      integer function gettbuf(42,1657
+
+getvdim.F,40
+      integer function getvdim(42,1657
+
+idenc.F,38
+      logical function idenc(51,1990
+
+iflun.F,38
+      integer function iflun 39,1617
+
+inqdict.F,40
+      integer function inqdict(51,2025
+
+inqlun.F,39
+      integer function inqlun(42,1650
+
+midate.F,79
+      integer function midate(48,1818
+      integer function mitime(128,3283
+
+mimem.F,206
+      integer function mialloc(45,1731
+      integer function mifree(119,3245
+      integer function miextend(178,4222
+      integer function miallocw(257,5854
+      integer function miextenw(326,7257
+
+mvnbc.F,32
+      subroutine mvnbc 39,1617
+
+prdict.F,39
+      integer function prdict(51,1909
+
+putdat.F,39
+      integer function putdat(48,1824
+
+putdat1.F,40
+      integer function putdat1 77,3102
+
+putdic.F,39
+      integer function putdic(53,1983
+
+putvdm.F,40
+      integer function putvdim(48,1824
+
+rdtrans.F,40
+      integer function rdtrans(48,1818
+
+readhd.F,39
+      integer function readhd(42,1650
+
+redat.F,38
+      integer function redat 47,1931
+
+redic.F,32
+      subroutine redic 47,1889
+
+savdb.F,83
+      integer function savevdbs(45,1731
+      integer function restvdbs(129,3521
+
+setcdim.F,40
+      integer function setcdim(45,1735
+
+setdat.F,40
+      integer function setdate(42,1650
+
+setdim.F,39
+      integer function setdim 39,1619
+
+seterr.F,81
+      integer function seterr(42,1650
+      integer function getdrser(101,3099
+
+setnam.F,40
+      integer function setname(39,1619
+
+setrep.F,39
+      integer function setrep(45,1733
+
+setvdm.F,40
+      integer function setvdim(42,1655
+
+wrdat.F,38
+      integer function wrdat 58,2347
+
+wrdic.F,32
+      subroutine wrdic 42,1700
+
+writehd.F,40
+      integer function writehd(42,1652
+
+wrtrans.F,40
+      integer function wrtrans(48,1818

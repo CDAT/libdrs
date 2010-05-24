@@ -1,0 +1,106 @@
+-------------------
+        Version: V2_12, Date: Wed May 29 11:32:46 PDT 1996, Module: drslib, User: drach
+-------------------
+- Fixed bug in SGI version which caused precompiler on the Indy to
+  select the wrong open statement (aslun.F)
+- Removed dependency on drsdef.h in Makefile.SGI - this caused
+  the include file to be added to the library, which causes a link error
+-------------------
+        Version: V2_11, Date: Thu Oct 26 16:28:09 PDT 1995, Module: drslib, User: drach
+-------------------
+- Added DEC/Alpha version
+- Modified NSL version to automatically copy dictionary to/from NSL
+-------------------
+        Version: V2_10, Date: Wed Aug  2 09:52:12 PDT 1995, Module: drslib, User: drach
+-------------------
+- Modified for IBM RS/6000
+-------------------
+        Version: V2_9, Date: Wed Mar 29 17:06:06 PST 1995, Module: drslib, User: drach
+-------------------
+(1) Added ability to turn off autosynchronization via drsautosync, and to force
+    synchronization via drssync.
+(2) Added support for the NSL (National Storage Lab) Unitree system.
+(3) Added ability to tune the buffer size.
+-------------------
+        Version: V2_8_2, Date: Wed Jul 14 15:58:21 PDT 1993, Module: drslib, User: drach
+-------------------
+1) Cleaned up cpp directives to avoid compiler warnings
+2) build drsdef.h from drsdef.H to make Fortran compiling easier
+-------------------
+        Version: V2_8, Date: Mon Jul 12 18:20:49 PDT 1993, Module: drslib, User: drach
+-------------------
+Merged Sun, Unicos, SGI, and HP versions into single source.
+-------------------
+        Version: V2_7, Date: Wed Jun 16 11:22:24 PDT 1993, Module: drslib, User: drach
+-------------------
+(1) Modified putdat1 to enforce incremental extension constraint
+(2) Fixed bug in putdat1 which caused roundoff error on dimension
+    limits, for second instance stuff.
+(3) Added error message in getslab when memory alloc fails.
+(4) Fixed prdict error in logical unit for inqlun.
+-------------------
+        Version: V2_6, Date: Thu Mar 11 17:24:26 PST 1993, Module: drslib, User: drach
+-------------------
+1) Fixed bug in aslun which omitted reading the first data block
+on file open via IDRS_EXTEND.
+-------------------
+        Version: V2_5, Date: Mon Jan  4 18:12:55 PST 1993, Module: drslib, User: drach
+-------------------
+(1) Fixed bug which caused copybuf in getslab to overwrite array bounds
+    when reading Cray R*8 data on the Sun;
+(2) Added routine getpelem to return user representation, rather than
+    file representation, as in getelemd;
+(3) Modified inqdict to support getpelem.
+-------------------
+        Version: V2_4, Date: Wed Dec 16 15:33:50 PST 1992, Module: drslib, User: drach
+-------------------
+1) Modified getdat to allow dimension ranges to be specified with
+either setdim or setvdim.
+2) Fixed a bug in putdat1, to allow second instance stuff to work
+even with minor format translation errors on dimension values.
+3) Fixed bugs in getdat and putdat, to return error values on
+read or write errors.
+-----------
+Version: V2_3(C_4), Date: Wed Oct 14 16:22:00 PDT 1992
+-----------
+	Provided full support for renaming strings via putdic:
+	1) Rewrote putdic to allow renaming all strings, including dimensions (equally
+	or unequally spaced). Literal blanks will be recognized if the IDRS_BLANKS_ARE_LITERAL
+	option is used, otherwise they are treated as nulls.
+	2) Modified redic to get unequally-spaced dimension names and units from the catalog entries
+	for the proper dimension variables.
+-----------
+
+Version: V2_2(C_3), Date: Tue Oct  6 09:59:10 PDT 1992
+-----------
+	1) Made idenc a logical function.
+	2) Fixed up SGI version: time/date functions, C interface has wrappers
+	for d_floor and bcopy.
+	3) Added the initial version of putdic;
+	NB!!! This version only modifies naming strings, and is not safe for
+	modifying names of dimension variables. It is suitable for supporting
+	the SET NAME functionality in drsed, provided that dimension variable
+	names are not modified.
+-----------
+
+Version: V2_1(C_2), Date: Tue Jun  2 16:11:04 PDT 1992
+-----------
+	1) Changed the naming scheme from 'similarity' to 'equality'
+	of naming strings, where two strings are considered as equal if they agree,
+	irrespective of case and blanks. As before, a blank string is treated as a wild card.
+	2) Inqdict no longer returns IDRS_INEXACTMATCH.
+	3) Reimplemented wrdat and redat, replacing implied do loops with reads
+	of pointer variables.
+	4) Moved drs error strings out of drsdef.h and drscdf.h, made them local
+	to drsrep.
+	5) Error messages are now sent to unit 0 (stderr). Error messages in
+	getslab are sent to stderr.
+	6) Fixed bug in getslab, where malloced buffer space is not released if an
+	error occured.
+-----------
+
+Version: V2_0(C_1), Date: Mon Mar  9 16:58:34 PST 1992
+-----------
+	Entered into RCS
+-----------
+

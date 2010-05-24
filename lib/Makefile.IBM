@@ -1,0 +1,81 @@
+# DRS library Makefile
+#
+# Usage:
+#
+# To make DRS library (libdrs.a) for the IBM RS-6000:
+#	% make
+#
+# To make an EMACS tags file:
+#       % make tags
+#
+# To install drs (library in directory INSTALL_LIB, 
+#   include files in directory INSTALL_INC)
+#	% make install
+#
+#--------------------------------------------------------------------
+
+DEBUG = -O
+CPP = /usr/ccs/lib/cpp
+FFLAGS = $(DEBUG) -qcharlen=1024
+CPPFLAGS = -Dhpux=def -Dibm=def
+CFLAGS=$(CPPFLAGS)
+INSTALL_LIB = /cirrus/drs
+INSTALL_INC = $(INSTALL_LIB)
+TARFILE = drs.tar
+
+.PRECIOUS: libdrs.a
+
+FOBJECTS = getdat.o idenc.o putdat.o clavdb.o getdim.o iflun.o setdim.o getnam.o mvnbc.o cluvdb.o getnd.o bnsrch.o drserr.o seterr.o getind.o compnm.o dictlk.o putvdm.o setnam.o setdat.o setvdm.o getrge.o savdb.o putdat1.o getdat1.o getvdim.o inqlun.o inqdict.o prdict.o rdtrans.o wrtrans.o setrep.o gettbuf.o getrge2.o getelemd.o setcdim.o getcdim.o getedim.o confnm.o putdic.o getpelem.o mimem.o redat.o wrdat.o cllun.o readhd.o writehd.o wrdic.o redic.o aslun.o midate.o drssync.o drsreadb.o drsautosync.o d_floor.o bdata.o
+FINCLUDES = drsdef.h drscom.h cycle.h
+FSOURCES = $(FOBJECTS:.o=.F)
+
+COBJECTS = ctoi.o getslab.o drsc.o drstrunc.o
+CINCLUDES = drscdf.h
+CSOURCES = $(COBJECTS:.o=.c)
+
+OBJECTS = $(FOBJECTS) $(COBJECTS)
+SOURCES = $(FSOURCES) $(CSOURCES)
+INCLUDES = $(FINCLUDES) $(CINCLUDES)
+#--------------------------------------------------------------------
+
+libdrs.a: drsdef.h $(OBJECTS)
+	ar rv libdrs.a $(OBJECTS)
+	ranlib libdrs.a
+	touch libdrs.a
+
+$(FOBJECTS): drsdef.h cycle.h
+$(COBJECTS): drscdf.h
+
+drsdef.h:
+	cp drsdef.IBM drsdef.h
+
+#--------------------------------------------------------------------
+
+install: libdrs.a
+	mv  libdrs.a $(INSTALL_LIB)
+	ranlib $(INSTALL_LIB)/libdrs.a
+	cp  drsdef.h $(INSTALL_INC)
+
+#--------------------------------------------------------------------------
+
+# Miscellaneous junk
+
+tags:
+	etags $(SOURCES) $(INCLUDES)
+
+tar:
+	-cp Rtag.log VERSION
+	tar cvf $(TARFILE) README VERSION ./*.F ./*.c ./cycle.h ./drscdf.h ./drscom.h ./drsdef.H ./Makefile.SUN ./Makefile.IBM ./Makefile.UNICOS ./Makefile.SGI ./Makefile.HP drsdef.IBM
+
+clean:
+	-rm -f *.o *.f
+	-rm -f *~
+	-rm -f core
+	
+.SUFFIXES: .F .o
+
+.F.o:
+	$(CPP) -P $(CPPFLAGS) $< `basename $< .F`.f ;\
+	$(FC) $(FFLAGS) -c `basename $< .F`.f
+	-rm -f `basename $< .F`.f
+

@@ -1,0 +1,80 @@
+
+		***** DRS Version 2.13 *****
+
+*********************************************************************
+
+Directory structure
+-------------------
+
+	The distribution tar file for DRS V2.13 contains the following
+directories: 
+
+	doc	- Documentation, Postscript format
+	drsed	- DRS browser utility
+	lib	- DRS library
+
+*********************************************************************
+
+Platforms
+---------
+
+	DRS is currently supported on:
+
+	- Cray/Unicos
+	- DEC Alpha/OSF
+	- HP 9000 / HP-UX 9.0
+	- IBM RS6000 / AIX 3.2
+	- Linux (Redhat V5.2), Portland Group (PGI) FORTRAN
+	- SGI Irix 5.4
+	- Sun / SunOS 4.1.3
+	- Sun / Solaris 2.4 (SunOS 5.4)
+
+*********************************************************************
+
+Library creation
+----------------
+
+	To create the DRS library libdrs.a, ensure that
+the C and Fortran compilers are available, then:
+
+% cd drs/lib
+% make -f Makefile.<machine>
+	
+where <machine> is one of ALPHA, HP, IBM, LINUX.PGI, SGI, SOL, SUN, or
+UNICOS.
+
+	To create the drsed utility:
+
+% cd drs/drsed
+% make -f Makefile.<machine> [DRSDIR=<ldir>] [INCDIR=<idir>]
+
+where <ldir> and <idir> are the directories containing libdrs.a and
+drscdf.h, respectively.
+
+Use the SUN Makefile for both SunOS 4.1.3 and Sun/Solaris.
+
+*********************************************************************
+
+Version
+-------
+
+V2.13 ported to Redhat Linux 5.2
+
+V2.12 fixes several bugs in the previous version. The most important of
+these caused an error when opening files on the SGI, and when linking
+with libdrs.a on the SGI.
+
+V2.11 implements the following enhancements and modifications with respect
+to the previous distribution (V2.8):
+
+- The DEC Alpha, IBM RS6000, and Sun/Solaris platforms are supported.
+
+- The drsautosync and drssync functions were added, to enable more control
+over I/O and buffer size. See the DRS Library documentation for details.
+
+- The mapdrs utility is no longer distributed with DRS. It has been
+replaced by the VCS program.
+
+- The drstran utility is no longer distributed.
+
+*********************************************************************

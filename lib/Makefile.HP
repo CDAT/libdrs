@@ -1,0 +1,68 @@
+# DRS library Makefile
+#
+# Usage:
+#
+# To make DRS library (libdrs.a) for the HP:
+#	% make
+#
+# To make an EMACS tags file:
+#       % make tags
+#
+# To install drs (library in directory INSTALL_LIB, 
+#   include files in directory INSTALL_INC)
+#	% make install
+#
+#--------------------------------------------------------------------
+
+DEBUG = -O
+FFLAGS = +es $(DEBUG)
+CFLAGS = $(DEBUG) 
+INSTALL_LIB = /usr/local/drs/drs/lib
+INSTALL_INC = /usr/local/drs/drs/include
+
+.PRECIOUS: libdrs.a
+
+FOBJECTS = getdat.o idenc.o putdat.o clavdb.o getdim.o iflun.o setdim.o getnam.o mvnbc.o cluvdb.o getnd.o bnsrch.o drserr.o seterr.o getind.o compnm.o dictlk.o putvdm.o setnam.o setdat.o setvdm.o getrge.o savdb.o putdat1.o getdat1.o getvdim.o inqlun.o inqdict.o prdict.o rdtrans.o wrtrans.o setrep.o gettbuf.o getrge2.o getelemd.o setcdim.o getcdim.o getedim.o confnm.o putdic.o getpelem.o mimem.o redat.o wrdat.o cllun.o readhd.o writehd.o wrdic.o redic.o aslun.o midate.o drssync.o drsreadb.o drsautosync.o
+FINCLUDES = drsdef.h drscom.h cycle.h
+FSOURCES = $(FOBJECTS:.o=.F)
+
+COBJECTS = ctoi.o getslab.o drsc.o drstrunc.o
+CINCLUDES = drscdf.h
+CSOURCES = $(COBJECTS:.o=.c)
+
+OBJECTS = $(FOBJECTS) $(COBJECTS)
+SOURCES = $(FSOURCES) $(CSOURCES)
+INCLUDES = $(FINCLUDES) $(CINCLUDES)
+#--------------------------------------------------------------------
+
+libdrs.a: drsdef.h $(OBJECTS)
+	ar rv libdrs.a $?
+	ranlib libdrs.a
+	touch libdrs.a
+
+drsdef.h: drsdef.H
+	/lib/cpp -P drsdef.H drsdef.h
+
+#--------------------------------------------------------------------------
+
+install: libdrs.a
+	/etc/install -f $(INSTALL_LIB) libdrs.a
+	/etc/install -f $(INSTALL_INC) drsdef.h
+	/etc/install -f $(INSTALL_INC) drscdf.h
+
+#--------------------------------------------------------------------------
+
+# Miscellaneous junk
+
+tags:
+	etags $(SOURCES) $(INCLUDES)
+
+clean:
+	-rm -f *.o
+	-rm -f *~
+	-rm -f core
+	
+.SUFFIXES: .F .o
+
+.F.o:
+	$(FC) $(FFLAGS) -c $<

@@ -1,0 +1,44 @@
+# drsed Makefile
+#
+# Usage: make [DRSDIR=<DRS library directory>] [INCDIR=<DRS include directory>]
+#
+
+
+.c.o:
+	$(CC) $(CFLAGS) $(CPPFLAGS) -c $<
+
+DRSDIR=.
+INCDIR = $(DRSDIR)
+LOADDIR=-L $(DRSDIR)
+CPPFLAGS = -I$(INCDIR)
+CFLAGS = -O2
+LINTFLAGS=
+YFLAGS = -v
+
+LOADLIBS = -ll -ldrs -lf -lc -lm
+
+CSRCS = main.c files.c vars.c dims.c error.c strings.c io.c hashSearch.c
+SRCS =  drsed.tab.c $(CSRCS)
+TAGSRCS = drsed.h drsed.y drsed.l $(CSRCS)
+OBJS =  $(SRCS:.c=.o)
+
+GOAL =  drsed
+
+$(GOAL): drsed.tab.o main.o files.o vars.o dims.o error.o strings.o io.o hashSearch.o
+	$(CC) $(CFLAGS) drsed.tab.o main.o files.o vars.o dims.o error.o strings.o io.o hashSearch.o $(LOADDIR) $(LOADLIBS) -o $@
+
+drsed.tab.c drsed.tab.h: drsed.y drsed.yy.c
+	yacc -d drsed.y
+	mv y.tab.c drsed.tab.c
+	mv y.tab.h drsed.tab.h
+
+drsed.yy.c: drsed.l
+	lex drsed.l
+	mv lex.yy.c drsed.yy.c
+
+clean:
+	-rm -f *.o
+	-rm -f drsed.tab.c drsed.tab.h drsed.yy.c
+
+
+

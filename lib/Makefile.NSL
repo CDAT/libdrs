@@ -1,0 +1,56 @@
+# Makefile.NSL,v 2.2 1995/10/26 23:20:25 drach Exp
+#
+# DRS Makefile
+#
+# Usage:
+#	make  libdrsnsl.a
+#
+#--------------------------------------------------------------------
+ 
+DEBUG = -O2
+FFLAGS = -Zv
+CFLAGS = $(DEBUG) -I/usr/local//unitree/migration/include -DNSL_DRS
+CF77PPFLAGS = -N -P -DNSL_DRS
+AR = bld
+ 
+.PRECIOUS: libdrsnsl.a
+ 
+#----------------------------------------------------------------------
+ 
+libdrsnsl.a: drsdef.h libdrsnsl.a(getdat.o) libdrsnsl.a(idenc.o) libdrsnsl.a(putdat.o) \
+	libdrsnsl.a(clavdb.o) libdrsnsl.a(getdim.o) libdrsnsl.a(iflun.o) \
+	libdrsnsl.a(setdim.o) libdrsnsl.a(getnam.o) libdrsnsl.a(mvnbc.o) \
+	libdrsnsl.a(cluvdb.o) libdrsnsl.a(getnd.o) libdrsnsl.a(bnsrch.o) \
+	libdrsnsl.a(drserr.o) libdrsnsl.a(seterr.o) libdrsnsl.a(getind.o) \
+	libdrsnsl.a(compnm.o) libdrsnsl.a(dictlk.o) libdrsnsl.a(putvdm.o) \
+	libdrsnsl.a(setnam.o) libdrsnsl.a(setdat.o) libdrsnsl.a(setvdm.o) \
+	libdrsnsl.a(getrge.o) libdrsnsl.a(savdb.o) libdrsnsl.a(putdat1.o) \
+	libdrsnsl.a(getdat1.o) libdrsnsl.a(getvdim.o) libdrsnsl.a(inqlun.o) \
+	libdrsnsl.a(inqdict.o) libdrsnsl.a(prdict.o) libdrsnsl.a(rdtrans.o) \
+	libdrsnsl.a(wrtrans.o) libdrsnsl.a(setrep.o) libdrsnsl.a(gettbuf.o) \
+	libdrsnsl.a(getrge2.o) libdrsnsl.a(getelemd.o) libdrsnsl.a(setcdim.o) \
+	libdrsnsl.a(getcdim.o) libdrsnsl.a(getedim.o) libdrsnsl.a(confnm.o) \
+	libdrsnsl.a(putdic.o) libdrsnsl.a(getpelem.o) libdrsnsl.a(mimem.o) \
+	libdrsnsl.a(redat.o) libdrsnsl.a(wrdat.o) libdrsnsl.a(cllun.o) \
+	libdrsnsl.a(readhd.o) libdrsnsl.a(writehd.o) libdrsnsl.a(wrdic.o) \
+	libdrsnsl.a(redic.o) libdrsnsl.a(aslun.o) libdrsnsl.a(midate.o) \
+	libdrsnsl.a(ctoi.o) libdrsnsl.a(getslab.o) libdrsnsl.a(drsc.o) \
+	libdrsnsl.a(d_floor.o) libdrsnsl.a(drssync.o) libdrsnsl.a(drsreadb.o) \
+	libdrsnsl.a(drstrunc.o) libdrsnsl.a(drsautosync.o) libdrsnsl.a(n2lcp.o) \
+	libdrsnsl.a(l2ncp.o)
+
+drsdef.h: drsdef.H
+	/lib/cpp $(CF77PPFLAGS) drsdef.H drsdef.h
+
+#------------------------------------------------------------------------
+
+install: libdrsnsl.a
+	install libdrsnsl.a $(INSTALL_LIB)
+	install drsdef.h $(INSTALL_INC)
+	install drscdf.h $(INSTALL_INC)
+
+#--------------------------------------------------------------------------
+ 
+clean:
+	rm -f *.o drsdef.h *.f
+

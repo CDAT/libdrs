@@ -1,0 +1,31 @@
+-------------------
+        Version: V2_3, Date: Wed Aug  2 09:46:50 PDT 1995, Module: drsed, User: drach
+-------------------
+- Added RS/6000 version
+-------------------
+        Version: V2_2_3, Date: Mon Jan  3 12:54:56 PST 1994, Module: drsed, User: drach
+-------------------
+Modified hashSearch.c and hashSearch.h for backward compatibility with 
+K&R C on Sun
+-------------------
+        Version: V2_2_2, Date: Fri Jul 16 11:38:26 PDT 1993, Module: drsed, User: drach
+-------------------
+Cleaned up HP and SGI Makefiles.
+-------------------
+        Version: V2_2, Date: Thu Jul 15 17:39:27 PDT 1993, Module: drsed, User: drach
+-------------------
+(1) Merged source for all platforms
+(2) Moved global definitions to main.c
+(3) Cleaned up ifdefs, etc.
+(4) Modified drsed.y, drsed.l for HP compatibility
+Version: V2_1(C_2), Date: Wed Oct 14 16:58:19 PDT 1992
+-----------
+	1) Added support for same-name variables.
+	2) Added SET command to rename strings.
+-----------
+
+Version: V2_0(C_1), Date: Mon Mar  2 17:22:50 PST 1992
+-----------
+	Entered into RCS
+-----------
+

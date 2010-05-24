@@ -1,0 +1,258 @@
+pgf77 -g  -Dhpux -D__linux -c getdat.F
+PGFTN-W-0024-CHARACTER or Hollerith constant truncated to fit data type (./drsdef.h: 110)
+  0 inform,   1 warnings,   0 severes, 0 fatal for getdat
+pgf77 -g  -Dhpux -D__linux -c idenc.F
+pgf77 -g  -Dhpux -D__linux -c putdat.F
+PGFTN-W-0024-CHARACTER or Hollerith constant truncated to fit data type (./drsdef.h: 110)
+  0 inform,   1 warnings,   0 severes, 0 fatal for putdat
+PGFTN/x86 Linux/x86 3.0-4: compilation completed with warnings
+pgf77 -g  -Dhpux -D__linux -c clavdb.F
+PGFTN-W-0024-CHARACTER or Hollerith constant truncated to fit data type (./drsdef.h: 110)
+  0 inform,   1 warnings,   0 severes, 0 fatal for clavdb
+PGFTN/x86 Linux/x86 3.0-4: compilation completed with warnings
+pgf77 -g  -Dhpux -D__linux -c getdim.F
+PGFTN-W-0024-CHARACTER or Hollerith constant truncated to fit data type (./drsdef.h: 110)
+  0 inform,   1 warnings,   0 severes, 0 fatal for getdim
+PGFTN/x86 Linux/x86 3.0-4: compilation completed with warnings
+pgf77 -g  -Dhpux -D__linux -c iflun.F
+pgf77 -g  -Dhpux -D__linux -c setdim.F
+PGFTN-W-0024-CHARACTER or Hollerith constant truncated to fit data type (./drsdef.h: 110)
+  0 inform,   1 warnings,   0 severes, 0 fatal for setdim
+PGFTN/x86 Linux/x86 3.0-4: compilation completed with warnings
+pgf77 -g  -Dhpux -D__linux -c getnam.F
+pgf77 -g  -Dhpux -D__linux -c mvnbc.F
+pgf77 -g  -Dhpux -D__linux -c cluvdb.F
+PGFTN-W-0024-CHARACTER or Hollerith constant truncated to fit data type (./drsdef.h: 110)
+  0 inform,   1 warnings,   0 severes, 0 fatal for cluvdb
+PGFTN/x86 Linux/x86 3.0-4: compilation completed with warnings
+pgf77 -g  -Dhpux -D__linux -c getnd.F
+pgf77 -g  -Dhpux -D__linux -c bnsrch.F
+PGFTN-W-0024-CHARACTER or Hollerith constant truncated to fit data type (./drsdef.h: 110)
+  0 inform,   1 warnings,   0 severes, 0 fatal for bnsrch
+PGFTN/x86 Linux/x86 3.0-4: compilation completed with warnings
+pgf77 -g  -Dhpux -D__linux -c drserr.F
+PGFTN-W-0024-CHARACTER or Hollerith constant truncated to fit data type (./drsdef.h: 110)
+  0 inform,   1 warnings,   0 severes, 0 fatal for drserr
+PGFTN-W-0024-CHARACTER or Hollerith constant truncated to fit data type (./drsdef.h: 110)
+  0 inform,   1 warnings,   0 severes, 0 fatal for drsrout
+PGFTN-W-0024-CHARACTER or Hollerith constant truncated to fit data type (./drsdef.h: 110)
+  0 inform,   1 warnings,   0 severes, 0 fatal for drstest
+PGFTN-W-0024-CHARACTER or Hollerith constant truncated to fit data type (./drsdef.h: 110)
+  0 inform,   1 warnings,   0 severes, 0 fatal for drstest2
+PGFTN-W-0024-CHARACTER or Hollerith constant truncated to fit data type (./drsdef.h: 110)
+  0 inform,   1 warnings,   0 severes, 0 fatal for drsrep
+pgf77 -g  -Dhpux -D__linux -c seterr.F
+PGFTN-W-0024-CHARACTER or Hollerith constant truncated to fit data type (./drsdef.h: 110)
+  0 inform,   1 warnings,   0 severes, 0 fatal for seterr
+pgf77 -g  -Dhpux -D__linux -c getind.F
+PGFTN-W-0024-CHARACTER or Hollerith constant truncated to fit data type (./drsdef.h: 110)
+  0 inform,   1 warnings,   0 severes, 0 fatal for getindex
+pgf77 -g  -Dhpux -D__linux -c compnm.F
+pgf77 -g  -Dhpux -D__linux -c dictlk.F
+PGFTN-W-0024-CHARACTER or Hollerith constant truncated to fit data type (./drsdef.h: 110)
+  0 inform,   1 warnings,   0 severes, 0 fatal for dictlook
+pgf77 -g  -Dhpux -D__linux -c putvdm.F
+PGFTN-W-0024-CHARACTER or Hollerith constant truncated to fit data type (./drsdef.h: 110)
+  0 inform,   1 warnings,   0 severes, 0 fatal for putvdim
+PGFTN/x86 Linux/x86 3.0-4: compilation completed with warnings
+pgf77 -g  -Dhpux -D__linux -c setnam.F
+PGFTN-W-0024-CHARACTER or Hollerith constant truncated to fit data type (./drsdef.h: 110)
+  0 inform,   1 warnings,   0 severes, 0 fatal for setname
+PGFTN/x86 Linux/x86 3.0-4: compilation completed with warnings
+pgf77 -g  -Dhpux -D__linux -c setdat.F
+PGFTN-W-0024-CHARACTER or Hollerith constant truncated to fit data type (./drsdef.h: 110)
+  0 inform,   1 warnings,   0 severes, 0 fatal for setdate
+PGFTN/x86 Linux/x86 3.0-4: compilation completed with warnings
+pgf77 -g  -Dhpux -D__linux -c setvdm.F
+PGFTN-W-0024-CHARACTER or Hollerith constant truncated to fit data type (./drsdef.h: 110)
+  0 inform,   1 warnings,   0 severes, 0 fatal for setvdim
+PGFTN/x86 Linux/x86 3.0-4: compilation completed with warnings
+pgf77 -g  -Dhpux -D__linux -c getrge.F
+PGFTN-W-0024-CHARACTER or Hollerith constant truncated to fit data type (./drsdef.h: 110)
+  0 inform,   1 warnings,   0 severes, 0 fatal for getrange
+pgf77 -g  -Dhpux -D__linux -c savdb.F
+PGFTN-W-0024-CHARACTER or Hollerith constant truncated to fit data type (./drsdef.h: 110)
+  0 inform,   1 warnings,   0 severes, 0 fatal for savevdbs
+PGFTN-W-0024-CHARACTER or Hollerith constant truncated to fit data type (./drsdef.h: 110)
+  0 inform,   1 warnings,   0 severes, 0 fatal for restvdbs
+PGFTN/x86 Linux/x86 3.0-4: compilation completed with warnings
+pgf77 -g  -Dhpux -D__linux -c putdat1.F
+PGFTN-W-0024-CHARACTER or Hollerith constant truncated to fit data type (./drsdef.h: 110)
+  0 inform,   1 warnings,   0 severes, 0 fatal for putdat1
+pgf77 -g  -Dhpux -D__linux -c getdat1.F
+PGFTN-W-0024-CHARACTER or Hollerith constant truncated to fit data type (./drsdef.h: 110)
+  0 inform,   1 warnings,   0 severes, 0 fatal for gd1
+pgf77 -g  -Dhpux -D__linux -c getvdim.F
+PGFTN-W-0024-CHARACTER or Hollerith constant truncated to fit data type (./drsdef.h: 110)
+  0 inform,   1 warnings,   0 severes, 0 fatal for getvdim
+PGFTN/x86 Linux/x86 3.0-4: compilation completed with warnings
+pgf77 -g  -Dhpux -D__linux -c inqlun.F
+PGFTN-W-0024-CHARACTER or Hollerith constant truncated to fit data type (./drsdef.h: 110)
+  0 inform,   1 warnings,   0 severes, 0 fatal for inqlun
+PGFTN/x86 Linux/x86 3.0-4: compilation completed with warnings
+pgf77 -g  -Dhpux -D__linux -c inqdict.F
+PGFTN-W-0024-CHARACTER or Hollerith constant truncated to fit data type (./drsdef.h: 110)
+  0 inform,   1 warnings,   0 severes, 0 fatal for inqdict
+PGFTN/x86 Linux/x86 3.0-4: compilation completed with warnings
+pgf77 -g  -Dhpux -D__linux -c prdict.F
+PGFTN-W-0024-CHARACTER or Hollerith constant truncated to fit data type (./drsdef.h: 110)
+  0 inform,   1 warnings,   0 severes, 0 fatal for prdict
+PGFTN/x86 Linux/x86 3.0-4: compilation completed with warnings
+pgf77 -g  -Dhpux -D__linux -c rdtrans.F
+PGFTN-W-0024-CHARACTER or Hollerith constant truncated to fit data type (./drsdef.h: 110)
+  0 inform,   1 warnings,   0 severes, 0 fatal for rdtrans
+PGFTN/x86 Linux/x86 3.0-4: compilation completed with warnings
+pgf77 -g  -Dhpux -D__linux -c wrtrans.F
+PGFTN-W-0024-CHARACTER or Hollerith constant truncated to fit data type (./drsdef.h: 110)
+  0 inform,   1 warnings,   0 severes, 0 fatal for wrtrans
+PGFTN/x86 Linux/x86 3.0-4: compilation completed with warnings
+pgf77 -g  -Dhpux -D__linux -c setrep.F
+PGFTN-W-0024-CHARACTER or Hollerith constant truncated to fit data type (./drsdef.h: 110)
+  0 inform,   1 warnings,   0 severes, 0 fatal for setrep
+PGFTN/x86 Linux/x86 3.0-4: compilation completed with warnings
+pgf77 -g  -Dhpux -D__linux -c gettbuf.F
+PGFTN-W-0024-CHARACTER or Hollerith constant truncated to fit data type (./drsdef.h: 110)
+  0 inform,   1 warnings,   0 severes, 0 fatal for gettbuf
+pgf77 -g  -Dhpux -D__linux -c getrge2.F
+PGFTN-W-0024-CHARACTER or Hollerith constant truncated to fit data type (./drsdef.h: 110)
+  0 inform,   1 warnings,   0 severes, 0 fatal for getrge2
+PGFTN/x86 Linux/x86 3.0-4: compilation completed with warnings
+pgf77 -g  -Dhpux -D__linux -c getelemd.F
+PGFTN-W-0024-CHARACTER or Hollerith constant truncated to fit data type (./drsdef.h: 110)
+  0 inform,   1 warnings,   0 severes, 0 fatal for getelemd
+pgf77 -g  -Dhpux -D__linux -c setcdim.F
+PGFTN-W-0024-CHARACTER or Hollerith constant truncated to fit data type (./drsdef.h: 110)
+  0 inform,   1 warnings,   0 severes, 0 fatal for setcdim
+PGFTN/x86 Linux/x86 3.0-4: compilation completed with warnings
+pgf77 -g  -Dhpux -D__linux -c getcdim.F
+PGFTN-W-0024-CHARACTER or Hollerith constant truncated to fit data type (./drsdef.h: 110)
+  0 inform,   1 warnings,   0 severes, 0 fatal for getcdim
+PGFTN/x86 Linux/x86 3.0-4: compilation completed with warnings
+pgf77 -g  -Dhpux -D__linux -c getedim.F
+PGFTN-W-0024-CHARACTER or Hollerith constant truncated to fit data type (./drsdef.h: 110)
+  0 inform,   1 warnings,   0 severes, 0 fatal for getedim
+pgf77 -g  -Dhpux -D__linux -c confnm.F
+pgf77 -g  -Dhpux -D__linux -c putdic.F
+PGFTN-W-0024-CHARACTER or Hollerith constant truncated to fit data type (./drsdef.h: 110)
+  0 inform,   1 warnings,   0 severes, 0 fatal for putdic
+PGFTN/x86 Linux/x86 3.0-4: compilation completed with warnings
+pgf77 -g  -Dhpux -D__linux -c getpelem.F
+PGFTN-W-0024-CHARACTER or Hollerith constant truncated to fit data type (./drsdef.h: 110)
+  0 inform,   1 warnings,   0 severes, 0 fatal for getpelem
+pgf77 -g  -Dhpux -D__linux -c mimem.F
+PGFTN-W-0024-CHARACTER or Hollerith constant truncated to fit data type (./drsdef.h: 110)
+  0 inform,   1 warnings,   0 severes, 0 fatal for mialloc
+PGFTN-W-0024-CHARACTER or Hollerith constant truncated to fit data type (./drsdef.h: 110)
+  0 inform,   1 warnings,   0 severes, 0 fatal for mifree
+PGFTN-W-0024-CHARACTER or Hollerith constant truncated to fit data type (./drsdef.h: 110)
+  0 inform,   1 warnings,   0 severes, 0 fatal for miextend
+PGFTN-W-0024-CHARACTER or Hollerith constant truncated to fit data type (./drsdef.h: 110)
+  0 inform,   1 warnings,   0 severes, 0 fatal for miallocw
+PGFTN-W-0024-CHARACTER or Hollerith constant truncated to fit data type (./drsdef.h: 110)
+  0 inform,   1 warnings,   0 severes, 0 fatal for miextenw
+pgf77 -g  -Dhpux -D__linux -c redat.F
+PGFTN-W-0024-CHARACTER or Hollerith constant truncated to fit data type (./drsdef.h: 110)
+  0 inform,   1 warnings,   0 severes, 0 fatal for redat
+pgf77 -g  -Dhpux -D__linux -c wrdat.F
+PGFTN-W-0024-CHARACTER or Hollerith constant truncated to fit data type (./drsdef.h: 110)
+  0 inform,   1 warnings,   0 severes, 0 fatal for wrdat
+pgf77 -g  -Dhpux -D__linux -c cllun.F
+PGFTN-W-0024-CHARACTER or Hollerith constant truncated to fit data type (./drsdef.h: 110)
+  0 inform,   1 warnings,   0 severes, 0 fatal for cllun
+pgf77 -g  -Dhpux -D__linux -c readhd.F
+PGFTN-W-0024-CHARACTER or Hollerith constant truncated to fit data type (./drsdef.h: 110)
+  0 inform,   1 warnings,   0 severes, 0 fatal for readhd
+pgf77 -g  -Dhpux -D__linux -c writehd.F
+PGFTN-W-0024-CHARACTER or Hollerith constant truncated to fit data type (./drsdef.h: 110)
+  0 inform,   1 warnings,   0 severes, 0 fatal for writehd
+pgf77 -g  -Dhpux -D__linux -c wrdic.F
+PGFTN-W-0024-CHARACTER or Hollerith constant truncated to fit data type (./drsdef.h: 110)
+  0 inform,   1 warnings,   0 severes, 0 fatal for wrdic
+pgf77 -g  -Dhpux -D__linux -c redic.F
+PGFTN-W-0024-CHARACTER or Hollerith constant truncated to fit data type (./drsdef.h: 110)
+  0 inform,   1 warnings,   0 severes, 0 fatal for redic
+pgf77 -g  -Dhpux -D__linux -c aslun.F
+PGFTN-W-0024-CHARACTER or Hollerith constant truncated to fit data type (./drsdef.h: 110)
+  0 inform,   1 warnings,   0 severes, 0 fatal for aslun
+PGFTN/x86 Linux/x86 3.0-4: compilation completed with warnings
+pgf77 -g  -Dhpux -D__linux -c drssync.F
+PGFTN-W-0024-CHARACTER or Hollerith constant truncated to fit data type (./drsdef.h: 110)
+  0 inform,   1 warnings,   0 severes, 0 fatal for drssync
+pgf77 -g  -Dhpux -D__linux -c drsreadb.F
+PGFTN-W-0024-CHARACTER or Hollerith constant truncated to fit data type (./drsdef.h: 110)
+  0 inform,   1 warnings,   0 severes, 0 fatal for drsreadb
+PGFTN/x86 Linux/x86 3.0-4: compilation completed with warnings
+pgf77 -g  -Dhpux -D__linux -c drsautosync.F
+PGFTN-W-0024-CHARACTER or Hollerith constant truncated to fit data type (./drsdef.h: 110)
+  0 inform,   1 warnings,   0 severes, 0 fatal for drsautosync
+PGFTN/x86 Linux/x86 3.0-4: compilation completed with warnings
+pgf77 -g  -Dhpux -D__linux -c midate.F
+PGFTN-W-0024-CHARACTER or Hollerith constant truncated to fit data type (./drsdef.h: 110)
+  0 inform,   1 warnings,   0 severes, 0 fatal for midate
+PGFTN-W-0024-CHARACTER or Hollerith constant truncated to fit data type (./drsdef.h: 110)
+  0 inform,   1 warnings,   0 severes, 0 fatal for mitime
+pgf77 -g  -Dhpux -D__linux -c d_floor.F
+cc -g -Dhpux -D__linux  -c ctoi.c -o ctoi.o
+cc -g -Dhpux -D__linux  -c getslab.c -o getslab.o
+cc -g -Dhpux -D__linux  -c drsc.c -o drsc.o
+cc -g -Dhpux -D__linux  -c drstrunc.c -o drstrunc.o
+ar rv libdrs.a getdat.o idenc.o putdat.o clavdb.o getdim.o iflun.o setdim.o getnam.o mvnbc.o cluvdb.o getnd.o bnsrch.o drserr.o seterr.o getind.o compnm.o dictlk.o putvdm.o setnam.o setdat.o setvdm.o getrge.o savdb.o putdat1.o getdat1.o getvdim.o inqlun.o inqdict.o prdict.o rdtrans.o wrtrans.o setrep.o gettbuf.o getrge2.o getelemd.o setcdim.o getcdim.o getedim.o confnm.o putdic.o getpelem.o mimem.o redat.o wrdat.o cllun.o readhd.o writehd.o wrdic.o redic.o aslun.o drssync.o drsreadb.o drsautosync.o midate.o d_floor.o ctoi.o getslab.o drsc.o drstrunc.o
+r - getdat.o
+r - idenc.o
+r - putdat.o
+r - clavdb.o
+r - getdim.o
+r - iflun.o
+r - setdim.o
+r - getnam.o
+r - mvnbc.o
+r - cluvdb.o
+r - getnd.o
+r - bnsrch.o
+r - drserr.o
+r - seterr.o
+r - getind.o
+r - compnm.o
+r - dictlk.o
+r - putvdm.o
+r - setnam.o
+r - setdat.o
+r - setvdm.o
+r - getrge.o
+r - savdb.o
+r - putdat1.o
+r - getdat1.o
+r - getvdim.o
+r - inqlun.o
+r - inqdict.o
+r - prdict.o
+r - rdtrans.o
+r - wrtrans.o
+r - setrep.o
+r - gettbuf.o
+r - getrge2.o
+r - getelemd.o
+r - setcdim.o
+r - getcdim.o
+r - getedim.o
+r - confnm.o
+r - putdic.o
+r - getpelem.o
+r - mimem.o
+r - redat.o
+r - wrdat.o
+r - cllun.o
+r - readhd.o
+r - writehd.o
+r - wrdic.o
+r - redic.o
+r - aslun.o
+r - drssync.o
+r - drsreadb.o
+r - drsautosync.o
+r - midate.o
+r - d_floor.o
+r - ctoi.o
+r - getslab.o
+r - drsc.o
+r - drstrunc.o

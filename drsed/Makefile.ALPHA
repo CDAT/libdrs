@@ -1,0 +1,53 @@
+# drsed Makefile
+# 
+# Usage: make [DRSDIR=<DRS library directory>] [INCDIR=<DRS include directory>]
+#
+
+.c.o:
+	$(CC) $(CFLAGS) $(CPPFLAGS) -c $<
+
+# To compile with K&R cc: make CC=cc COPTS="-D_KRC_" [DRSDIR=<DRS library directory>]
+
+CC=cc
+DRSDIR= $(HOME)/drs/lib
+INSTALL_DIR = /usr/local/drs/util
+INCDIR=$(DRSDIR)
+CPPFLAGS = -I$(INCDIR) $(COPTS)
+CFLAGS = -O -std $(INCDIR)
+FFLAGS = -O -nofor_main
+LINTFLAGS=
+YFLAGS = -v
+
+LDFLAGS = -L$(DRSDIR) -ll -ldrs -lc -lm
+
+CSRCS = main.c files.c vars.c dims.c error.c strings.c io.c hashSearch.c
+SRCS =  drsed.tab.c $(CSRCS)
+TAGSRCS =drsed.h hashSearch.h drsed.y drsed.l $(CSRCS)
+OBJS =  $(CSRCS:.c=.o) drsed.tab.o
+
+drsed: drsed.h $(SRCS) $(OBJS)
+	$(FC) $(FFLAGS) $(OBJS) $(LDFLAGS) -o $@
+
+drsed.tab.c drsed.tab.h: drsed.y drsed.yy.c
+	yacc -d drsed.y
+	mv y.tab.c drsed.tab.c
+	mv y.tab.h drsed.tab.h
+
+drsed.yy.c: drsed.l
+	lex drsed.l
+	mv lex.yy.c drsed.yy.c
+
+install:
+	install -m 755 drsed $(INSTALL_DIR)
+
+tar:
+	-cp Rtag.log VERSION
+	tar cvf drsed.tar README VERSION $(TAGSRCS) Makefile.SUN Makefile.UNICOS Makefile.SGI Makefile.HP Makefile.IBM
+
+tags:
+	etags $(TAGSRCS)
+
+clean:
+	-rm -f *.o
+	-rm -f drsed.tab.c drsed.tab.h drsed.yy.c
+
