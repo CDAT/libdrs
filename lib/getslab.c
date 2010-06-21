@@ -56,7 +56,7 @@
    
 **********************************************************************/
 #include <stdio.h>
-#include <malloc/malloc.h>
+#include <malloc.h>
 #include <memory.h>
 #include <math.h>
 #include "drscdf.h"
@@ -151,7 +151,7 @@ extern int setdim(),getpelem(),inqdict(),getdat(),getdim(),
       -------                                                        */
 
 #ifdef hpux
-int getslab_(lu,rank,order,fe,le,cycle,data,datadim)
+int getslab(lu,rank,order,fe,le,cycle,data,datadim)
 #else /* !hpux */
 int getslab_(lu,rank,order,fe,le,cycle,data,datadim)
 #endif

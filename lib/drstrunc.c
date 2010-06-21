@@ -75,7 +75,7 @@ NOTES
 */
 
 #include "drscdf.h"
-#define DRS_BYTE_MULT 2048	/* Note: should be a multiple of eight bytes */
+#define DRS_BYTE_MULT 512	/* Note: should be a multiple of eight bytes */
 				/* to handle Cray word lengths - set to 512 */
 				/* bytes for compatibility with HP, which */
 				/* cannot read partial records. */
@@ -125,7 +125,7 @@ int DRSTRUNC(fpath, len)
 	size = lseek(fd,offset,0);
 
 	if(trunc(fd) == -1){
-		fprintf(stderr,"Cannot truncatewww file %s to length %d.\n",path,offset);
+		fprintf(stderr,"Cannot truncate file %s to length %d.\n",path,offset);
                 perror("truncation failed");
 		return 1;
 	}
@@ -148,7 +148,7 @@ int DRSTRUNC(fpath, len)
 #include <stdio.h>
 
 #ifdef hpux
-int drstrunc_(fpath,len,fpathLen)
+int drstrunc(fpath,len,fpathLen)
 #else
 int drstrunc_(fpath,len,fpathLen)
 #endif
@@ -179,7 +179,7 @@ int drstrunc_(fpath,len,fpathLen)
 				/* for compatibility with Cray word length. */
 	offset = (*len==0 ? 0 : (((*len-1)/DRS_BYTE_MULT)+1)*DRS_BYTE_MULT);
 	if (ftruncate(fd,offset) == -1) {
-		fprintf(stderr,"Cannot truncateeeeeeeeeeeeeeeee file %s to length %d.\n",path,*len);
+		fprintf(stderr,"Cannot truncate file %s to length %d.\n",path,*len);
                 perror("truncation failed");
 		return 1;
 	}

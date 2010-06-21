@@ -90,7 +90,7 @@ ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 
 #ifdef cray
       integer iarray(3)
-      character*(*) cdate
+      character*8 cdate
 #endif cray
 
       midate=IDRS_SUCCESS
@@ -116,7 +116,7 @@ ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 #endif cray
 
       do 10 i=2,8
-c         if(cdate(i).eq.' ') cdate(i)='0'
+         if(cdate(i:i).eq.' ') cdate(i:i)='0'
  10   continue
       return
          

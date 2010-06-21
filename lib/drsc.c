@@ -111,7 +111,7 @@
 #endif /* cray */
 
 int
-aslun(lud,dicfil,lu,datfil,istat)
+Aslun(lud,dicfil,lu,datfil,istat)
 	int lud, lu, istat;
 	char dicfil[], datfil[];
 	
@@ -139,7 +139,7 @@ aslun(lud,dicfil,lu,datfil,istat)
 }
 
 int
-cllun(lu)
+Cllun(lu)
 	int lu;
 {
 #ifdef cray
@@ -157,7 +157,7 @@ cllun(lu)
 }
 
 int
-cluvdb()
+Cluvdb()
 {
 #ifdef cray
 	fortran int CLUVDB();
@@ -174,7 +174,7 @@ cluvdb()
 }
 
 int
-drsautosync(lu,iopt)
+Drsautosync(lu,iopt)
         int lu,iopt;
 {
 #ifdef cray
@@ -192,7 +192,7 @@ drsautosync(lu,iopt)
 }
 
 int
-drssync(lu)
+Drssync(lu)
         int lu;
 {
 #ifdef cray
@@ -210,7 +210,7 @@ drssync(lu)
 }
 
 int
-drstest(ierr)
+Drstest(ierr)
 	int ierr;
 {
 #ifdef cray
@@ -230,7 +230,7 @@ drstest(ierr)
 }
 
 int
-getdat(lu,a,isize)
+Getdat(lu,a,isize)
 #ifdef __linux
         int lu, isize;
 	void* a;
@@ -253,7 +253,7 @@ getdat(lu,a,isize)
 }
 
 int
-getcdim(idim,source,name,title,units,dtype,reqlen,var,retlen)
+Getcdim(idim,source,name,title,units,dtype,reqlen,var,retlen)
 	int idim,*dtype,reqlen,*retlen;
 	char source[],name[],title[],units[];
 	float var[];
@@ -297,7 +297,7 @@ getcdim(idim,source,name,title,units,dtype,reqlen,var,retlen)
 }
 
 int
-getdim(n,dna,dun,dtype,idim,df,dl)
+Getdim(n,dna,dun,dtype,idim,df,dl)
 	int n,*idim,*dtype;
 	char dna[], dun[];
 	float *df,*dl;
@@ -337,7 +337,7 @@ getdim(n,dna,dun,dtype,idim,df,dl)
 }
 
 int
-getedim(n,dsrc,dna,dti,dun,dtype,idim,df,dl)
+Getedim(n,dsrc,dna,dti,dun,dtype,idim,df,dl)
 	int n,*idim,*dtype;
 	char dna[], dun[],dsrc[],dti[];
 	float *df,*dl;
@@ -383,7 +383,7 @@ getedim(n,dsrc,dna,dti,dun,dtype,idim,df,dl)
 }
 
 int
-getelemd(type,bpe)
+Getelemd(type,bpe)
 	int *type,*bpe;
 {
 #ifdef cray
@@ -401,7 +401,7 @@ getelemd(type,bpe)
 }
 
 int
-getpelem(type,bpe)
+Getpelem(type,bpe)
 	int *type,*bpe;
 {
 #ifdef cray
@@ -420,7 +420,7 @@ getpelem(type,bpe)
 
 
 int
-getname(source,name,title,units,date,time,typed,nd)
+Getname(source,name,title,units,date,time,typed,nd)
 	char source[],name[],title[],units[],date[],time[],typed[];
 	int *nd;
 {
@@ -478,7 +478,7 @@ getname(source,name,title,units,date,time,typed,nd)
 }
 
 int
-getrge2(lu,idim,elem1,elem2,ind1,ind2,dlow,dhigh)
+Getrge2(lu,idim,elem1,elem2,ind1,ind2,dlow,dhigh)
 	int lu,idim,*ind1,*ind2;
 	double elem1,elem2;
 	float *dlow,*dhigh;
@@ -513,7 +513,7 @@ getrge2(lu,idim,elem1,elem2,ind1,ind2,dlow,dhigh)
 }
 
 int
-getslab(lu,rank,order,fe,le,cycle,data,datadim)
+Getslab(lu,rank,order,fe,le,cycle,data,datadim)
 #ifdef __linux
      int lu,rank,*order,*datadim;
      float *fe,*le,*cycle;
@@ -540,7 +540,7 @@ getslab(lu,rank,order,fe,le,cycle,data,datadim)
 
 	
 int
-getvdim(idim,source,title,reqlen,var,retlen)
+Getvdim(idim,source,title,reqlen,var,retlen)
 	int idim,reqlen,*retlen;
 	char source[],title[];
 	float var[];
@@ -578,7 +578,7 @@ getvdim(idim,source,title,reqlen,var,retlen)
 	
 
 int
-inqdict(lu,oper)
+Inqdict(lu,oper)
 	int lu,oper;
 {
 #ifdef cray
@@ -596,7 +596,7 @@ inqdict(lu,oper)
 }
 
 int
-inqlun(lu,datafile,nvar,version)
+Inqlun(lu,datafile,nvar,version)
 	int lu,*nvar;
 	char datafile[];
 	float *version;
@@ -626,7 +626,7 @@ inqlun(lu,datafile,nvar,version)
 }
 
 int
-prdict(lup,lu)
+Prdict(lup,lu)
 	int lup,lu;
 {
 #ifdef cray
@@ -644,7 +644,7 @@ prdict(lup,lu)
 }
 	
 int
-putdic(lu,iopt)
+Putdic(lu,iopt)
 	int lu,iopt;
 {
 #ifdef cray
@@ -662,7 +662,7 @@ putdic(lu,iopt)
 }
 
 int
-putdat(lu,a)
+Putdat(lu,a)
 #ifdef __linux
      int lu;
      void* a;
@@ -685,7 +685,7 @@ putdat(lu,a)
 }
 
 int
-putvdim(lu,len,dimvar,i1,i2)
+Putvdim(lu,len,dimvar,i1,i2)
 	int lu,len,*i1,*i2;
 	float dimvar[];
 {
@@ -704,7 +704,7 @@ putvdim(lu,len,dimvar,i1,i2)
 }
 
 int
-setdate(date,time)
+Setdate(date,time)
 	char date[],time[];
 {
 #ifdef cray
@@ -728,7 +728,7 @@ setdate(date,time)
 
 
 int
-setdim(n,dna,dun,idim,df,dl)
+Setdim(n,dna,dun,idim,df,dl)
 	int n,idim;
 	char dna[],dun[];
 	double df,dl;		/* C converts args to double anyway. */
@@ -770,7 +770,7 @@ setdim(n,dna,dun,idim,df,dl)
 	
 
 int
-seterr(ierrlun,reportlevel)
+Seterr(ierrlun,reportlevel)
 	int ierrlun, reportlevel;
 {
 #ifdef cray
@@ -788,7 +788,7 @@ seterr(ierrlun,reportlevel)
 }
 
 int
-setname(source,name,title,units,typed)
+Setname(source,name,title,units,typed)
 	char source[],name[],title[],units[],typed[];
 {
 #ifdef cray
@@ -818,7 +818,7 @@ setname(source,name,title,units,typed)
 }
 
 int
-setrep(irep)
+Setrep(irep)
 	int irep;
 {
 #ifdef cray
@@ -836,7 +836,7 @@ setrep(irep)
 }
 
 int
-setvdim(n,dso,dna,dti,dun,df,dl)
+Setvdim(n,dso,dna,dti,dun,df,dl)
 	int n;
 	char dso[], dna[], dti[], dun[];
 	double df, dl;		/* C converts args to double anyway. */
@@ -878,19 +878,9 @@ setvdim(n,dso,dna,dti,dun,df,dl)
 	return(setvdim(&n,dso,dna,dti,dun,&dftemp,&dltemp,
 			strlen(dso),strlen(dna),strlen(dti),
 			strlen(dun)));
-
 #endif /* hpux */
 }
 
-/*2010 C. Doutriaux addition to build with gfortrna on mac */
-void bcopy_(const void *src, void *dest, int len) {
-  memmove((dest),(src),(len));
-}
-
-double
-d_floor_( double *x ){
-	return floor( *x );
-}
 				/* SGI wrapper routines */
 #ifdef sgi
 /*

@@ -1,0 +1,8 @@
+source=test10                                                                                                                  
+name=dv1             
+title=dimension variable 1                                                            
+units=none                                    
+date=10/31/89
+time=15:17:00
+type=R*4     
+Number of dimensions=1
