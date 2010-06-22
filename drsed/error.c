@@ -5,16 +5,24 @@
  *
 */
 #include "drsed.h"
+#ifdef mac
+#include <stdarg.h>
+#else
 #include <varargs.h>
+#endif
 				/* Report error, with format fmt, and */
 				/* variable argument list va_alist*/
+#ifdef mac
+void DRSEDerror(char *fmt, ...)
+#else
 DRSEDerror(fmt, va_alist)
      char *fmt ;
      va_dcl
+#endif
 {
 	va_list args;
 	if(!interact) fprintf(stderr,"%s: error near line %d\n",progname,lineno);
-	va_start(args);
+	va_start(args,*fmt);
 	vfprintf(stderr,fmt,args);
 	va_end(args);
 	fputc('\n',stderr);

@@ -1,0 +1,110 @@
+# DRS test suite Makefile
+#
+# Usage:
+#
+# To test the DRS library in directory $DRSDIR:
+#	% make [DRSDIR=<directory containing libdrs.a>]
+#
+#--------------------------------------------------------------------
+
+FC = gfortran
+DRSLIB = ../lib
+DRSINC = $(DRSLIB)
+DRSDIR = $(DRSLIB)
+CPPFLAGS = -I$(DRSINC)
+FFLAGS = -g -fcray-pointer $(CPPFLAGS)
+CFLAGS = -g $(CPPFLAGS)
+LDFLAGS = -L$(DRSLIB) -ldrs -lm -lgfortran
+CLDFLAGS = -L$(DRSLIB) -ldrs  -lm -lgfortran
+
+FTESTS = drs_put2 drs_get2 drs_get2a drs_put3 drs_get3 test10 test11 test12 test26 test13 test14  printdict test16 test17 test18 test20
+
+CTESTS = test21 testinq
+
+TESTS = $(FTESTS) $(CTESTS)
+
+SOURCES = drs_put2.F drs_get2.F drs_get2a.F drs_put3.F drs_get3.F test10.f test11.F test12.F test26.F test13.F test14.F printdict.F test16.F test17.F test18.F test20.F testinq.c test21.c
+
+#--------------------------------------------------------------------
+
+.SUFFIXES: .c .F
+
+.c:
+	$(CC) $(CFLAGS) $< $(CLDFLAGS) -o $@
+
+.F:
+	$(FC) $(FFLAGS) $< $(LDFLAGS) -o $@ 
+
+runtests: tests
+	-rm -f dbwrt2.dic
+	-rm -f dbwrt2.dat
+	-drs_put2
+	-cmp dbwrt2.dat dbwrt2.dat.bench
+	-rm -f test2.dat
+	-drs_get2 > test2.dat
+	-diff test2.dat test2.dat.bench
+	-rm -f test2a.dat
+	-drs_get2a > test2a.dat
+	-diff test2a.dat test2a.dat.bench
+	-rm -f dbwrt3.dic
+	-rm -f dbwrt3.dat
+	-drs_put3
+	-cmp dbwrt3.dat dbwrt3.dat.bench
+	-rm -f test3.dat
+	-drs_get3 > test3.dat
+	-diff test3.dat test3.dat.bench
+	-rm -f dvtest1.dic
+	-rm -f dvtest1.dat
+	-test10
+	-rm -f dvtest1.dic
+	-rm -f dvtest1.dat
+	-test11
+	-test12
+	-test26
+	-test13
+	-rm -f dvtest1.dic
+	-rm -f dvtest1.dat
+	-test14
+	-rm -f dvtest15.txt
+	-printdict > dvtest15.txt
+	-diff dvtest15.txt dvtest15.txt.bench
+	-rm -f dvtest16.dic
+	-rm -f dvtest16.dat
+	-test16
+	-rm -f dvtest17a.dic
+	-rm -f dvtest17a.dat
+	-rm -f dvtest17b.dic
+	-rm -f dvtest17b.dat
+	-test17
+	-rm -f dvtestinq.txt
+	-testinq > dvtestinq.txt
+	-diff dvtestinq.txt dvtestinq.txt.bench
+	-rm -f test18.txt
+	-test18 > test18.txt
+	-diff test18.txt test18.txt.bench
+	-rm -f test20.dic
+	-rm -f test20.dat
+	-test20
+	-rm -f test21.txt
+	-test21 > test21.txt
+	-diff test21.txt test21.txt.bench
+
+tests: $(TESTS)
+
+test10: test10.f
+	-rm -f drsdefv.h
+	-ln -s $(DRSDIR)/drsdef.h drsdefv.h
+	$(FC) $(FFLAGS) test10.f $(LDFLAGS) -o $@ 
+
+#--------------------------------------------------------------------
+
+tags:
+	etags $(SOURCES)
+
+clean: cleantests
+	-rm -f *.o
+	-rm -f *~
+	-rm -f core
+
+cleantests:
+	-rm -f $(TESTS)

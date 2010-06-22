@@ -56,7 +56,11 @@
    
 **********************************************************************/
 #include <stdio.h>
+#ifdef mac
+#include <sys/malloc.h>
+#else
 #include <malloc.h>
+#endif
 #include <memory.h>
 #include <math.h>
 #include "drscdf.h"
@@ -109,8 +113,11 @@
 #define Swap(A,B,C) {C=B;B=A;A=C;}
 #define SetRoutine(X) char *ROUTINE=X
 #define MXDIM 4			/* Max number of dimensions in DRS variable */
-	
+#ifdef mac
+static void *buf;
+#else	
 static char *buf;		/* Input buffer */
+#endif
 static int bpe;		/* Bytes per element */
 static int actdimlen[MXDIM],actdimu[MXDIM];	/* Actual dimension lengths returned */
 static float cyfe[MXDIM], cyle[MXDIM],cyfu[MXDIM],cylu[MXDIM]; /* Actual first, last values of dimensions. */
@@ -261,7 +268,7 @@ int getslab_(lu,rank,order,fe,le,cycle,data,datadim)
 	}
 	
 				/* Initialize read buffer */
-	if((buf=(char *) malloc(1)) == NULL) 
+	if((buf=(void *)malloc(sizeof(void *))) == NULL) 
 	{
 		fprintf(stderr,"Error in routine getslab_: cannot allocate memory.\n");
 		return(IDRS_NOMEMORY);
@@ -487,7 +494,7 @@ getslab1(lu,rank,order,fe,le,cycle,name,dfe,dle,datadim,data,dim,bufdim,offset,d
 		}
 			
 				/* Extend buffer size, if necessary. */
-		if((buf=realloc(buf,nbytes)) == NULL){
+		if((buf=(void *)realloc(buf,nbytes)) == NULL){
 			fprintf(stderr,"Cannot extend getslab buffer to %d bytes. \nTry using routine getdat or reading in increments?\n",nbytes);
 			return(IDRS_NOMEMORY);
 		}

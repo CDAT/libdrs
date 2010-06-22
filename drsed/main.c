@@ -10,6 +10,10 @@
 */
 
 #include "drsed.h"
+#ifdef mac
+#include <Stdio.h>
+#include <stdlib.h>
+#endif
 
 extern DRS_FILE *DRSEDopenfile();
 extern int DRSEDreaddicfile();
@@ -80,7 +84,11 @@ char *DRSEDalloc(size,ptr)
 {
 	char *s;
 /*	if((s=(ptr==NULL ? malloc(size) : realloc(ptr,size)))==NULL) */
+#ifdef mac
+	if((s=(ptr==NULL ? (char *)calloc(size,1) : (free(ptr),(char *)calloc(size,1))))==NULL)
+#else
 	if((s=(ptr==NULL ? (char *)calloc(size,1) : (cfree(ptr),(char *)calloc(size,1))))==NULL)
+#endif
 		DRSEDerror("Error allocating space of size %d",size);
 	return(s);
 }

@@ -23,7 +23,11 @@
 #define _drsed_h
 
 #include <stdio.h>
+#ifdef mac
+#include <sys/malloc.h>
+#else
 #include <malloc.h>
+#endif
 #include <math.h>
 #include "drscdf.h"
 #define MISSINGDATA 1.0e20	/* missing data float value */

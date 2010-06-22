@@ -8,19 +8,27 @@
  *
 */
 #include "drsed.h"
+#ifdef mac
+#include <stdarg.h>
+#else
 #include <varargs.h>
+#endif
 #define MAX(A,B) ((A)<(B) ? (B) : (A))
 				/* Print variable argument list with format */
 				/* fmt to stdout, then flush buffer */
 void
+#ifdef mac
+DRSEDprintf(int flushopt,char *fmt, ...)
+#else
 DRSEDprintf(flushopt,fmt,va_alist)
 	int flushopt;
 	
      char *fmt ;
      va_dcl
+#endif
 {
 	va_list args;
-	va_start(args);
+	va_start(args, *fmt);
 	vfprintf(stdout,fmt,args);
 	va_end(args);
 	if(flushopt==FLUSH)

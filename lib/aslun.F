@@ -229,6 +229,7 @@ c
             go to 13
          endif
  12   continue
+      print*, 'dicfill',dicfill
       go to 9002
  13   continue
 
@@ -330,9 +331,11 @@ c            name
      2       access='direct',form='unformatted',
      $       recl=idicrecl/IDRS_BYTES_PER_WORD,err=9002)
 #elif !defined(sgi)
+        print*,'yep seems to be here, file: ',dif(nf),ludi(nf),idicrecl
         open (unit=ludi(nf),file=dif(nf),status='old',
      2       access='direct',form='unformatted',
      $       recl=idicrecl,err=9002)
+        print*,'Ok actually passed this buddy!'
 #endif
 
 c                      get data file name, number of vdbs, data length
@@ -341,10 +344,11 @@ c        read (ludi(nf),rec=1) daf(nf),nvdb(nf),mxdat(nf)
      $       drsvers(nf))))
      $       go to 9002
 
-
+        print*, 'but not tihs!!!!',nvdb(nf),mxdat(nf)
 c
         if (nvdb(nf).le.0.or.mxdat(nf).le.0) go to 9002
 c                       open the data file
+        print*, 'but not tihs!!!!????'
 
 #if defined(sgi)
       open (unit=luda(nf),file=daf(nf),status='old',
