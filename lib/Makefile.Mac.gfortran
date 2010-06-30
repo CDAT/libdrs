@@ -7,15 +7,17 @@
 #
 #--------------------------------------------------------------------
 
-DEBUG = -O
+DEBUG = -O -g
 # Requires Absoft FORTRAN
 FC = gfortran
-FOPTS = -fcray-pointer 
+FOPTS = -fcray-pointer -arch i386
 FFLAGS = $(DEBUG) $(FOPTS) -Dsun -D__linux -D__linux_pgi -byteswapio -Dmac
-CFLAGS = $(DEBUG)
+FFLAGS = $(DEBUG) $(FOPTS) -Dmac
+CFLAGS = $(DEBUG) -arch i386
 INSTALL_LIB = /usr/local/lib
 INSTALL_INC = /usr/local/include
 CPPFLAGS = -Dsun -D__linux -D__linux_pgi -Dmac
+CPPFLAGS = -Dmac -Dsun
 CPP = cpp
 
 FOBJECTS = getdat.o idenc.o putdat.o clavdb.o getdim.o iflun.o setdim.o getnam.o mvnbc.o cluvdb.o getnd.o bnsrch.o drserr.o seterr.o getind.o compnm.o dictlk.o putvdm.o setnam.o setdat.o setvdm.o getrge.o savdb.o putdat1.o getdat1.o getvdim.o inqlun.o inqdict.o prdict.o rdtrans.o wrtrans.o setrep.o gettbuf.o getrge2.o getelemd.o setcdim.o getcdim.o getedim.o confnm.o putdic.o getpelem.o mimem.o redat.o wrdat.o cllun.o readhd.o writehd.o wrdic.o redic.o aslun.o drssync.o drsreadb.o drsautosync.o midate.o d_floor.o

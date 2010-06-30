@@ -1,8 +1,12 @@
-source=test10                                                                                                                  
-name=dv1             
-title=dimension variable 1                                                            
-units=none                                    
-date=10/31/89
-time=15:17:00
-type=R*4     
-Number of dimensions=1
+ ok in there2../drsed/ts_Mean_Vmodel2_20c3m_am_xy_EM_r1900_1999.dic                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          ../drsed/ts_Mean_Vmodel2_20c3m_am_xy_EM_r1900_1999.dat                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+  opeing dic with reclen:         512
+ DRSTAG is:DRS DICT  2.7156490E+23                                             16777216 -2131492096
+  bad ver?
+source=                                                                                                                        
+name=                
+title=                                                                                
+units=                                        
+date=        
+time=        
+type=        
+Number of dimensions=0

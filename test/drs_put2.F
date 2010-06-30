@@ -57,6 +57,7 @@ c      ierr=system("rm -f dbwrt2.dat")
       
 c      ierr=seterr(6,.true.)
 c     write first block of slp and varb
+      print*, 'ok first drs call: ',lud,dicfil,lu,datfil,IDRS_CREATE
       ierr=aslun (lud,dicfil,lu,datfil,IDRS_CREATE)
       if (ierr.gt.0) then
          write (6,90) ierr

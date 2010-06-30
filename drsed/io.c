@@ -7,6 +7,7 @@
  * Entered into RCS
  *
 */
+#include <string.h>
 #include "drsed.h"
 #ifdef mac
 #include <stdarg.h>

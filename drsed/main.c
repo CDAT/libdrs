@@ -36,7 +36,9 @@ main(argc,argv)
 	char *s;
 	int ierr;
 #ifdef sun
+#ifndef mac
 	f_init();
+#endif
 #endif
 	Seterr(0,IDRS_WARNING);
 	_drsed_outfile = stdout;
@@ -73,7 +75,9 @@ main(argc,argv)
 
 	ierr=yyparse();
 #ifdef sun
+#ifndef mac
 	f_exit();
+#endif
 #endif
 	exit(ierr);
 }
@@ -85,7 +89,7 @@ char *DRSEDalloc(size,ptr)
 	char *s;
 /*	if((s=(ptr==NULL ? malloc(size) : realloc(ptr,size)))==NULL) */
 #ifdef mac
-	if((s=(ptr==NULL ? (char *)calloc(size,1) : (free(ptr),(char *)calloc(size,1))))==NULL)
+	if((s=(ptr==NULL ? (char *)malloc(size) : (free(ptr),(char *)malloc(size))))==NULL)
 #else
 	if((s=(ptr==NULL ? (char *)calloc(size,1) : (cfree(ptr),(char *)calloc(size,1))))==NULL)
 #endif

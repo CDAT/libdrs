@@ -17,7 +17,7 @@ main()
 	
 	int ndim,ierr;
 
-	ierr=Aslun(2,"dvtest1.dic",3,"dvtest1.dat",IDRS_READ);
+	ierr=Aslun(2,"../drsed/ts_Mean_Vmodel2_20c3m_am_xy_EM_r1900_1999.dic",3,"../drsed/ts_Mean_Vmodel2_20c3m_am_xy_EM_r1900_1999.dat",IDRS_READ);
 	ierr=Cluvdb();
 	if(Inqdict(2,IDRS_GETFIRSTVAR)==IDRS_NOMOREVARS) 
 	{

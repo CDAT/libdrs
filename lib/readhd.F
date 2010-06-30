@@ -101,16 +101,18 @@ ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
       read(lu,rec=1,err=100) dfname,numvdbs,idatalen,drstag,
      $     version
 #endif cray
-
+      print*, 'DRSTAG is:',drstag,version,dfname,numvdbs,idatalen
       if(drstag.ne.'DRS DICT') then
          readhd=IDRS_VERSION1FILE
          version=1.0
          go to 9000
       elseif(abs(100.0*version - aint(100.0*version)).gt.1.0) then
+         print*,' bad ver?'
          readhd=IDRS_VERSION1FILE
          version=1.0
          go to 9000
       elseif(version.lt.2.0 .or. version.gt.DRS_MAXVERSION) then
+         print*,' bad ver?'
          readhd=IDRS_VERSION1FILE
          version=1.0
          go to 9000

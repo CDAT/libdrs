@@ -103,6 +103,8 @@ extern DRS_VARIABLE *currentvar;   /* most recently referenced DRS variable */
 extern char *progname;		/* program name */
 extern int lineno;		/* current line number */
 #ifdef sun
+#ifndef mac
 extern char *calloc();
-#endif
+#endif /*mac*/
+#endif /*sun*/
 #endif /* _drsed_h */

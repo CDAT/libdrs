@@ -231,7 +231,7 @@ Drstest(ierr)
 
 int
 Getdat(lu,a,isize)
-#ifdef __linux
+#if defined(__linux) || defined(mac)
         int lu, isize;
 	void* a;
 #else
@@ -514,7 +514,7 @@ Getrge2(lu,idim,elem1,elem2,ind1,ind2,dlow,dhigh)
 
 int
 Getslab(lu,rank,order,fe,le,cycle,data,datadim)
-#ifdef __linux
+#if defined(__linux) || defined(mac)
      int lu,rank,*order,*datadim;
      float *fe,*le,*cycle;
      void* data;
@@ -663,7 +663,7 @@ Putdic(lu,iopt)
 
 int
 Putdat(lu,a)
-#ifdef __linux
+#if defined(__linux) || defined(mac)
      int lu;
      void* a;
 #else

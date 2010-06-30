@@ -146,7 +146,12 @@ int DRSTRUNC(fpath, len)
 #include <sys/types.h>
 #include <string.h>
 #include <stdio.h>
-
+#ifdef mac
+#include <stdlib.h>
+/* #include <sys/types.h> */
+/* #include <sys/stat.h> */
+#include <unistd.h>
+#endif
 #ifdef hpux
 int drstrunc(fpath,len,fpathLen)
 #else
@@ -159,6 +164,9 @@ int drstrunc_(fpath,len,fpathLen)
 	int fd, offset, i;
 	char *path;
 
+/* #ifdef mac */
+/* 	struct stat buf; */
+/* #endif */
 	path = (char *) malloc(fpathLen+1);
 	strncpy(path,fpath,fpathLen);
 
@@ -175,15 +183,17 @@ int drstrunc_(fpath,len,fpathLen)
                 perror("truncation failed");
 		return 1;
 	}
+	/* printf("ok getting the file size\n"); */
+	/*   fstat(fd,&buf); */
+	/*   printf("ok the file size is: %i\n",buf.st_size); */
 				/* Truncate to next even multiple of DRS_BYTE_MULT bytes */
 				/* for compatibility with Cray word length. */
 	offset = (*len==0 ? 0 : (((*len-1)/DRS_BYTE_MULT)+1)*DRS_BYTE_MULT);
 	if (ftruncate(fd,offset) == -1) {
-		fprintf(stderr,"Cannot truncate file %s to length %d.\n",path,*len);
+	  fprintf(stderr,"Cannot truncate file %s to length %d. \n",path,*len);
                 perror("truncation failed");
 		return 1;
 	}
-
 	close(fd);
 	free(path);
 	return 0;

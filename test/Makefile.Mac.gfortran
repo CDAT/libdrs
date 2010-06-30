@@ -11,8 +11,8 @@ FC = gfortran
 DRSLIB = ../lib
 DRSINC = $(DRSLIB)
 DRSDIR = $(DRSLIB)
-CPPFLAGS = -I$(DRSINC)
-FFLAGS = -g -fcray-pointer $(CPPFLAGS)
+CPPFLAGS = -I$(DRSINC) -arch i386
+FFLAGS = -g -fcray-pointer -arch i386 $(CPPFLAGS)
 CFLAGS = -g $(CPPFLAGS)
 LDFLAGS = -L$(DRSLIB) -ldrs -lm -lgfortran
 CLDFLAGS = -L$(DRSLIB) -ldrs  -lm -lgfortran
@@ -79,15 +79,6 @@ runtests: tests
 	-rm -f dvtestinq.txt
 	-testinq > dvtestinq.txt
 	-diff dvtestinq.txt dvtestinq.txt.bench
-	-rm -f test18.txt
-	-test18 > test18.txt
-	-diff test18.txt test18.txt.bench
-	-rm -f test20.dic
-	-rm -f test20.dat
-	-test20
-	-rm -f test21.txt
-	-test21 > test21.txt
-	-diff test21.txt test21.txt.bench
 
 tests: $(TESTS)
 

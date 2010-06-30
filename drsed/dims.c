@@ -9,6 +9,7 @@
  * Entered into RCS
  *
 */
+#include <string.h>
 #include "drsed.h"
 #include "drsed.tab.h"
 	extern char *DRSEDalloc();

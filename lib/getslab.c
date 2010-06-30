@@ -57,11 +57,12 @@
 **********************************************************************/
 #include <stdio.h>
 #ifdef mac
-#include <sys/malloc.h>
+#include <stdlib.h>
+#include <string.h>
 #else
 #include <malloc.h>
 #endif
-#include <memory.h>
+//#include <memory.h>
 #include <math.h>
 #include "drscdf.h"
 

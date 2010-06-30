@@ -95,7 +95,7 @@ c**********************************************************************
       return
       end
 #endif
-#ifdef __linux
+#if defined (__linux) || defined (mac)
       double precision function d_floor(x)
       double precision x
       d_floor = dint(x)

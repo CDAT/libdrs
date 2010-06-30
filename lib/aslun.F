@@ -229,7 +229,6 @@ c
             go to 13
          endif
  12   continue
-      print*, 'dicfill',dicfill
       go to 9002
  13   continue
 
@@ -306,6 +305,7 @@ c
             endif
          endif
       endif
+      print*, 'ok in there2',dif(nf),daf(nf)
 
       
 c            the files exist open the dictionary file and get the data file
@@ -331,11 +331,10 @@ c            name
      2       access='direct',form='unformatted',
      $       recl=idicrecl/IDRS_BYTES_PER_WORD,err=9002)
 #elif !defined(sgi)
-        print*,'yep seems to be here, file: ',dif(nf),ludi(nf),idicrecl
+        print *, ' opeing dic with reclen:',idicrecl
         open (unit=ludi(nf),file=dif(nf),status='old',
      2       access='direct',form='unformatted',
      $       recl=idicrecl,err=9002)
-        print*,'Ok actually passed this buddy!'
 #endif
 
 c                      get data file name, number of vdbs, data length
@@ -344,11 +343,10 @@ c        read (ludi(nf),rec=1) daf(nf),nvdb(nf),mxdat(nf)
      $       drsvers(nf))))
      $       go to 9002
 
-        print*, 'but not tihs!!!!',nvdb(nf),mxdat(nf)
+
 c
         if (nvdb(nf).le.0.or.mxdat(nf).le.0) go to 9002
 c                       open the data file
-        print*, 'but not tihs!!!!????'
 
 #if defined(sgi)
       open (unit=luda(nf),file=daf(nf),status='old',
@@ -380,6 +378,7 @@ c                       open the data file
      1     access='direct',form='unformatted',
      $     recl=idatrecl/IDRS_BYTES_PER_WORD,err=9003)
 #elif !defined(sgi)
+      print*, 'opening dat with reclen:',idatrecl
       open (unit=luda(nf),file=daf(nf),status='old',
      1     access='direct',form='unformatted',recl=idatrecl,err=9003)
 #endif
@@ -430,6 +429,7 @@ c
      1     access='direct',recl=idicrecl,form='unformatted',
      2     err=9002)
 #elif !defined(sgi)
+        print *, ' opeing dic with reclen:',idicrecl
         open (unit=ludi(nf),file=dif(nf),status='new',
      1     access='direct',recl=idicrecl,form='unformatted',
      2     err=9002)
@@ -485,9 +485,11 @@ c                   open the data file
      $     form='unformatted',
      2     err=9003)
 #elif !defined(sgi)
+        print*, 'opening daf file',luda(nf),daf(nf),idatrecl
         open (unit=luda(nf),file=daf(nf),status='new',
-     1     access='direct',recl=idatrecl,form='unformatted',
-     2     err=9003)
+     1     access='direct',recl=idatrecl,form='unformatted')
+c     2     err=9003,iostat=imyiostat)
+        print*, 'opened daf file'
 #endif
 
 c
@@ -541,6 +543,7 @@ c
       go to 9000
  9003 aslun=IDRS_CANNOTOPENDATA
       close (unit=lud)
+      print*, 'open recived error:',imyiostat
       nf=nf-1
       go to 9000
  9002 aslun=IDRS_CANNOTOPENDICT
