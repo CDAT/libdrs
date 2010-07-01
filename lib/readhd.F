@@ -101,7 +101,6 @@ ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
       read(lu,rec=1,err=100) dfname,numvdbs,idatalen,drstag,
      $     version
 #endif cray
-      print*, 'ok version:',version
       if(drstag.ne.'DRS DICT') then
          readhd=IDRS_VERSION1FILE
          version=1.0

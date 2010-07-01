@@ -1,9 +1,8 @@
-source=×âàP@äxéÿ¿Ø:â§«ª2
-name=
-
-title=à(êÿ¿±à
-units=\êÿ¿
-date=
-time=
-type=
-Number of dimensions=-1073747608
+source=test10                                                                                                                  
+name=dv1             
+title=dimension variable 1                                                            
+units=none                                    
+date=10/31/89
+time=15:17:00
+type=R*4     
+Number of dimensions=1

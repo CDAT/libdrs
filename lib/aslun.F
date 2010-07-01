@@ -330,7 +330,6 @@ c            name
      2       access='direct',form='unformatted',
      $       recl=idicrecl/IDRS_BYTES_PER_WORD,err=9002)
 #elif defined(gfortran)
-        print*, 'Opening dic (READ):',dif(nf)
         open (unit=ludi(nf),file=dif(nf),status='old',
      2       access='direct',form='unformatted',
      $       recl=idicrecl,err=9002,CONVERT='big_endian')
@@ -381,7 +380,6 @@ c                       open the data file
      1     access='direct',form='unformatted',
      $     recl=idatrecl/IDRS_BYTES_PER_WORD,err=9003)
 #elif defined(gfortran)
-        print*, 'Opening dat (READ):',daf(nf)
       open (unit=luda(nf),file=daf(nf),status='old',
      1     access='direct',form='unformatted',
      2     CONVERT='big_endian',recl=idatrecl,err=9003)
@@ -436,7 +434,6 @@ c
      1     access='direct',recl=idicrecl,form='unformatted',
      2     err=9002)
 #elif defined(gfortran)
-        print*, 'Opening dic (NEW):',dif(nf)
         open (unit=ludi(nf),file=dif(nf),status='new',
      1     access='direct',recl=idicrecl,form='unformatted',
      2     err=9002,CONVERT='big_endian')
@@ -496,7 +493,6 @@ c                   open the data file
      $     form='unformatted',
      2     err=9003)
 #elif defined(gfortran)
-        print*, 'Opening dat (NEW):',daf(nf)
         open (unit=luda(nf),file=daf(nf),status='new',
      1     access='direct',recl=idatrecl,form='unformatted',
      2     err=9003,CONVERT='big_endian')

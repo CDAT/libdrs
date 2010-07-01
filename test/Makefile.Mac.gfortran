@@ -12,6 +12,7 @@ DRSLIB = ../lib
 DRSINC = $(DRSLIB)
 DRSDIR = $(DRSLIB)
 ARCHOPT = -arch i386
+#ARCHOPT = 
 CPPFLAGS = -I$(DRSINC) $(ARCHOPT)
 FFLAGS = -g -fcray-pointer $(CPPFLAGS)
 CFLAGS = -g $(CPPFLAGS) $(ARCHOPT)
@@ -36,11 +37,6 @@ SOURCES = drs_put2.F drs_get2.F drs_get2a.F drs_put3.F drs_get3.F test10.f test1
 .F:
 	$(FC) $(FFLAGS) $< $(LDFLAGS) -o $@ 
 
-runtests2: tests
-	-rm -f dbwrt2.dic
-	-rm -f dbwrt2.dat
-	-drs_put2
-	-cmp dbwrt2.dat dbwrt2.dat.bench
 runtests: tests
 	-rm -f dbwrt2.dic
 	-rm -f dbwrt2.dat

@@ -14,7 +14,9 @@ DRSDIR = ../lib
 INSTALL_DIR=/usr/local/drs/util
 INCDIR = $(DRSDIR)
 CPPFLAGS = -I$(INCDIR) -Dmac -Dsun
-CFLAGS = -O -g -arch i386
+ARCHOPT = -arch i386
+#ARCHOPT = 
+CFLAGS = -O -g $(ARCHOPT)
 LINTFLAGS=
 YFLAGS = -v
 

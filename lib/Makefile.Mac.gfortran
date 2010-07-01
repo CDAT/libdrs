@@ -12,6 +12,7 @@ DEBUG = -O -g
 FC = gfortran
 CC = gcc
 ARCHOPT = -arch i386
+#ARCHOPT = 
 FOPTS = -fcray-pointer $(ARCHOPT) -W
 FFLAGS = $(DEBUG) $(FOPTS) -Dsun -D__linux -D__linux_pgi -byteswapio
 FFLAGS = $(DEBUG) $(FOPTS) -Dmac -Dgfortran 
