@@ -73,6 +73,7 @@ c**********************************************************************
       if(ibdirty(il).eq.1) then
          ptblock= loc(iblock(1,il))
 #ifdef NSL_DRS
+         print*, 'yyyyy'
          if(it(il)(2:2).eq.'N') then
             ioff=(iblno(il)-1)*idatrecl
             istat=nsllseek(luda(il),ioff,0)

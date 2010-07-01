@@ -10,14 +10,17 @@
 DEBUG = -O -g
 # Requires Absoft FORTRAN
 FC = gfortran
-FOPTS = -fcray-pointer -arch i386
-FFLAGS = $(DEBUG) $(FOPTS) -Dsun -D__linux -D__linux_pgi -byteswapio -Dmac
-FFLAGS = $(DEBUG) $(FOPTS) -Dmac
-CFLAGS = $(DEBUG) -arch i386
+CC = gcc
+ARCHOPT = -arch i386
+FOPTS = -fcray-pointer $(ARCHOPT) -W
+FFLAGS = $(DEBUG) $(FOPTS) -Dsun -D__linux -D__linux_pgi -byteswapio
+FFLAGS = $(DEBUG) $(FOPTS) -Dmac -Dgfortran 
+FFLAGS = $(DEBUG) $(FOPTS) -Dsun -D__linux -D__linux_pgi -Dgfortran -Dmac
+CFLAGS = $(DEBUG) $(ARCHOPT)
 INSTALL_LIB = /usr/local/lib
 INSTALL_INC = /usr/local/include
-CPPFLAGS = -Dsun -D__linux -D__linux_pgi -Dmac
-CPPFLAGS = -Dmac -Dsun
+CPPFLAGS = -Dmac -Dsun -D__linux -D__linux_pgi $(ARCHOPT)
+#CPPFLAGS = -Dmac $(ARCHOPT) -Dsun -byteswapio
 CPP = cpp
 
 FOBJECTS = getdat.o idenc.o putdat.o clavdb.o getdim.o iflun.o setdim.o getnam.o mvnbc.o cluvdb.o getnd.o bnsrch.o drserr.o seterr.o getind.o compnm.o dictlk.o putvdm.o setnam.o setdat.o setvdm.o getrge.o savdb.o putdat1.o getdat1.o getvdim.o inqlun.o inqdict.o prdict.o rdtrans.o wrtrans.o setrep.o gettbuf.o getrge2.o getelemd.o setcdim.o getcdim.o getedim.o confnm.o putdic.o getpelem.o mimem.o redat.o wrdat.o cllun.o readhd.o writehd.o wrdic.o redic.o aslun.o drssync.o drsreadb.o drsautosync.o midate.o d_floor.o
@@ -33,13 +36,18 @@ SOURCES = $(FSOURCES) $(CSOURCES)
 INCLUDES = $(FINCLUDES) $(CINCLUDES)
 #--------------------------------------------------------------------
 
-all: drsdef.h libdrs.a
+all: drsdef.h libdrs.a libdrs.so
+
+shared: drsdef.h libdrs.so
 
 libdrs.a: $(OBJECTS)
 	ar rv libdrs.a $?
 
-drsdef.h: drsdef.H
-	$(CPP) -P $(CPPFLAGS) drsdef.H drsdef.h
+libdrs.so: $(OBJECTS)
+	$(CC) $(ARCHOPT) -lgfortran  -shared -o libdrs.so $(OBJECTS)
+
+drsdef.h: drsdef.HH
+	$(CPP) -P $(CPPFLAGS) drsdef.HH drsdef.h
 #--------------------------------------------------------------------
 
 install: libdrs.a

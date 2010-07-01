@@ -107,7 +107,7 @@ c     see GETIND
       parameter (IDRS_MAXPATH=1024)
 #endif cray
 
-#if defined(hpux) || defined(__alpha) || defined(__linux_pgi)
+#if defined(hpux) || defined(__alpha) || defined(__linux_pgi) || defined(mac)
 	character*8 DRS_FILETAG
 #endif
 

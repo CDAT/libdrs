@@ -93,6 +93,8 @@ c     IDRS_CASEDELTA = ichar('a')-ichar('A')
       character*1 cx,cy,lcx,lcy
       logical blank,xeos,yeos
 
+      cx = ' '
+      cy = ' '
       blank=.false.
       lenxx=len(x)+1
       lenyy=len(y)+1

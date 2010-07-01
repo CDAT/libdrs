@@ -1,12 +1,9 @@
- ok in there2../drsed/ts_Mean_Vmodel2_20c3m_am_xy_EM_r1900_1999.dic                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          ../drsed/ts_Mean_Vmodel2_20c3m_am_xy_EM_r1900_1999.dat                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
-  opeing dic with reclen:         512
- DRSTAG is:DRS DICT  2.7156490E+23                                             16777216 -2131492096
-  bad ver?
-source=                                                                                                                        
-name=                
-title=                                                                                
-units=                                        
-date=        
-time=        
-type=        
-Number of dimensions=0
+source=◊‚è‡èP@‰èxÈˇøÿ:‚èß´™2
+name=
+
+title=‡è(Íˇø±‡è
+units=è\Íˇø
+date=
+time=
+type=
+Number of dimensions=-1073747608

@@ -92,9 +92,6 @@ ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
       integer iarray(3)
       character*8 cdate
 #endif cray
-#ifdef mac
-      character*(*) cdate
-#endif
 
       midate=IDRS_SUCCESS
 

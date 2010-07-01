@@ -140,6 +140,8 @@ c         ierr=setvdim(3,' ','plev',' ',' ',xlevel,xlevel)
 c
 c
          ierr=getdat(7,din,IDRS_BYTES_PER_WORD*nlon)
+
+         print*, 'din:',din
 c
 c         ierr=getname(vsourcein1,vname(1),vtitle(1),vun(1),
 c     *        vdate(1),vtime(1),vtype(1),numdim(1))

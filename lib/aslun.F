@@ -305,7 +305,6 @@ c
             endif
          endif
       endif
-      print*, 'ok in there2',dif(nf),daf(nf)
 
       
 c            the files exist open the dictionary file and get the data file
@@ -330,8 +329,12 @@ c            name
         open (unit=ludi(nf),file=dif(nf),status='old',
      2       access='direct',form='unformatted',
      $       recl=idicrecl/IDRS_BYTES_PER_WORD,err=9002)
+#elif defined(gfortran)
+        print*, 'Opening dic (READ):',dif(nf)
+        open (unit=ludi(nf),file=dif(nf),status='old',
+     2       access='direct',form='unformatted',
+     $       recl=idicrecl,err=9002,CONVERT='big_endian')
 #elif !defined(sgi)
-        print *, ' opeing dic with reclen:',idicrecl
         open (unit=ludi(nf),file=dif(nf),status='old',
      2       access='direct',form='unformatted',
      $       recl=idicrecl,err=9002)
@@ -377,8 +380,12 @@ c                       open the data file
       open (unit=luda(nf),file=daf(nf),status='old',
      1     access='direct',form='unformatted',
      $     recl=idatrecl/IDRS_BYTES_PER_WORD,err=9003)
+#elif defined(gfortran)
+        print*, 'Opening dat (READ):',daf(nf)
+      open (unit=luda(nf),file=daf(nf),status='old',
+     1     access='direct',form='unformatted',
+     2     CONVERT='big_endian',recl=idatrecl,err=9003)
 #elif !defined(sgi)
-      print*, 'opening dat with reclen:',idatrecl
       open (unit=luda(nf),file=daf(nf),status='old',
      1     access='direct',form='unformatted',recl=idatrecl,err=9003)
 #endif
@@ -428,8 +435,12 @@ c
         open (unit=ludi(nf),file=dif(nf),status='new',
      1     access='direct',recl=idicrecl,form='unformatted',
      2     err=9002)
+#elif defined(gfortran)
+        print*, 'Opening dic (NEW):',dif(nf)
+        open (unit=ludi(nf),file=dif(nf),status='new',
+     1     access='direct',recl=idicrecl,form='unformatted',
+     2     err=9002,CONVERT='big_endian')
 #elif !defined(sgi)
-        print *, ' opeing dic with reclen:',idicrecl
         open (unit=ludi(nf),file=dif(nf),status='new',
      1     access='direct',recl=idicrecl,form='unformatted',
      2     err=9002)
@@ -484,12 +495,15 @@ c                   open the data file
      1     access='direct',recl=idatrecl/IDRS_BYTES_PER_WORD,
      $     form='unformatted',
      2     err=9003)
-#elif !defined(sgi)
-        print*, 'opening daf file',luda(nf),daf(nf),idatrecl
+#elif defined(gfortran)
+        print*, 'Opening dat (NEW):',daf(nf)
         open (unit=luda(nf),file=daf(nf),status='new',
-     1     access='direct',recl=idatrecl,form='unformatted')
-c     2     err=9003,iostat=imyiostat)
-        print*, 'opened daf file'
+     1     access='direct',recl=idatrecl,form='unformatted',
+     2     err=9003,CONVERT='big_endian')
+#elif !defined(sgi)
+        open (unit=luda(nf),file=daf(nf),status='new',
+     1     access='direct',recl=idatrecl,form='unformatted',
+     2     err=9003)
 #endif
 
 c
@@ -543,7 +557,6 @@ c
       go to 9000
  9003 aslun=IDRS_CANNOTOPENDATA
       close (unit=lud)
-      print*, 'open recived error:',imyiostat
       nf=nf-1
       go to 9000
  9002 aslun=IDRS_CANNOTOPENDICT
