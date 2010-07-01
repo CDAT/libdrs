@@ -11,7 +11,7 @@
 
 #include "drsed.h"
 #ifdef mac
-#include <Stdio.h>
+#include <stdio.h>
 #include <stdlib.h>
 #endif
 

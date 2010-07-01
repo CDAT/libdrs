@@ -13,6 +13,8 @@
  * Entered into RCS
  *
 */
+#include <stdlib.h>
+#include <stdio.h>
 #include <string.h>
 #include "drsed.h"
 #include "drsed.tab.h"
@@ -26,14 +28,20 @@ extern DRS_VARIABLE *DRSEDreadvar();
 				/* Get a pointer to a new file structure */
 DRS_FILE *DRSEDgetfile()
 {
-	return((DRS_FILE *)DRSEDalloc(sizeof(DRS_FILE),NULL));
+  DRS_FILE *afile=NULL;
+#ifdef mac
+  afile =  malloc(sizeof(DRS_FILE));
+#else
+  afile = DRSEDalloc(sizeof(DRS_FILE),NULL);
+#endif
+  return afile;
 }
 				/* Open DRS file with given filename */
 				/* return pointer, or nil if error*/
 DRS_FILE *DRSEDopenfile(filename)
 	char *filename;
 {
-	DRS_FILE *file;
+	DRS_FILE *file=NULL;
 	int err;
 	
 
@@ -50,6 +58,7 @@ DRS_FILE *DRSEDopenfile(filename)
 				/* Create file structure */
 		if(file=DRSEDgetfile())
 		{
+		  printf("ok filenam eis: %s, %p\n",filename,file);
 			strcpy(file->name,filename);
 			file->unit=DICTUNIT;
 			file->dataunit=DATAUNIT;
