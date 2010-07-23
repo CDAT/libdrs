@@ -95,7 +95,7 @@ c     *** UNICOS version ***
          go to 9000
       endif
 
-#else !cray
+#else
 c     *** SUN-like version ***
 
 #ifdef ibm
@@ -111,7 +111,7 @@ c     *** SUN-like version ***
          mialloc=IDRS_NOMEMORY
          go to 9000
       endif
-#endif cray
+#endif
 
  9000 continue
       call drsrout('mialloc',mialloc)
@@ -162,7 +162,7 @@ ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 c     *** UNICOS version ***
 
       call hpdeallc(ptr,ierr,1)
-#else !cray
+#else
 c     *** SUN-like version ***
 
 #ifdef ibm
@@ -175,7 +175,7 @@ c     *** SUN-like version ***
 #endif
 #endif
 
-#endif cray
+#endif
 
  9000 continue
       end
@@ -238,7 +238,7 @@ c     *** UNICOS version ***
          go to 9000
       endif
 
-#else !cray
+#else
 c     *** SUN-like version ***
 
 #ifdef ibm
@@ -257,7 +257,7 @@ c     *** SUN-like version ***
          miextend=IDRS_NOMEMORY
          go to 9000
       endif
-#endif cray
+#endif
 
  9000 continue
       call drsrout('miextend',miextend)
@@ -313,7 +313,7 @@ c     *** UNICOS version ***
          go to 9000
       endif
 
-#else !cray
+#else
 c     *** SUN-like version ***
 
 #ifdef ibm
@@ -331,7 +331,7 @@ c     Linux version
          miallocw=IDRS_NOMEMORY
          go to 9000
       endif
-#endif cray
+#endif
 
  9000 continue
       call drsrout('miallocw',miallocw)
@@ -389,7 +389,7 @@ c     *** UNICOS version ***
          go to 9000
       endif
 
-#else !cray
+#else
 c     *** SUN-like version ***
 
 #ifdef ibm
@@ -410,7 +410,7 @@ c     Linux version
          miextenw=IDRS_NOMEMORY
          go to 9000
       endif
-#endif cray
+#endif
 
  9000 continue
       call drsrout('miextenw',miextenw)

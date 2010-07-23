@@ -74,12 +74,12 @@ c       Cray data buffer is an integer array
       parameter (idicrecw=idicrecl/8)
       parameter (idatrecw=idatrecl/8)
       integer idicbuf(idicrecw)
-#else !cray
+#else 
       parameter (idatrecl=512)
       parameter (ibloclen=idatrecl)
       parameter (idicrecl=512)
 
-#endif cray
+#endif 
 
 c
 c         mxdim = max number of dimensions for a variable
@@ -112,7 +112,7 @@ c-----------------------------------------------------------------------
 
 #ifdef cray
       character*248 daf(mxfil),dif(mxfil)
-#else !cray
+#else
       character*1024 daf(mxfil),dif(mxfil)
 #endif
 
@@ -348,9 +348,9 @@ c
 
 #ifdef cray
       integer iblock(ibloclen,mxfil)
-#else !cray
+#else
       byte iblock(ibloclen,mxfil)
-#endif cray
+#endif
 
 
 c

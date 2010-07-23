@@ -141,9 +141,9 @@ c     data. Finally, restore the vdbs
 
 #ifdef cray
          getvdim=setname(source,name,title,units,'R*8')
-#else !cray
+#else
          getvdim=setname(source,name,title,units,'R*4')
-#endif cray
+#endif
          
 c     dimension values of DIMENSION variables are just
 c     the (floating-point) indices

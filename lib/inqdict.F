@@ -227,7 +227,7 @@ c     set program element representation
             else
                utype2='R*8'
             endif
-#else !cray
+#else
             if(filerepa.eq.IDRS_I4 .or. filerepa.eq.IDRS_I8) then
                utype2='I*4'
             elseif(filerepa.eq.IDRS_ASCII) then
@@ -235,7 +235,7 @@ c     set program element representation
             else
                utype2='R*4'
             endif
-#endif cray
+#endif
 
       endif
 

@@ -119,9 +119,9 @@ c**********************************************************************
       double precision n,d_floor
 #endif
 #endif
-#else !hpux
+#else
       double precision n,d_floor
-#endif hpux
+#endif
 
       getcdim=IDRS_SUCCESS
 
@@ -196,9 +196,9 @@ c     loop through the subranges
 #else
          n=-floor(%val(dble(-(ufe-dle)/ucycle)))
 #endif
-#else !hpux
+#else 
          n=-d_floor(dble(-(ufe-dle)/ucycle))
-#endif hpux
+#endif
 
          dmin=ufe-n*ucycle
 

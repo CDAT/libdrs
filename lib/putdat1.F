@@ -127,7 +127,7 @@ c     generate program element characterizations
             else
                utype2='R*8'
             endif
-#else !cray
+#else 
             if(filerepu.eq.IDRS_I4 .or. filerepu.eq.IDRS_I8) then
                utype2='I*4'
             elseif(filerepu.eq.IDRS_ASCII) then
@@ -135,7 +135,7 @@ c     generate program element characterizations
             else
                utype2='R*4'
             endif
-#endif cray
+#endif
 
       endif
 

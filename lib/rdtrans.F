@@ -82,7 +82,7 @@ ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
       integer a(1)
 #ifdef hpux
       integer gettbuf,c8tof4_,f4toc8_,i8toi4_,i4toi8_,redat
-#else !hpux
+#else 
       integer gettbuf,c8tof4,f4toc8,i8toi4,i4toi8,redat
 #endif
       logical drstest
@@ -98,7 +98,7 @@ ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
          if(drstest(rdtrans)) go to 9000
 #ifdef hpux
          rdtrans= f4toc8_(itranbuf,a,neu,IDRS_LEFTHALFWORD)
-#else !hpux
+#else
          rdtrans= f4toc8(itranbuf,a,neu,IDRS_LEFTHALFWORD)
 #endif
          if(rdtrans.ne.IDRS_SUCCESS) rdtrans=IDRS_BADCRAYFP

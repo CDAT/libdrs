@@ -111,9 +111,9 @@ c
       data ierrun/7/
 #endif
 #endif
-#else !hpux
+#else
       data ierrun/0/
-#endif hpux
+#endif
 c
       integer lud
       integer readhd,writehd,drsreadb
@@ -131,9 +131,9 @@ c
       character*248 dictf
       logical isnsl, icopynsl
       integer drsn2lcp
-#else !cray
+#else
       character*1024 dictf
-#endif cray
+#endif
 
 c      character*40 path
 c

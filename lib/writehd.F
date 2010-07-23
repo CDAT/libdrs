@@ -81,7 +81,7 @@ ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 #ifdef cray
       integer c8tof4,i8toi4
       logical drstest
-#endif cray
+#endif
 
       data drstag /'DRS DICT'/
 
@@ -100,10 +100,10 @@ ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
       writehd=c8tof4(version,idicbuf(8),1,IDRS_LEFTHALFWORD)
       if(drstest(writehd)) go to 9000 
       write(lu,rec=1,err=200)(idicbuf(i),i=1,idicrecw)
-#else !cray
+#else
       write(lu,rec=1,err=200) dfname,numvdbs,idatalen,drstag,
      $     version
-#endif cray
+#endif
 
 
       go to 9000

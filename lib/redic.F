@@ -64,7 +64,7 @@ c
 #ifdef cray
 	integer i4toi8,f4toc8
         logical drstest
-#endif cray
+#endif
 
 c
       ierr=0
@@ -114,10 +114,10 @@ c
       if(drstest(f4toc8(idicbuf((iptr-1)/2+1),dvfe,ilen,ihalfword)))
      $     go to 9001
 
-#else !cray
+#else
       read (lu,rec=irec*2,err=9001) abuf
       read (lu,rec=irec*2+1,err=9001) iabuf
-#endif cray
+#endif
 
 c     version 1.0 files must have equally-spaced dimensions
 

@@ -56,10 +56,10 @@ c
       
 #ifdef cray
       integer a(1)
-#else !cray
+#else
       external bcopy !$pragma C( bcopy )
       byte a(*)
-#endif cray
+#endif
 
       integer lu
       integer iw1,kn,il,ik,ij,ii,kl,kk,kj,ki
@@ -125,12 +125,12 @@ c     Copy as many bytes as possible from buffer to data array
 
 #ifdef cray
          call strmov(iblock(1,nl),ibl,iclen,a,in)
-#else !cray
+#else
 c$$$         do 25 i=1,iclen
 c$$$            a(in+i-1)= iblock(ibl+i-1,nl)
 c$$$ 25      continue
       call bcopy(iblock(ibl,nl),a(in),%val(iclen))
-#endif cray
+#endif
 
 c     If more bytes to read into the element,
 c     read the new block and update all pointers

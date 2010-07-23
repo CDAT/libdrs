@@ -250,9 +250,9 @@ c     write the dimension variable
 
 #ifdef cray
          putvdim=setname(source,name,title,units,'R*8')
-#else !cray
+#else
          putvdim=setname(source,name,title,units,'R*4')
-#endif cray
+#endif
 
       putvdim=setdate(date,time)
       putvdim=setdim(1,'internal','internal',len,newdfe,newdle)

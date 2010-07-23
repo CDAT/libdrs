@@ -68,13 +68,13 @@ c
       integer a(1)
       pointer (ptblock,tblock)
       integer tblock(ibloclen)
-#else !cray
+#else
       external bcopy !$pragma C( bcopy )
       external bzero !$pragma C( bzero )
       byte a(*)
       pointer (ptblock,tblock)
       byte tblock(ibloclen)
-#endif cray
+#endif
 
       integer iw1,kn,il,ik,ij,ii,kl,kk,kj,ki
       integer lu
@@ -185,12 +185,12 @@ c     and mark the buffer as dirty
 
 #ifdef cray
 	 call strmov(a,in,iclen,iblock(1,nl),ibl)
-#else !cray
+#else
 c$$$         do 25 i=1,iclen
 c$$$            iblock(ibl+i-1,nl)= a(in+i-1)
 c$$$ 25      continue
       call bcopy(a(in),iblock(ibl,nl),%val(iclen))
-#endif cray
+#endif
 
       ibdirty(nl)=1
 

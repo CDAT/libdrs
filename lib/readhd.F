@@ -82,7 +82,7 @@ ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 #ifdef cray
 	integer i4toi8,f4toc8
         logical drstest
-#endif cray
+#endif
 
 
       readhd=IDRS_SUCCESS
@@ -97,10 +97,10 @@ ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
       if(drstest(readhd)) go to 9000
       call strmov(idicbuf(7),1,8,drstag,1)
       readhd=f4toc8(idicbuf(8),version,1,IDRS_LEFTHALFWORD)
-#else !cray
+#else
       read(lu,rec=1,err=100) dfname,numvdbs,idatalen,drstag,
      $     version
-#endif cray
+#endif
       if(drstag.ne.'DRS DICT') then
          readhd=IDRS_VERSION1FILE
          version=1.0

@@ -7,7 +7,7 @@
 #
 #--------------------------------------------------------------------
 
-DEBUG = -O -g
+DEBUG = -O 
 # Requires Absoft FORTRAN
 FC = gfortran
 CC = gcc

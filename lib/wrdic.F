@@ -59,7 +59,7 @@ c
 #ifdef cray
       integer i8toi4,c8tof4
       logical drstest
-#endif cray
+#endif
 
 c
       ierr=0
@@ -110,7 +110,7 @@ c
      $     go to 9001
 
       write(lu,rec=irec*2+1,err=9001)(idicbuf(i),i=1,mxiabuf)
-#else !cray
+#else
       write (lu,rec=irec*2,err=9001) asrc,anam,atitl,aun,adate,atime,
      1                             atype,adna,adun
       write (lu,rec=irec*2+1,err=9001) nina,nda,nea,laty,iadim,dfa,dla,
@@ -119,7 +119,7 @@ c
 #ifdef ibm
       call flush_(lu)
 #endif
-#endif cray
+#endif
 
       go to 9000
 c                     error return

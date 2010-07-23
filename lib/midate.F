@@ -81,17 +81,17 @@ ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
       integer iarray(3)
 #endif
       character*(*) cdate
-#endif sun||hpux
+#endif 
 
 #ifdef sgi
       integer imon, iday, iyear
       character*(*) cdate
-#endif sgi
+#endif
 
 #ifdef cray
       integer iarray(3)
       character*8 cdate
-#endif cray
+#endif
 
       midate=IDRS_SUCCESS
 
@@ -103,17 +103,17 @@ ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 #endif
       write(cdate,100) iarray(2),iarray(1),mod(iarray(3),100)
  100  format(i2,"/",i2,"/",i2)
-#endif sun||hpux
+#endif
 
 #ifdef sgi
       call idate(imon,iday,iyear)
       write(cdate,100) imon,iday,iyear
  100  format(i2,"/",i2,"/",i2)
-#endif sgi
+#endif
 
 #ifdef cray
       call date(cdate)
-#endif cray
+#endif
       do 10 i=2,8
          if(cdate(i:i).eq.' ') cdate(i:i)='0'
  10   continue
@@ -160,15 +160,15 @@ ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 
 #ifdef cray
       character*8 ctime
-#else !cray
+#else 
       character*(*) ctime
-#endif cray
+#endif
 
       mitime=IDRS_SUCCESS
 
 #ifdef cray
       call clock(ctime)
-#else !cray
+#else
 #ifdef hpux
       call itime_(iarray)
 #else
@@ -176,7 +176,7 @@ ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 #endif
       write(ctime,100) iarray(1),iarray(2),iarray(3)
  100  format(i2,":",i2,":",i2)
-#endif cray
+#endif
 
       do 10 i=2,8
          if(ctime(i:i).eq.' ') ctime(i:i)='0'

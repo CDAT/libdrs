@@ -55,7 +55,7 @@ c**********************************************************************
       integer tblock(ibloclen)
 #else
       byte tblock(ibloclen)
-#endif cray
+#endif
 
       drsreadb = IDRS_SUCCESS
 
