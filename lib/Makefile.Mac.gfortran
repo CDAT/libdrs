@@ -9,10 +9,11 @@
 
 DEBUG = -O 
 # Requires Absoft FORTRAN
-FC = gfortran
+FC = /usr/local/bin/gfortran
 CC = gcc
-ARCHOPT = -arch i386
-ARCHOPT = 
+ARCHOPT = -arch x86_64 
+#ARCHOPT = -arch i386
+#ARCHOPT =
 FOPTS = -fcray-pointer $(ARCHOPT) -W
 FFLAGS = $(DEBUG) $(FOPTS) -Dsun -D__linux -D__linux_pgi -byteswapio
 FFLAGS = $(DEBUG) $(FOPTS) -Dmac -Dgfortran 

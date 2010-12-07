@@ -141,7 +141,6 @@ c
 c
          ierr=getdat(7,din,IDRS_BYTES_PER_WORD*nlon)
 
-         print*, 'din:',din
 c
 c         ierr=getname(vsourcein1,vname(1),vtitle(1),vun(1),
 c     *        vdate(1),vtime(1),vtype(1),numdim(1))
@@ -187,6 +186,7 @@ c         ierr=setvdim(3,' ','plev',' ',' ',xlevel,xlevel)
          ierr=setdim(2,vname2d,vun2d,1,times(itot),times(itot))
 c
          ierr=getdat(9,ddep,IDRS_BYTES_PER_WORD*nlon)
+
 c
 c         ierr=getname(vsourcein2,vname(2),vtitle(2),vun(2),
 c     *        vdate(2),vtime(2),vtype(2),numdim(2))
@@ -231,6 +231,8 @@ c
          ierr=setdim(1,'longitude',' ',nlon,xlonmin,xlonmax)
          ierr=setdim(2,vname2d,vun2d,1,times(iold),times(iold))
          ierr=getdat(7,din,IDRS_BYTES_PER_WORD*nlon)
+
+         print*, 'Ok din again',din
          do ilon=1,nlon
             x8_old(ilon)=din(ilon)
          enddo

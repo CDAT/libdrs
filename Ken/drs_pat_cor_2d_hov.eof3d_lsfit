@@ -1,24 +1,8 @@
 #!/bin/csh
 drs_pat_cor_2d_hov<<_EOF_
-'/pcmdi/high_freq/sperber/cmip/3d/obs/olr_15N_15S_eof_olr_79_07_20_100_25N_25S_3D_lsfit_pc1_4'
+'olr_15N_15S_eof_olr_79_07_20_100_25N_25S_3D_lsfit_pc1_4'
 'rlt_bpf'
-'/pcmdi/high_freq/sperber/obs/olr/olr_daily_79_07_20_100_15N_15S'
+'olr_daily_79_07_20_100_15N_15S'
 'rlt_bpf'
-0., 360.
-_EOF_
-#!/bin/csh
-drs_pat_cor_2d_hov<<_EOF_
-'/pcmdi/high_freq/sperber/cmip/3d/obs/u850_15N_15S_eof_olr_79_07_20_100_25N_25S_3D_lsfit_pc1_4'
-'u850_bpf'
-'/pcmdi/high_freq/sperber/ncep_reanal/daily/u850_79_07_20_100_15N_15S'
-'u_bpf'
-0., 360.
-_EOF_
-#!/bin/csh
-drs_pat_cor_2d_hov<<_EOF_
-'/pcmdi/high_freq/sperber/cmip/3d/obs/u200_15N_15S_eof_olr_79_07_20_100_25N_25S_3D_lsfit_pc1_4'
-'u200_bpf'
-'/pcmdi/high_freq/sperber/ncep_reanal/daily/u200_79_07_20_100_15N_15S'
-'u_bpf'
-0., 360.
+ 0.         360.
 _EOF_
