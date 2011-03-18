@@ -1,9 +1,14 @@
 c
 c  2009 October 21: Calculate pattern correlations
-cjfp 2011 Jan 3: changed cw_ to fcw_, and related changes
+cjfp 2011: changed cw_ to fcw_, and related changes
 c
-c  to compile:
+c  to compile and run on a Macintosh, for debugging:
 c
+c gfortran -g3 -save-temps -O0 -arch x86_64 -L/usr/local/lib -L${HOME}/drs/libdrs/lib -L${HOME}/cdat/libcdms/lib -lcdms -lnetcdf -lz -ldrs -lc -lm -o dpc2ho dpc2ho.f
+c dsymutil dpc2ho
+c dpc2ho
+c
+c older compile lines:
 c  f77 -g -e drs_pat_cor_2d_hov.f -L/pcmdi/cirrus/netcdf-2.3.2/libsrc -L/usr/local/lib -lcdms -lnetcdf -L/usr/local/src/hdf/HDF4.0r2/lib -lmfhdf -ldf -ljpeg -lz -lnsl -L/pcmdi/cirrus/drs_solaris -ldrs -lnsl -lF77 -lc -lm -lsunmath -o drs_pat_cor_2d_hov
 c
 c  f77 -g -e drs_pat_cor_2d_hov.f -L/home/andy/pcmdi/drs/lib -ldrs -o drs_pat_cor_2d_hov
