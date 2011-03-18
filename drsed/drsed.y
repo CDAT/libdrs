@@ -35,6 +35,10 @@ static int err;  /* error return */
 static int err2;
 static int ndim; /* number of dimensions */
 extern FILE *_drsed_outfile;
+
+void DRSEDhelp(int option);
+
+
 char c;
 %}
 %union {
