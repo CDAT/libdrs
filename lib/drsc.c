@@ -882,7 +882,7 @@ Setvdim(n,dso,dna,dti,dun,df,dl)
 }
 
 				/* SGI wrapper routines */
-#if defined (sgi) || defined (mac) 
+#if defined (sgi) || defined (mac) || defined(__linux_gfortran)
 /*
 double
 d_floor_( double *x ){

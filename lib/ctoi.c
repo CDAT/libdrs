@@ -599,7 +599,7 @@ void byteswap4_(void *buf, int *n){
 #endif /* alpha */
 #if defined(__linux)
 					     /* Byte swap for linux int, float */
-#if defined(__linux_pgi)
+#if defined(__linux_pgi) || defined(__linux_gfortran)
 void byteswap4_(void *buf, int *n){
 #else
 void byteswap4(void *buf, int *n){
