@@ -7,22 +7,26 @@
 #
 #--------------------------------------------------------------------
 
-DEBUG = -O 
+# DEBUG = -O 
+DEBUG = -g -save-temps
 # Requires Absoft FORTRAN
 FC = /usr/local/bin/gfortran
 CC = gcc
-ARCHOPT = -arch x86_64 
+ARCHOPT = -arch x86_64
 #ARCHOPT = -arch i386
 #ARCHOPT =
 FOPTS = -fcray-pointer $(ARCHOPT) -W
-FFLAGS = $(DEBUG) $(FOPTS) -Dsun -D__linux -D__linux_pgi -byteswapio
-FFLAGS = $(DEBUG) $(FOPTS) -Dmac -Dgfortran 
-FFLAGS = $(DEBUG) $(FOPTS) -Dsun -D__linux -D__linux_pgi -Dgfortran -Dmac
+# FFLAGS = $(DEBUG) $(FOPTS) -Dsun -D__linux -D__linux_pgi -byteswapio
+# FFLAGS = $(DEBUG) $(FOPTS) -Dsun -D__linux -D__linux_pgi -Dgfortran -Dmac
+FFLAGS = $(DEBUG) $(FOPTS) -Dsun -Dgfortran -D__linux -D__linux_gfortran -Dmac -Dmac64
 CFLAGS = $(DEBUG) $(ARCHOPT)
 INSTALL_LIB = /usr/local/lib
 INSTALL_INC = /usr/local/include
-CPPFLAGS = -Dmac -Dsun -D__linux -D__linux_pgi $(ARCHOPT)
-#CPPFLAGS = -Dmac $(ARCHOPT) -Dsun -byteswapio
+# Somehow CPPFLAGS ends out on the gcc lines...
+#CPPFLAGS = -Dmac -Dsun -D__linux -D__linux_pgi $(ARCHOPT)
+#CPPFLAGS = -Dmac $(ARCHOPT) -Dsun -byteswapio   note that byteswapio is never referenced
+#CPPFLAGS = -Dsun -D__linux -D__linux_gfortran -Dmac $(ARCHOPT)
+CPPFLAGS = -Dsun -D__linux -D__linux_gfortran -Dmac -Dmac64 $(ARCHOPT)
 CPP = cpp
 
 FOBJECTS = getdat.o idenc.o putdat.o clavdb.o getdim.o iflun.o setdim.o getnam.o mvnbc.o cluvdb.o getnd.o bnsrch.o drserr.o seterr.o getind.o compnm.o dictlk.o putvdm.o setnam.o setdat.o setvdm.o getrge.o savdb.o putdat1.o getdat1.o getvdim.o inqlun.o inqdict.o prdict.o rdtrans.o wrtrans.o setrep.o gettbuf.o getrge2.o getelemd.o setcdim.o getcdim.o getedim.o confnm.o putdic.o getpelem.o mimem.o redat.o wrdat.o cllun.o readhd.o writehd.o wrdic.o redic.o aslun.o drssync.o drsreadb.o drsautosync.o midate.o d_floor.o
