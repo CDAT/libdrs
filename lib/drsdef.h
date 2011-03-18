@@ -90,13 +90,11 @@ c     FileStatus
 
 c     MachineName
       parameter (IDRS_SUN = 1,
-     $     IDRS_CRAY = 2)
+     $     IDRS_CRAY = 2, IDRS_MAC64 = 3)
 
-      parameter (IDRS_MACHINE=IDRS_SUN,
-     $    IDRS_BYTES_PER_WORD=4
+      parameter (IDRS_MACHINE=IDRS_MAC64,
+     $    IDRS_BYTES_PER_WORD=8
      $    )
-c     see GETIND
-      parameter (IDRS_MAXPATH=1024)
 
 	character*8 DRS_FILETAG
 

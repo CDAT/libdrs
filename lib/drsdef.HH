@@ -88,7 +88,7 @@ c     FileStatus
 
 c     MachineName
       parameter (IDRS_SUN = 1,
-     $     IDRS_CRAY = 2)
+     $     IDRS_CRAY = 2, IDRS_MAC64 = 3)
 
 #ifdef cray
 
@@ -99,12 +99,18 @@ c     see GETIND
       parameter (IDRS_MAXPATH=248)
       parameter (IDRS_NSL=8)
       parameter (IDRS_NOCOPY=16)
+#else
+#ifdef mac64
+      parameter (IDRS_MACHINE=IDRS_MAC64,
+     $    IDRS_BYTES_PER_WORD=8
+     $    )
 #else !cray
       parameter (IDRS_MACHINE=IDRS_SUN,
      $    IDRS_BYTES_PER_WORD=4
      $    )
 c     see GETIND
       parameter (IDRS_MAXPATH=1024)
+#endif mac64
 #endif cray
 
 #if defined(hpux) || defined(__alpha) || defined(__linux_pgi) || defined(mac)

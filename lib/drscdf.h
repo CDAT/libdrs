@@ -90,6 +90,7 @@
 /*     MachineName */
 #define IDRS_SUN 1
 #define IDRS_CRAY 2
+#define IDRS_MAC64 3
 
 #ifdef cray
 
@@ -97,11 +98,18 @@
 #define IDRS_BYTES_PER_WORD 8
 #define IDRS_NSL 8			     /* Aslun flag: file is on NSL UniTree */
 #define IDRS_NOCOPY 16			     /* Aslun flag: do not copy dictionary from NSL on open */
+#else      /*following new block added by jfp */
+
+#ifdef mac64
+#define IDRS_MACHINE IDRS_MAC64
+#define IDRS_BYTES_PER_WORD 8
 #else
+
 #define IDRS_MACHINE IDRS_SUN
 #define IDRS_BYTES_PER_WORD 4
 
-#endif
+#endif mac64
+#endif cray
 
 /*     DRSVersion */
 /*     DRS_VERSION is current version */
