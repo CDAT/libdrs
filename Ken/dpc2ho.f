@@ -134,8 +134,6 @@ c
          ierr=fcw_cluvdb()
          ierr=fcw_setname(' ',vname(1),' ',' ',' ')
          ierr=fcw_inqdict(7,IDRS_GETFIRSTVAR)
-c     testing...
-      vtitle2d = "jfp_hello"
          ierr=fcw_getedim(2,vsource2d,vname2d,vtitle2d,vun2d,
      *        ntype2d, numdim2, xt1, xtn )
          ierr=fcw_getcdim(2,vsource2d,vname2d,vtitle2d,
