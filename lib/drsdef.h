@@ -75,49 +75,59 @@ c                 drsdef.h
 
 c#######################################################################
 c     General definitions
+      integer IDRS_NOVALUE, IDRS_DEFAULT
       parameter(IDRS_NOVALUE=0
      $     ,IDRS_DEFAULT=0
      $     )
      
 c     DimensionType
+      integer IDRS_EQUALLY_SPACED, IDRS_UNEQUALLY_SPACED
       parameter (IDRS_EQUALLY_SPACED = 1,
      $     IDRS_UNEQUALLY_SPACED = 2)
 
 c     FileStatus
+      integer IDRS_READ, IDRS_CREATE, IDRS_EXTEND
       parameter (IDRS_READ = 1,
      $     IDRS_CREATE = 2,
      $     IDRS_EXTEND = 3)
 
 c     MachineName
+      integer IDRS_SUN, IDRS_CRAY, IDRS_MAC64
       parameter (IDRS_SUN = 1,
      $     IDRS_CRAY = 2, IDRS_MAC64 = 3)
 
+      integer IDRS_MACHINE, IDRS_BYTES_PER_WORD
       parameter (IDRS_MACHINE=IDRS_MAC64,
      $    IDRS_BYTES_PER_WORD=8
      $    )
 
-	character*8 DRS_FILETAG
+      character*8 DRS_FILETAG
 
 c     DRSVersion
 c     DRS_VERSION is current version
 c     DRS_MAXVERSION is max allowed version before version
 c     is considered *novalue*
+      integer DRS_VERSION, DRS_MAXVERSION
       parameter(DRS_VERSION=2.1,
      $    DRS_MAXVERSION=10.0,
      $    DRS_FILETAG='DRS DATA'
      $    )
 
 c     Inquiry operators (INQDICT)
+      integer IDRS_GETFIRSTVAR, IDRS_GETNEXTVAR
       parameter(IDRS_GETFIRSTVAR=1
      $     ,IDRS_GETNEXTVAR=2
      $     )
       
 c     Cray-to-IEEE translation parameters
+      integer IDRS_LEFTHALFWORD, IDRS_RIGHTHALFWORD
       parameter(IDRS_LEFTHALFWORD=0
      $     ,IDRS_RIGHTHALFWORD=4
      $     )
 
 c     ElementType
+      integer IDRS_I4, IDRS_I8, IDRS_IEEE_R4, IDRS_CRAY_R8,
+     $     IDRS_ASCII, IDRS_USER
       parameter(IDRS_I4=1
      $     ,IDRS_I8=2
      $     ,IDRS_IEEE_R4=3
@@ -127,10 +137,12 @@ c     ElementType
      $     )
 
 c     Synchronization options
+      integer IDRS_SYNC_OFF, IDRS_SYNC_ON
       parameter(IDRS_SYNC_OFF=1
      $     ,IDRS_SYNC_ON=2)
 
 c     Error reporting
+      integer IDRS_NOREPORT, IDRS_FATAL, IDRS_WARNING, IDRS_INTERNAL
       parameter (IDRS_NOREPORT=1
      $     ,IDRS_FATAL=2
      $     ,IDRS_WARNING=3
@@ -138,11 +150,22 @@ c     Error reporting
      $     )
 
 c     Putdic options
+      integer IDRS_BLANKS_ARE_NULL, IDRS_BLANKS_ARE_LITERAL
       parameter (IDRS_BLANKS_ARE_NULL=1
      $     ,IDRS_BLANKS_ARE_LITERAL=2
      $     )
 
 c     Error definitions
+      integer IDRS_SUCCESS
+     $     ,IDRS_NOMEMORY
+     $     ,IDRS_BINFAILED
+     $     ,IDRS_BADLEN
+     $     ,IDRS_NOMONO
+     $     ,IDRS_NOCOMPARISON
+     $     ,IDRS_VDBNOTFOUND
+     $     ,IDRS_BADDIM
+     $     ,IDRS_NOTMONOTONE
+     $     ,IDRS_DICTREADERROR
       parameter (IDRS_SUCCESS=0
      $     ,IDRS_NOMEMORY=1
      $     ,IDRS_BINFAILED=2002
@@ -153,6 +176,16 @@ c     Error definitions
      $     ,IDRS_BADDIM=7
      $     ,IDRS_NOTMONOTONE=8
      $     ,IDRS_DICTREADERROR=9)
+      integer IDRS_NODICTFILE
+     $     ,IDRS_BADLU
+     $     ,IDRS_BADTYPE
+     $     ,IDRS_AMBIGUITYEXISTS
+     $     ,IDRS_CANNOTADDDATA
+     $     ,IDRS_DICTFULL
+     $     ,IDRS_VERSION1FILE
+     $     ,IDRS_NEWFILEFORMAT
+     $     ,IDRS_CANNOTREADHEADER
+     $     ,IDRS_CANNOTREADDATA
       parameter (IDRS_NODICTFILE=10
      $     ,IDRS_BADLU=11
      $     ,IDRS_BADTYPE=12
@@ -163,6 +196,16 @@ c     Error definitions
      $     ,IDRS_NEWFILEFORMAT=1017
      $     ,IDRS_CANNOTREADHEADER=18
      $     ,IDRS_CANNOTREADDATA=19)
+      integer IDRS_BADDIMNAME
+     $     ,IDRS_TOOMANYFILES
+     $     ,IDRS_CANNOTOPENDICT
+     $     ,IDRS_CANNOTOPENDATA
+     $     ,IDRS_BADSTATUS
+     $     ,IDRS_BADDIMTYPE
+     $     ,IDRS_INDEXHIGH
+     $     ,IDRS_INDEXLOW
+     $     ,IDRS_INDEXBETWEEN
+     $     ,IDRS_NORANGE
       parameter(IDRS_BADDIMNAME=20
      $     ,IDRS_TOOMANYFILES=21
      $     ,IDRS_CANNOTOPENDICT=22
@@ -173,6 +216,16 @@ c     Error definitions
      $     ,IDRS_INDEXLOW=2027
      $     ,IDRS_INDEXBETWEEN=2028
      $     ,IDRS_NORANGE=29)
+      integer IDRS_SAVEBUFOVERFLOW
+     $     ,IDRS_BADERRLEVEL
+     $     ,IDRS_ERROROUTOFRANGE
+     $     ,IDRS_CANNOTWRITEHEADER
+     $     ,IDRS_CANNOTWRITEDATA
+     $     ,IDRS_BADCHARLEN
+     $     ,IDRS_BADOPER
+     $     ,IDRS_NOMOREVARS
+     $     ,IDRS_DICTALREADYOPEN
+     $     ,IDRS_LOOKUPFAILED
       parameter(IDRS_SAVEBUFOVERFLOW=30
      $     ,IDRS_BADERRLEVEL=31
      $     ,IDRS_ERROROUTOFRANGE=32
@@ -184,6 +237,16 @@ c     Error definitions
      $     ,IDRS_DICTALREADYOPEN=38
      $     ,IDRS_LOOKUPFAILED=2039
      $     )
+      integer IDRS_DICTWRITEERROR
+     $     ,IDRS_DICTEXTENDERROR
+     $     ,IDRS_DATEXTENDERROR
+     $     ,IDRS_DICTRUNCATEERR
+     $     ,IDRS_DATTRUNCATEERR
+     $     ,IDRS_BADIEEEFP
+     $     ,IDRS_BADCRAYFP
+     $     ,IDRS_BADCRAYINT
+     $     ,IDRS_CANNOTCONVERT
+     $     ,IDRS_INEXACTMATCH
       parameter(IDRS_DICTWRITEERROR=40
      $     ,IDRS_DICTEXTENDERROR=41
      $     ,IDRS_DATEXTENDERROR=42
@@ -195,6 +258,10 @@ c     Error definitions
      $     ,IDRS_CANNOTCONVERT=48
      $     ,IDRS_INEXACTMATCH=1049
      $     )
+      integer IDRS_DUPLICATEVAR
+     $     ,IDRS_CANNOTWRITEDIC
+     $     ,IDRS_BADSYNCOPT
+     $     ,IDRS_LASTERROR
       parameter(IDRS_DUPLICATEVAR=50
      $     ,IDRS_CANNOTWRITEDIC=51
      $     ,IDRS_BADSYNCOPT=52
