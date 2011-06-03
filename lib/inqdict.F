@@ -160,7 +160,7 @@ c     No more variables found.
 c     A variable was found: read the avdb, and copy to uvdb
       
  200  continue
-      
+
       call redic(ludi(il),ivdb-n1+1,ierr)
       if(ierr.eq.1) then
          inqdict=IDRS_DICTREADERROR

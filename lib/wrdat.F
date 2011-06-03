@@ -113,7 +113,7 @@ c       Update current block number
             else
                write (luda(nl),rec=iblno(nl),err=9001) tblock
             endif
-#else            
+#else
             write (luda(nl),rec=iblno(nl),err=9001) tblock
 #endif
          endif

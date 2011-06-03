@@ -123,6 +123,7 @@ c
       character*(*) datfil
       integer istat
       character*40 dum
+      integer ierr
 #ifndef ibm
       data nf /0/
 #endif
@@ -156,6 +157,10 @@ c                  IDRS_DICTREADERROR = error reading dictionaly entries
 c                  IDRS_CANNOTREADDATA = error reading first block of data after open
 c                  IDRS_DICTALREADYOPEN = dictionary file is already open
 c
+c     Note: on a Macintosh, 64-bit, an additional, temporary, dictionary file will be opened.
+c     Most reading and writing will be to and from the temporary dic file.  When the files are
+c     closed the temporary file will be written to the specified file lud/dicfil.  This improves
+c     performance if the specified file is elsewhere on a network.
       aslun=0
 #ifdef NSL_DRS
       icopynsl=(istat.lt.IDRS_NOCOPY)
@@ -229,7 +234,7 @@ c
             go to 13
          endif
  12   continue
-      go to 9002
+      go to 9026
  13   continue
 
       do 15 i=icpathln,1,-1
@@ -332,7 +337,7 @@ c            name
 #elif defined(gfortran)
         open (unit=ludi(nf),file=dif(nf),status='old',
      2       access='direct',form='unformatted',
-     $       recl=idicrecl,err=9002,CONVERT='big_endian')
+     $       recl=idicrecl,err=9021,CONVERT='big_endian')
 #elif !defined(sgi)
         open (unit=ludi(nf),file=dif(nf),status='old',
      2       access='direct',form='unformatted',
@@ -343,11 +348,11 @@ c                      get data file name, number of vdbs, data length
 c        read (ludi(nf),rec=1) daf(nf),nvdb(nf),mxdat(nf)
         if(drstest(readhd(ludi(nf),dum,nvdb(nf),mxdat(nf),
      $       drsvers(nf))))
-     $       go to 9002
+     $       go to 9024
 
 
 c
-        if (nvdb(nf).le.0.or.mxdat(nf).le.0) go to 9002
+        if (nvdb(nf).le.0.or.mxdat(nf).le.0) go to 9025
 c                       open the data file
 
 #if defined(sgi)
@@ -417,6 +422,22 @@ c            it is a new file, save the 'given' data file name
         drsvers(nf)=DRS_VERSION
 c
 
+#ifdef mac64
+c       Stash the specified dic file in dif2.  Create a tempoary local file and put it in
+c       dif instead.  Thus the user's logical unit number ludi(nf) will point to the
+c       temporary local file, and a new logical unit number ludi2(nf) will point to the
+c       (possibly remote) file specified by the user.
+c       Most of the DRS library will read and write to and from
+c       the local file.  (The local file will be in the current directory, whatever that is.
+c       There is no checking for whether it really is local or even whether that directory
+c       has write permissions.)  This is a substitue for a cache, because (as of June 2011)
+c       Macintosh OS X does not cache of networked files, at least not usefully; even
+c       mmap doesn't help performance.
+        dif2(nf) = dif(nf)
+        call getlun( ludi2(nf) )
+        call getfile( dif(nf) )
+#endif
+
 #if defined(sgi)
         open (unit=ludi(nf),file=dif(nf),status='new',
      1     access='direct',recl=idicrecl/IDRS_BYTES_PER_WORD,
@@ -434,9 +455,20 @@ c
      1     access='direct',recl=idicrecl,form='unformatted',
      2     err=9002)
 #elif defined(gfortran)
-        open (unit=ludi(nf),file=dif(nf),status='new',
+cjfp        open (unit=ludi(nf),file=dif(nf),status='new',
+#ifdef mac64mmap
+        ierr = fmapf(dif(nf))
+        if ( ierr.ne.0 ) go to 9023
+#endif
+c >>>jfp for mac64 we want status='scratch', but not until debugging is finished >>>>>
+        open (unit=ludi(nf),file=dif(nf),status='replace',
      1     access='direct',recl=idicrecl,form='unformatted',
-     2     err=9002,CONVERT='big_endian')
+     2     err=9022,CONVERT='big_endian')
+#ifdef mac64
+        open (unit=ludi2(nf),file=dif2(nf),status='replace',
+     1     access='direct',recl=idicrecl,form='unformatted',
+     2     err=9027,CONVERT='big_endian')
+#endif
 #elif !defined(sgi)
         open (unit=ludi(nf),file=dif(nf),status='new',
      1     access='direct',recl=idicrecl,form='unformatted',
@@ -493,7 +525,8 @@ c                   open the data file
      $     form='unformatted',
      2     err=9003)
 #elif defined(gfortran)
-        open (unit=luda(nf),file=daf(nf),status='new',
+cjfp        open (unit=luda(nf),file=daf(nf),status='new',
+        open (unit=luda(nf),file=daf(nf),status='replace',
      1     access='direct',recl=idatrecl,form='unformatted',
      2     err=9003,CONVERT='big_endian')
 #elif !defined(sgi)
@@ -530,7 +563,8 @@ c
 #ifdef NSL_DRS
       isynch(nf)=IDRS_SYNC_OFF
 #else
-      isynch(nf)=IDRS_SYNC_ON
+cjfp      isynch(nf)=IDRS_SYNC_ON
+      isynch(nf)=IDRS_SYNC_OFF
 #endif
       go to 9000
 c
@@ -555,6 +589,27 @@ c
       close (unit=lud)
       nf=nf-1
       go to 9000
+ 9021 continue
+      print *, "jfp 9021"
+      stop
+ 9022 continue
+      print *, "jfp 9022"
+      stop
+ 9023 continue
+      print *, "jfp 9023"
+      stop
+ 9024 continue
+      print *, "jfp 9024"
+      stop
+ 9025 continue
+      print *, "jfp 9024"
+      stop
+ 9026 continue
+      print *, "jfp 9026"
+      stop
+ 9027 continue
+      print *, "jfp 9027"
+      stop
  9002 aslun=IDRS_CANNOTOPENDICT
       nf=nf-1
       go to 9000
@@ -563,5 +618,44 @@ c
       go to 9000
  9000 continue
       call drsrout('aslun',aslun)
+      return
+      end
+
+      subroutine getlun( lun )
+      integer lun
+c     returns a random logical unit number which is not open
+      integer minlun, rangelun, i
+      real rnd
+      logical isopen
+
+      minlun = 1234
+      rangelun = 2**15-1 - minlun
+      do 10 i = 1, 123456789
+         call random_number( rnd )
+         lun = minlun + rnd*rangelun
+         inquire( unit=lun, opened=isopen )
+         if ( .not. isopen ) exit
+ 10   continue
+      return
+      end
+
+      subroutine getfile( filename )
+      character *(*) filename
+c     returns a random filename.  The caller should have allocated space
+c     for the argument, a string of length at least 17 characters.
+      integer num
+      character*7 numstr
+      real rnd
+      logical isopen
+
+      do 10 i = 1, 123456789
+         call random_number( rnd )
+         num = 1000000 + 9000000*rnd
+c     1,000,000 <= num < 10,000,000, thus it prints as 7 characters
+         write (unit=numstr,fmt='(i7)') num
+         filename = 'drstmp' // numstr // '.dic'
+         inquire( file=filename, opened=isopen )
+         if ( .not. isopen ) exit
+ 10   continue
       return
       end

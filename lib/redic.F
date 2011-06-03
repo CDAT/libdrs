@@ -56,8 +56,11 @@ c         ierr    is the error return
 c                  0 = successful 
 c                  1 = error reading the dictionary file
 c                  2 = file does not exist
+c         ierr also is used for input - if ierr<0 that means
+c                  lu is nonstandard; use -err for computing il if needed
 c
       integer lu
+      integer lustd
 #include "drscom.h"
 #include "drsdef.h"
 
@@ -67,12 +70,16 @@ c
 #endif
 
 c
+      if ( ierr.lt.0 ) then
+         lustd = -ierr
+      else
+         lustd = lu
+      endif
+
       ierr=0
-c
-      il=iflun(lu)
+      il=iflun(lustd)
       if (il.le.0) go to 9002
       if (irec.gt.nvdb(il).or.irec.le.0) go to 9002
-
 
 #ifdef cray
 

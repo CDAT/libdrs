@@ -107,13 +107,13 @@ c
       save /drscuvd3/
 c
 c-----------------------------------------------------------------------
-      common /drscdef/ it,daf,dif
+      common /drscdef/ it,daf,dif,dif2
       character*8 it(mxfil)
 
 #ifdef cray
-      character*248 daf(mxfil),dif(mxfil)
+      character*248 daf(mxfil),dif(mxfil),dif2(mxfil)
 #else
-      character*1024 daf(mxfil),dif(mxfil)
+      character*1024 daf(mxfil),dif(mxfil),dif2(mxfil)
 #endif
 
 c
@@ -123,6 +123,7 @@ c                                   'E' - extend.
 c	      (Note: 'it' is length 8 to force word-alignment on the Crays)
 c         daf    = data file specifiers
 c         dif    = dictionary file specifiers
+c         dif2   = stashed dictionary file specifiers (Macintosh 64 only)
 c
 c-----------------------------------------------------------------------
 #ifdef NSL_DRS
@@ -134,17 +135,18 @@ c     nsldif = NSL dictionary file name (as opposed to dif = local disk copy)
 #endif
 c-----------------------------------------------------------------------
 
-      common /drsidef/ nf,luda,ludi,nvdb,mxdat,drsvers
+      common /drsidef/ nf,luda,ludi,ludi2,nvdb,mxdat,drsvers
 
       integer nf
 c      data nf/0/
-      integer luda(mxfil),ludi(mxfil),nvdb(mxfil)
+      integer luda(mxfil),ludi(mxfil),ludi2(mxfil),nvdb(mxfil)
       integer mxdat(mxfil)
       real drsvers(mxfil)
 c
 c         nf     = number of open files
 c         luda   = logical unit numbers for data files
 c         ludi   = logical unit numbers for dictionary files
+c         ludi2  = logical unit numbers for stashed dictionary files (Macintosh 64 only)
 c         nvdb   = number of vdbs in each file
 c         mxdat  = amount of data in each file (bytes)
 c         drsvers = DRS version number for each file

@@ -221,6 +221,7 @@ c     Dimensions of dimension variables may not be changed.
          if(unam.ne.anam) then
             do 100 ivdb=n_rec(1,il),n_rec(2,il)
                if(ivdb.eq.isavevdb) go to 100
+               ierr = 0
                call redic(lu, ivdb-n_rec(1,il)+1, ierr)
                if(ierr.eq.1) then
                   putdic=IDRS_DICTREADERROR
@@ -256,7 +257,7 @@ c     Does the name conflict with other dimension names?
          endif
 
 c     Restore AVDB
-         
+         ierr = 0
          call redic(lu, nsave, ierr)
          if(ierr.eq.1) then
             putdic=IDRS_DICTREADERROR
@@ -286,6 +287,7 @@ c     Update catalog
 
 c     Write the new dictionary entry
 
+      ier = 0
       call wrdic(lu,nsave,ier)
       if(ier.eq.2) then
          putdic=IDRS_BADLU

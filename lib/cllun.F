@@ -85,7 +85,22 @@ c
 c     Flush buffer if necessary
       call drssync(lu)
 
+c     Close the dictionary file.
+c     On a Macintosh, first copy the temporary copy of the dictionary file to
+c     its permanent, remote location if any; and close them both.
+#ifdef mac64
+      ierr = cpdic( ludi(il), ludi2(il) )
+      if ( ierr.ne.0 ) then
+         cllun = IDRS_CANNOTWRITEDIC
+         go to 9000
+      endif
+#endif
       close (unit=ludi(il))
+#ifdef mac64
+      close (unit=ludi2(il))
+#endif
+
+c     Close the data file.
 #ifdef NSL_DRS
       if(it(il)(2:2).eq.'N') then
          istat=nslclose(luda(il))
@@ -169,6 +184,38 @@ c
       cllun=0
  9000 continue
       call drsrout('cllun',cllun)
+#ifdef mac64mmap
+c     un-map files from memory
+      ierr = funmapf()
+#endif
+
       return
       end
 
+      integer function cpdic( lusrc, lutrg )
+c copies a file at logical unit lusrc (source) to logical unit lutarg (target).
+c This function is specific to DRS.  I particular, lusrc must be known to the
+c DRS library, and must point to a dictionary file, so the library can get the
+c file length.  Both logical units must correspond to files which have been
+c opened, for direct unformatted access, readable or writeable as appropriate..
+#include "drscom.h"
+      integer lusrc, lutrg
+      integer ierr, ilsrc, irec
+
+      ilsrc = iflun(lusrc)
+      if (ilsrc.eq.0) then
+         ierr = -1
+         go to 9000
+      endif
+
+      ierr = 0
+      do irec = 1, 2*nvdb(ilsrc)
+         read( unit=lusrc, rec=irec, err=9001 )
+         write( unit=lutrg, rec=irec, err=9001 )
+      enddo
+
+      go to 9000
+ 9001 ierr = 1
+ 9000 cpdic = ierr
+      return
+      end
