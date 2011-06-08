@@ -422,7 +422,8 @@ c            it is a new file, save the 'given' data file name
         drsvers(nf)=DRS_VERSION
 c
 
-#ifdef mac64
+c       Set ludi2(nf)=0 to indicate that there are no second copies of the dictionary
+c       file.  But for 64-bit Macintosh OS X:
 c       Stash the specified dic file in dif2.  Create a tempoary local file and put it in
 c       dif instead.  Thus the user's logical unit number ludi(nf) will point to the
 c       temporary local file, and a new logical unit number ludi2(nf) will point to the
@@ -433,6 +434,8 @@ c       There is no checking for whether it really is local or even whether that
 c       has write permissions.)  This is a substitue for a cache, because (as of June 2011)
 c       Macintosh OS X does not cache of networked files, at least not usefully; even
 c       mmap doesn't help performance.
+        ludi2(nf) = 0
+#ifdef mac64
         dif2(nf) = dif(nf)
         call getlun( ludi2(nf) )
         call getfile( dif(nf) )
@@ -455,20 +458,30 @@ c       mmap doesn't help performance.
      1     access='direct',recl=idicrecl,form='unformatted',
      2     err=9002)
 #elif defined(gfortran)
-cjfp        open (unit=ludi(nf),file=dif(nf),status='new',
+
 #ifdef mac64mmap
         ierr = fmapf(dif(nf))
         if ( ierr.ne.0 ) go to 9023
 #endif
-c >>>jfp for mac64 we want status='scratch', but not until debugging is finished >>>>>
-        open (unit=ludi(nf),file=dif(nf),status='replace',
-     1     access='direct',recl=idicrecl,form='unformatted',
-     2     err=9022,CONVERT='big_endian')
-#ifdef mac64
-        open (unit=ludi2(nf),file=dif2(nf),status='replace',
-     1     access='direct',recl=idicrecl,form='unformatted',
-     2     err=9027,CONVERT='big_endian')
-#endif
+        if ( ludi2(nf).gt.0 ) then
+c          Two dic files - we'll write to a temporary at ludi, then
+c          copy to a permanent at ludi2.  Normally this is for the
+c          mac64 case.
+           open (unit=ludi(nf),file=dif(nf),status='new',
+     1          access='direct',recl=idicrecl,form='unformatted',
+     2          err=9022,CONVERT='big_endian')
+c          After writing to ludi we'll close it and re-open at recl=1,
+c          then copy to ludi2.  This open could be moved there.
+           open (unit=ludi2(nf),file=dif2(nf),status='new',
+     1          access='direct',recl=1,form='unformatted',
+     2          err=9027,CONVERT='big_endian')
+        else
+c          One dic file, the normal case.
+           open (unit=ludi(nf),file=dif(nf),status='new',
+     1          access='direct',recl=idicrecl,form='unformatted',
+     2          err=9022,CONVERT='big_endian')
+        endif
+
 #elif !defined(sgi)
         open (unit=ludi(nf),file=dif(nf),status='new',
      1     access='direct',recl=idicrecl,form='unformatted',
@@ -525,8 +538,7 @@ c                   open the data file
      $     form='unformatted',
      2     err=9003)
 #elif defined(gfortran)
-cjfp        open (unit=luda(nf),file=daf(nf),status='new',
-        open (unit=luda(nf),file=daf(nf),status='replace',
+        open (unit=luda(nf),file=daf(nf),status='new',
      1     access='direct',recl=idatrecl,form='unformatted',
      2     err=9003,CONVERT='big_endian')
 #elif !defined(sgi)
@@ -563,8 +575,7 @@ c
 #ifdef NSL_DRS
       isynch(nf)=IDRS_SYNC_OFF
 #else
-cjfp      isynch(nf)=IDRS_SYNC_ON
-      isynch(nf)=IDRS_SYNC_OFF
+      isynch(nf)=IDRS_SYNC_ON
 #endif
       go to 9000
 c
@@ -646,7 +657,7 @@ c     for the argument, a string of length at least 17 characters.
       integer num
       character*7 numstr
       real rnd
-      logical isopen
+      logical isopen, exists
 
       do 10 i = 1, 123456789
          call random_number( rnd )
@@ -654,8 +665,8 @@ c     for the argument, a string of length at least 17 characters.
 c     1,000,000 <= num < 10,000,000, thus it prints as 7 characters
          write (unit=numstr,fmt='(i7)') num
          filename = 'drstmp' // numstr // '.dic'
-         inquire( file=filename, opened=isopen )
-         if ( .not. isopen ) exit
+         inquire( file=filename, exist=exists )
+         if ( .not. exists ) exit
  10   continue
       return
       end

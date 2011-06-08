@@ -75,7 +75,7 @@ c
 #ifdef NSL_DRS
       integer drsl2ncp
 #endif
-
+      integer cpdic
 
 c
       cllun=IDRS_SUCCESS
@@ -86,17 +86,17 @@ c     Flush buffer if necessary
       call drssync(lu)
 
 c     Close the dictionary file.
-c     On a Macintosh, first copy the temporary copy of the dictionary file to
-c     its permanent, remote location if any; and close them both.
-#ifdef mac64
-      ierr = cpdic( ludi(il), ludi2(il) )
-      if ( ierr.ne.0 ) then
-         cllun = IDRS_CANNOTWRITEDIC
-         go to 9000
-      endif
-#endif
+c     On a Macintosh, also copy the temporary copy of the dictionary file to
+c     its permanent, remote location if any, and close that too.
       close (unit=ludi(il))
 #ifdef mac64
+      if ( ludi2(il).gt.0 ) then
+         ierr = cpdic( dif(il), ludi(il), ludi2(il) )
+         if ( ierr.ne.0 ) then
+            cllun = IDRS_CANNOTWRITEDIC
+            go to 9000
+         endif
+      endif
       close (unit=ludi2(il))
 #endif
 
@@ -143,7 +143,10 @@ c     with direct NSL calls.
         nvdb(i-1)=nvdb(i)
         mxdat(i-1)=mxdat(i)
         drsvers(i-1)=drsvers(i)
-
+#ifdef mac64
+        ludi2(i-1)=ludi2(i)
+        dif2(i-1)=dif2(i)
+#endif
 
         it(i-1)=it(i)
         daf(i-1)=daf(i)
@@ -192,16 +195,15 @@ c     un-map files from memory
       return
       end
 
-      integer function cpdic( lusrc, lutrg )
+      integer function cpopendic( lusrc, lutrg )
 c copies a file at logical unit lusrc (source) to logical unit lutarg (target).
-c This function is specific to DRS.  I particular, lusrc must be known to the
+c This function is specific to DRS.  I particular, lusrc & lutrg must be known to the
 c DRS library, and must point to a dictionary file, so the library can get the
 c file length.  Both logical units must correspond to files which have been
 c opened, for direct unformatted access, readable or writeable as appropriate..
 #include "drscom.h"
       integer lusrc, lutrg
-      integer ierr, ilsrc, irec
-
+      integer ierr, ilsrc, iltrg, irec
       ilsrc = iflun(lusrc)
       if (ilsrc.eq.0) then
          ierr = -1
@@ -209,13 +211,53 @@ c opened, for direct unformatted access, readable or writeable as appropriate..
       endif
 
       ierr = 0
-      do irec = 1, 2*nvdb(ilsrc)
-         read( unit=lusrc, rec=irec, err=9001 )
-         write( unit=lutrg, rec=irec, err=9001 )
+      do irec = 1, 2*nvdb(ilsrc)+1
+         read( unit=lusrc, rec=irec, err=9001 ) abuf
+         print *, "jfp irec=",irec
+         write( unit=lutrg, rec=irec, err=9001 ) abuf
       enddo
 
       go to 9000
  9001 ierr = 1
- 9000 cpdic = ierr
+ 9000 cpopendic = ierr
       return
+      end
+
+      integer function cpdic( src, lusrc, lutrg )
+c copies a file named src (string, 'source') to logical unit lutarg (integer).
+c The target logical unit must correspond to a file which has been
+c opened, for direct unformatted access, and writeable as appropriate.
+c The source file should have been closed, but logical unit lusrc must be
+c available to use for opening it.  This function will delete the source file!
+#include "drscom.h"
+      integer lusrc, lutrg
+      character mybuf
+      integer ierr, ilsrc, iltrg, irec
+      character*(*) src
+
+c     Open the t
+      open (unit=lusrc,file=src,status='old',
+     1     access='direct',recl=1,form='unformatted',
+     2     err=9001,CONVERT='big_endian')
+
+      irec = 1
+      do
+         read( unit=lusrc, rec=irec, err=9000 ) mybuf
+         write( unit=lutrg, rec=irec, err=9002 ) mybuf
+         irec = irec + 1
+      enddo
+
+ 9000 ierr = 0
+      cpdic = ierr
+      close( unit=lusrc, status='delete' )
+      return
+ 9001 ierr = 1
+      cpdic = ierr
+      close( unit=lusrc )
+      return
+ 9002 ierr = 2
+      cpdic = ierr
+      close( unit=lusrc )
+      return
+
       end

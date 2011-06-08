@@ -108,14 +108,12 @@ c
       logical idenc,blank,confnam
       integer dictlook
       integer nee,nef,nean,nen(mxnin)
-      integer count, count_rate, wrcount
 c     
-
       putdat1=0
       il=iflun(lu)
 c     return if lu not found or is not opened for write
-      if (il.le.0) go to 9011
-      if (it(il)(1:1).eq.'R') go to 9012
+      if (il.le.0) go to 9001
+      if (it(il)(1:1).eq.'R') go to 9001
 
 c     generate program element characterizations
 
@@ -270,20 +268,19 @@ c     if naming info is not unique, error
          
          if (ivdb.lt.n2) then
             if(dictlook(il,nsim,usrc,unam,utitl,uun,idum).eq.
-     $           IDRS_SUCCESS) go to 9041
+     $           IDRS_SUCCESS) go to 9004
          endif
 
 c     read in the avdb if necessary
 
          if(.not.skipred) then
-            ier = 0
             call redic(ludi(il),nsim,ier)
-            if(ier.ne.0) go to 9013
+            if(ier.ne.0) go to 9001
          endif
 
 c     check that types match
 
-         if(.not.idenc(utype,atype,blank)) go to 9042
+         if(.not.idenc(utype,atype,blank)) go to 9004
 
 c     set filerepa, and check that it equals filerepu
 c     filerepa is the program representation for the datafile variable
@@ -301,13 +298,13 @@ c     filerepa is the program representation for the datafile variable
          else
             go to 9002
          endif
-         if(filerepa.ne.filerepu) go to 9043
+         if(filerepa.ne.filerepu) go to 9004
 
-         if (ndu.ne.nda) go to 9044
+         if (ndu.ne.nda) go to 9004
 
 c     check that dimensions conform
 
-         if(.not.confnam(udna,adna,ndu,ip)) go to 9045
+         if(.not.confnam(udna,adna,ndu,ip)) go to 9004
 
 c     check that declared dimension types match
 
@@ -639,17 +636,18 @@ c     order the dimensions, single values last
 c     write to the data file.
 
 c$$$      putdat1=wrdat (lu,a)
-c$$$      if (ier.ne.0) go to 9014
+c$$$      if (ier.ne.0) go to 9001
 
       putdat1=wrtrans(lu,a)
       if(drstest(putdat1)) go to 9007
 
 c     write or rewrite the dictionary entry
       call wrdic (lu,nsim,ier)
+      if (ier.ne.0) go to 9001
 
 c     rewrite the initial block of dictionary
       mxdat(il)=mxdat(il)+neu*luty
-c$$$      write (lu,rec=1,err=9016) daf(il),nvdb(il),mxdat(il)
+c$$$      write (lu,rec=1,err=9001) daf(il),nvdb(il),mxdat(il)
       dum=' '
       putdat1=writehd(lu,dum,nvdb(il),mxdat(il),
      $     drsvers(il))
@@ -663,48 +661,12 @@ c
       go to 9000
  9005 putdat1=IDRS_CANNOTADDDATA
       go to 9000
- 9041 continue
-      print *,"jfp 9041"
-      stop
- 9042 continue
-      print *,"jfp 9042"
-      stop
- 9043 continue
-      print *,"jfp 9043"
-      stop
- 9044 continue
-      print *,"jfp 9044 ndu=",ndu,"  nda=",nda
-      stop
- 9045 continue
-      print *,"jfp 9045"
-      stop
- 9046 continue
-      print *,"jfp 9046"
-      stop
  9004 putdat1=IDRS_AMBIGUITYEXISTS
       go to 9000
  9003 putdat1=IDRS_BADDIM
       go to 9000
  9002 putdat1=IDRS_BADTYPE
       go to 9000
- 9011 continue
-      print *,"jfp 9011"
-      stop
- 9012 continue
-      print *,"jfp 9012"
-      stop
- 9013 continue
-      print *,"jfp 9013 ier=",ier
-      stop
- 9014 continue
-      print *,"jfp 9014"
-      stop
- 9015 continue
-      print *,"jfp 9015"
-      stop
- 9016 continue
-      print *,"jfp 9016"
-      stop
  9001 putdat1=IDRS_BADLU
  9000 continue
       call drsrout('putdat1',putdat1)

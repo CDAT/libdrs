@@ -113,10 +113,7 @@ ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
          readhd=IDRS_VERSION1FILE
          version=1.0
          go to 9000
-c jfp was      elseif(version.gt.DRS_VERSION) then
-      elseif(int(version).gt.DRS_VERSION) then
-c        ...This change may be wrong, but it keeps the code from bothering me.
-         print *, "jfp version=", version, "DRS_VERSION=", DRS_VERSION
+      elseif(version.gt.DRS_VERSION) then
          readhd=IDRS_NEWFILEFORMAT
          go to 9000
       endif
