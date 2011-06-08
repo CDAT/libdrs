@@ -107,7 +107,7 @@ c     DRSVersion
 c     DRS_VERSION is current version
 c     DRS_MAXVERSION is max allowed version before version
 c     is considered *novalue*
-      integer DRS_VERSION, DRS_MAXVERSION
+      real DRS_VERSION, DRS_MAXVERSION
       parameter(DRS_VERSION=2.1,
      $    DRS_MAXVERSION=10.0,
      $    DRS_FILETAG='DRS DATA'
