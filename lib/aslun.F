@@ -600,27 +600,14 @@ c
       close (unit=lud)
       nf=nf-1
       go to 9000
+c The 902? labels are for debugging convenience; all were formerly 9002.
  9021 continue
-      print *, "jfp 9021"
-      stop
  9022 continue
-      print *, "jfp 9022"
-      stop
  9023 continue
-      print *, "jfp 9023"
-      stop
  9024 continue
-      print *, "jfp 9024"
-      stop
  9025 continue
-      print *, "jfp 9024"
-      stop
  9026 continue
-      print *, "jfp 9026"
-      stop
  9027 continue
-      print *, "jfp 9027"
-      stop
  9002 aslun=IDRS_CANNOTOPENDICT
       nf=nf-1
       go to 9000

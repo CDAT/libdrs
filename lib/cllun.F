@@ -213,7 +213,6 @@ c opened, for direct unformatted access, readable or writeable as appropriate..
       ierr = 0
       do irec = 1, 2*nvdb(ilsrc)+1
          read( unit=lusrc, rec=irec, err=9001 ) abuf
-         print *, "jfp irec=",irec
          write( unit=lutrg, rec=irec, err=9001 ) abuf
       enddo
 

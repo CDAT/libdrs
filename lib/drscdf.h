@@ -98,7 +98,7 @@
 #define IDRS_BYTES_PER_WORD 8
 #define IDRS_NSL 8			     /* Aslun flag: file is on NSL UniTree */
 #define IDRS_NOCOPY 16			     /* Aslun flag: do not copy dictionary from NSL on open */
-#else      /*following new block added by jfp */
+#else
 
 #ifdef mac64
 #define IDRS_MACHINE IDRS_MAC64
