@@ -7,8 +7,8 @@
 #
 #--------------------------------------------------------------------
 
-# DEBUG = -O 
-DEBUG = -g -save-temps
+DEBUG = -O 
+# DEBUG = -g -save-temps
 FC = /usr/local/bin/gfortran
 CC = gcc
 ARCHOPT = -arch x86_64
