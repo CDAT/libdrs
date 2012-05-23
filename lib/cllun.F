@@ -135,10 +135,12 @@ c     with direct NSL calls.
      $    call drstrunc(daf(il),mxdat(il))
 #endif
 
+#ifdef mac64
 c     Way back in aslun, ludi2(il) can get set to 0 to indicate when there are
 c     no second copies of the dictionary.  Now that the dictionary copy is
 c     over, there _are_ no second copies, so make sure it's 0...
       ludi2(il) = 0
+#endif
 
       if (il.lt.nf) then
          ioff=n_rec(1,il+1)-n_rec(1,il)
