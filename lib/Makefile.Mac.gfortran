@@ -4,16 +4,22 @@
 #
 # To make DRS library (libdrs.a) for Linux, with Absoft FORTRAN:
 #	% make
+# This makefile is set up for a 64-bit Macintosh and gfortran/gcc 4.6.0
+# but see comments for how to use older Macs and older gfortran/gcc.
 #
 #--------------------------------------------------------------------
 
 DEBUG = -O 
 # DEBUG = -g -save-temps
+# If you're lucky, this Fortran will work:
 FC = /usr/local/bin/gfortran
+# jfp: I wasn't lucky.  On my Macintosh, I had to install my own Fortran:
+# FC = /usr/caradoc/bin/gfortran
 CC = gcc
-ARCHOPT = -arch x86_64
-#ARCHOPT = -arch i386
-#ARCHOPT =
+#ARCHOPT = -arch x86_64  # use for 64-bit Macintosh and gfortran 4.2.3
+ARCHOPT = -m64           # use for 64-bit Macintosh and gfortran 4.6.0
+#ARCHOPT = -arch i386    # use for 32-bit Macintosh and gfortran 4.2.3
+#ARCHOPT =               # use if nothing else will work
 FOPTS = -fcray-pointer $(ARCHOPT) -W
 # FFLAGS = $(DEBUG) $(FOPTS) -Dsun -D__linux -D__linux_pgi -byteswapio
 # FFLAGS = $(DEBUG) $(FOPTS) -Dsun -D__linux -D__linux_pgi -Dgfortran -Dmac
