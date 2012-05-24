@@ -4,19 +4,31 @@
 #
 # To test the DRS library in directory $DRSDIR:
 #	% make [DRSDIR=<directory containing libdrs.a>]
+# This makefile is set up for a 64-bit Macintosh and gfortran/gcc 4.6.0
+# but see comments for how to use older Macs and older gfortran/gcc.
 #
 #--------------------------------------------------------------------
 
+# If you're lucky, this Fortran will work:
 FC = /usr/local/bin/gfortran
+# jfp: I wasn't lucky.  On my Macintosh, I had to install my own Fortran:
+# FC = /usr/caradoc/bin/gfortran
 DRSLIB = ../lib
 DRSINC = $(DRSLIB)
 DRSDIR = $(DRSLIB)
-ARCHOPT = -arch x86_64
-ARCHOPT = -arch i386
+#ARCHOPT = -arch x86_64  # use for 64-bit Macintosh and gfortran 4.2.3
+ARCHOPT = -m64           # use for 64-bit Macintosh and gfortran 4.6.0
+#ARCHOPT = -arch i386    # use for 32-bit Macintosh and gfortran 4.2.3
+#ARCHOPT =               # use if nothing else will work
 CPPFLAGS = -I$(DRSINC) $(ARCHOPT)
 FFLAGS = -g -fcray-pointer $(CPPFLAGS)
 CFLAGS = -g $(CPPFLAGS) $(ARCHOPT)
-LDFLAGS = -L$(DRSLIB) -ldrs -lm -lgfortran
+# was LDFLAGS = -L$(DRSLIB) -ldrs -lm -lgfortran
+# May 2012 (jfp): a bug in the BSD linker on Macintosh OS X causes functions to be loaded
+# from the default load path when they exist in the specified library.  The following
+# "-Xlinker -force_load ../lib/libdrs.a" is a workaround and should be deleted if no
+# longer needed.
+LDFLAGS = -L$(DRSLIB) -ldrs -lm -lgfortran -Xlinker -force_load ../lib/libdrs.a
 CLDFLAGS = -L$(DRSLIB) -ldrs  -lm -lgfortran
 
 FTESTS = drs_put2 drs_get2 drs_get2a drs_put3 drs_get3 test10 test11 test12 test26 test13 test14  printdict test16 test17 test18 test20
