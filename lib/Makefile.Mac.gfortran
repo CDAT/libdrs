@@ -11,9 +11,10 @@
 DEBUG = -g -save-temps
 FC = /usr/local/bin/gfortran
 CC = gcc
-ARCHOPT = -arch x86_64
+#ARCHOPT = -arch x86_64
 #ARCHOPT = -arch i386
-#ARCHOPT =
+ARCHOPT = -m64
+
 FOPTS = -fcray-pointer $(ARCHOPT) -W
 # FFLAGS = $(DEBUG) $(FOPTS) -Dsun -D__linux -D__linux_pgi -byteswapio
 # FFLAGS = $(DEBUG) $(FOPTS) -Dsun -D__linux -D__linux_pgi -Dgfortran -Dmac
