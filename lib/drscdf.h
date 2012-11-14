@@ -108,8 +108,8 @@
 #define IDRS_MACHINE IDRS_SUN
 #define IDRS_BYTES_PER_WORD 4
 
-#endif mac64
-#endif cray
+#endif /* mac64 */
+#endif /* cray */
 
 /*     DRSVersion */
 /*     DRS_VERSION is current version */

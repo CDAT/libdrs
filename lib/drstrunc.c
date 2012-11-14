@@ -92,10 +92,11 @@ NOTES
 #include <fcntl.h>
 #include <string.h>
 #include <stdio.h>
+#include <malloc.h>
 
-int DRSTRUNC(fpath, len)
-	_fcd fpath;
-	int *len;
+int DRSTRUNC(_fcd fpath, int *len)
+/* was	_fcd fpath;
+   int *len;*/
 {
 	int fpathLen, i;
 	int fd;
@@ -147,19 +148,19 @@ int DRSTRUNC(fpath, len)
 #include <string.h>
 #include <stdio.h>
 #ifdef mac
-#include <stdlib.h>
 /* #include <sys/types.h> */
 /* #include <sys/stat.h> */
 #include <unistd.h>
 #endif
+#include <stdlib.h>
 #ifdef hpux
-int drstrunc(fpath,len,fpathLen)
+int drstrunc( char *fpath, int *len, int fpathLen )
 #else
-int drstrunc_(fpath,len,fpathLen)
+int drstrunc_( char *fpath, int *len, int fpathLen)
 #endif
-	char *fpath;
+/*was	char *fpath;
 	int *len;
-	int fpathLen;
+	int fpathLen;*/
 {
 	int fd, offset, i;
 	char *path;

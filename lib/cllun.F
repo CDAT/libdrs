@@ -135,41 +135,48 @@ c     with direct NSL calls.
      $    call drstrunc(daf(il),mxdat(il))
 #endif
 
-      if (il.lt.nf) then
-         ioff=n_rec(1,il+1)-n_rec(1,il)
-        do 100 i=il+1,nf
-        luda(i-1)=luda(i)
-        ludi(i-1)=ludi(i)
-        nvdb(i-1)=nvdb(i)
-        mxdat(i-1)=mxdat(i)
-        drsvers(i-1)=drsvers(i)
 #ifdef mac64
-        ludi2(i-1)=ludi2(i)
-        dif2(i-1)=dif2(i)
+c     Way back in aslun, ludi2(il) can get set to 0 to indicate when there are
+c     no second copies of the dictionary.  Now that the dictionary copy is
+c     over, there _are_ no second copies, so make sure it's 0...
+      ludi2(il) = 0
 #endif
 
-        it(i-1)=it(i)
-        daf(i-1)=daf(i)
-        dif(i-1)=dif(i)
-        iblno(i-1)=iblno(i)
-        ibdirty(i-1)=ibdirty(i)
-        isynch(i-1)=isynch(i)
-        do 10 j=1,ibloclen
-        iblock(j,i-1)=iblock(j,i)
-  10    continue
-c
-        n_rec(1,i-1)=n_rec(1,i)-ioff
-        n_rec(2,i-1)=n_rec(2,i)-ioff
-        do 20 j=n_rec(1,i-1),n_rec(2,i-1)
-        jj=j+ioff
-        n_src(j)=n_src(jj)
-        n_nam(j)=n_nam(jj)
-        n_tit(j)=n_tit(jj)
-        n_un(j)=n_un(jj)
-        n_lun(j)=n_lun(jj)
-  20    continue
-c
- 100    continue
+      if (il.lt.nf) then
+         ioff=n_rec(1,il+1)-n_rec(1,il)
+         do 100 i=il+1,nf
+            luda(i-1)=luda(i)
+            ludi(i-1)=ludi(i)
+            nvdb(i-1)=nvdb(i)
+            mxdat(i-1)=mxdat(i)
+            drsvers(i-1)=drsvers(i)
+#ifdef mac64
+            ludi2(i-1)=ludi2(i)
+            dif2(i-1)=dif2(i)
+#endif
+
+            it(i-1)=it(i)
+            daf(i-1)=daf(i)
+            dif(i-1)=dif(i)
+            iblno(i-1)=iblno(i)
+            ibdirty(i-1)=ibdirty(i)
+            isynch(i-1)=isynch(i)
+            do 10 j=1,ibloclen
+               iblock(j,i-1)=iblock(j,i)
+ 10         continue
+c     
+            n_rec(1,i-1)=n_rec(1,i)-ioff
+            n_rec(2,i-1)=n_rec(2,i)-ioff
+            do 20 j=n_rec(1,i-1),n_rec(2,i-1)
+               jj=j+ioff
+               n_src(j)=n_src(jj)
+               n_nam(j)=n_nam(jj)
+               n_tit(j)=n_tit(jj)
+               n_un(j)=n_un(jj)
+               n_lun(j)=n_lun(jj)
+ 20         continue
+c     
+ 100     continue
       endif
       n_rec(1,nf)=0
       n_rec(2,nf)=0

@@ -58,14 +58,13 @@
 #include <stdio.h>
 #ifdef mac
 #include <stdlib.h>
-#include <string.h>
 #else
 #include <malloc.h>
 #endif
+#include <string.h>
 //#include <memory.h>
 #include <math.h>
 #include "drscdf.h"
-
 
 #ifdef cray
 #define Drscall(X,E) E=X;\
@@ -129,10 +128,10 @@ extern int Setdim(),Getpelem(),Inqdict(),Getdat(),Getdim(),Getrge2(),
 fortran int SETCDIM(),GETDRSER();
 /* Fortran interface */
 int
-GETSLAB(lu,rank,order,fe,le,cycle,data,datadim)
-	int *lu,*rank,order[],datadim[];
+GETSLAB(int *lu, int *rank, order[], float fe[], float le[], float cycle[], char data[], int datadim[] )
+/*was	int *lu,*rank,order[],datadim[];
 	float fe[],le[],cycle[];
-	char data[];
+	char data[];*/
 {
 	int getslab_(int *,int *,int *,float *,float *,float *,char *,int *);
 	return(getslab_(lu,rank,order,fe,le,cycle,data,datadim));
@@ -159,13 +158,13 @@ extern int setdim(),getpelem(),inqdict(),getdat(),getdim(),
       -------                                                        */
 
 #ifdef hpux
-int getslab(lu,rank,order,fe,le,cycle,data,datadim)
+int getslab( int *lu, int *rank, int order[], float fe[], float le[], float cycle[], char data[], int datadim[] )
 #else /* !hpux */
-int getslab_(lu,rank,order,fe,le,cycle,data,datadim)
+int getslab_( int *lu, int *rank, int order[], float fe[], float le[], float cycle[], char data[], int datadim[] )
 #endif
-	int *lu,*rank,order[],datadim[];
+/*was	int *lu,*rank,order[],datadim[];
 	float fe[],le[],cycle[];
-	char data[];
+	char data[];*/
 
                                                                      /*
       Description:
@@ -440,11 +439,13 @@ int getslab_(lu,rank,order,fe,le,cycle,data,datadim)
 }
 
 int
-getslab1(lu,rank,order,fe,le,cycle,name,dfe,dle,datadim,data,dim,bufdim,offset,dmin,dmax,nbytes,d,dtype)
-	int lu,rank,order[],datadim[],dim,nbytes,offset[],d[],dtype[],bufdim[];
+getslab1( int lu, int rank, int order[], float fe[], float le[], float cycle[], DRS_NAME name[],
+	  float dfe[], float dle[], int datadim[], char *data, int dim, int bufdim[], int offset[],
+	  float dmin[], float dmax[], int nbytes, int d[], int dtype[] )
+/*was	int lu,rank,order[],datadim[],dim,nbytes,offset[],d[],dtype[],bufdim[];
 	float fe[],le[],cycle[],dfe[],dle[],dmin[],dmax[];
 	char *data;
-	DRS_NAME name[];
+	DRS_NAME name[];*/
 {
 	int err,dlen,i,idmin,idmax,ndim,idim,
 	     datadimto[MXDIM],bufdimto[MXDIM],offsetto[MXDIM],reverse,setfirst=1;
@@ -683,9 +684,9 @@ getslab1(lu,rank,order,fe,le,cycle,name,dfe,dle,datadim,data,dim,bufdim,offset,d
 				/* offset = offset within 'to' */
 				/* bpe = bytes per element */
 
-copybuf(from,to,rank,order,todim,fromdim,offset,bpe)
-	char *from,*to;
-	int order[],todim[],fromdim[],offset[],bpe;
+copybuf( char *from, char *to, int rank, int order[], int todim[], int fromdim[], int offset[], int bpe )
+/*was	char *from,*to;
+  int order[],todim[],fromdim[],offset[],bpe;*/
 {
 	int d[MXDIM],todim2[MXDIM],fp[MXDIM],r[MXDIM],rp[MXDIM],rt[MXDIM],dp[MXDIM];
 	register int i,j,k,l;

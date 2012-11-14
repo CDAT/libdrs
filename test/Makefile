@@ -1,1 +1,1 @@
-Makefile.LINUX.PGI
+Makefile.Mac.gfortran
