@@ -1,8 +1,0 @@
-#!/bin/csh
-drs_pat_cor_2d_hov<<_EOF_
-'olr_15N_15S_eof_olr_79_07_20_100_25N_25S_3D_lsfit_pc1_4'
-'rlt_bpf'
-'olr_daily_79_07_20_100_15N_15S'
-'rlt_bpf'
- 0.         360.
-_EOF_

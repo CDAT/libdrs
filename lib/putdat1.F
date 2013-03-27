@@ -318,7 +318,7 @@ c     check that declared dimension types match
 c----------------------------------------------------------------     
  110  if (nsim.eq.0) then
 c     a new variable will be added
-c     
+c
          call clavdb
 c     copy uvdb to avdb
          do 130 i=1,mxbuf

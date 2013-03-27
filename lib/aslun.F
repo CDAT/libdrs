@@ -602,12 +602,19 @@ c
       go to 9000
 c The 902? labels are for debugging convenience; all were formerly 9002.
  9021 continue
+      write(6,*)"hit error branch 9021"
  9022 continue
+      write(6,*)"hit error branch 9022"
  9023 continue
+      write(6,*)"hit error branch 9023"
  9024 continue
+      write(6,*)"hit error branch 9024"
  9025 continue
+      write(6,*)"hit error branch 9025"
  9026 continue
+      write(6,*)"hit error branch 9026"
  9027 continue
+      write(6,*)"hit error branch 9027"
  9002 aslun=IDRS_CANNOTOPENDICT
       nf=nf-1
       go to 9000
