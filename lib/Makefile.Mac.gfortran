@@ -16,10 +16,10 @@ FC = /usr/local/bin/gfortran
 # jfp: I wasn't lucky.  On my Macintosh, I had to install my own Fortran:
 # FC = /usr/caradoc/bin/gfortran
 CC = gcc
-#ARCHOPT = -arch x86_64  # use for 64-bit Macintosh and gfortran 4.2.3
-ARCHOPT = -m64           # use for 64-bit Macintosh and gfortran 4.6.0
-#ARCHOPT = -arch i386    # use for 32-bit Macintosh and gfortran 4.2.3
-#ARCHOPT =               # use if nothing else will work
+#ARCHOPT = -arch x86_64
+#ARCHOPT = -arch i386
+ARCHOPT = -m64
+
 FOPTS = -fcray-pointer $(ARCHOPT) -W
 # FFLAGS = $(DEBUG) $(FOPTS) -Dsun -D__linux -D__linux_pgi -byteswapio
 # FFLAGS = $(DEBUG) $(FOPTS) -Dsun -D__linux -D__linux_pgi -Dgfortran -Dmac
