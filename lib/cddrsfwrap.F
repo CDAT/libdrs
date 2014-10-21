@@ -146,19 +146,26 @@ c      endif
 
 
       integer function fcw_setdim( pn, dnain, dunin, pidim, pdf, pdl )
+c     Note that pdf,pdl are required to be real*4 on input, and are
+c     converted to real*8 for calling fc_setdim.  This provides backwards
+c     compatibility - to Fortran code cw_setdim will look like the 32-bit
+c     version in older versions of libcdms.
       implicit none
       integer ierr
       integer pn, namax, nalen, unmax, unlen, pidim
       character dnain*(*), dunin*(*)
-      real*8 pdf,pdl
+      real*4 pdf,pdl
+      real*8 df,dl
       integer fc_setdim
       
+      df = dble(pdf)
+      dl = dble(pdl)
       namax = len(dnain)
       nalen = len_trim(dnain)
       unmax = len(dunin)
       unlen = len_trim(dunin)
 
-      ierr = fc_setdim( pn, dnain, dunin, pidim, pdf, pdl,
+      ierr = fc_setdim( pn, dnain, dunin, pidim, df, dl,
      1     namax, nalen, unmax, unlen )
       fcw_setdim = ierr
 c      if ( ierr.ne.0 ) then
