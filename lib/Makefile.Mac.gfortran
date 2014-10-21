@@ -11,10 +11,7 @@
 
 # DEBUG = -O 
 DEBUG = -g -O -save-temps
-# If you're lucky, this Fortran will work:
 FC = /usr/local/bin/gfortran
-# jfp: I wasn't lucky.  On my Macintosh, I had to install my own Fortran:
-# FC = /usr/caradoc/bin/gfortran
 CC = gcc
 #ARCHOPT = -arch x86_64
 #ARCHOPT = -arch i386
@@ -57,9 +54,8 @@ libdrs.a: $(OBJECTS)
 	ar rv libdrs.a $?
 
 libdrs.so: $(OBJECTS)
-#jfp normal:	$(CC) $(ARCHOPT) -lgfortran  -shared -o libdrs.so $(OBJECTS)
-#jfp the following massive link line seems necessary at the moment, March 2013:
-	$(CC) $(ARCHOPT) -lgfortran -L$(HOME)/uvcdat-2012.11.15/Library/Frameworks/Python.framework/Versions/2.7/lib/ -lcdms  -L$(HOME)/uvcdat-2012.11.15/2.6.0b/darwin-x86_64/lib/ -lnetcdf -L$(HOME)/uvcdat-2012.11.15/Externals/lib/ -lgrib2c -shared -o libdrs.so $(OBJECTS)
+	$(CC) $(ARCHOPT) -headerpad_max_install_names -lgfortran  -L/Users/painter1/bin/uvcdat-2014.10.08//Library/Frameworks/Python.framework/Versions/2.7/lib -L${HOME}/bin/uvcdat-2014.10.08/Externals/lib -L${HOME}/cdat-old21/build/g2clib-1.2.4/ -lcdms -L/usr/local/lib/ -lnetcdf -lgrib2c -l quadmath -L /usr/local/lib/gcc/x86_64-apple-darwin10.7.0/4.6.0 -lgcc -shared -o libdrs.so $(OBJECTS)
+
 
 drsdef.h: drsdef.HH
 	$(CPP) -P $(CPPFLAGS) drsdef.HH drsdef.h
@@ -84,7 +80,7 @@ clean:
 	-rm -f *.o
 	-rm -f *~
 	-rm -f core
-	
+
 .SUFFIXES: .F .o
 
 .F.o:
