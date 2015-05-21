@@ -9,12 +9,9 @@
 #
 #--------------------------------------------------------------------
 
-DEBUG = -O 
-# DEBUG = -g -save-temps
-# If you're lucky, this Fortran will work:
+# DEBUG = -O 
+DEBUG = -g -O -save-temps
 FC = /usr/local/bin/gfortran
-# jfp: I wasn't lucky.  On my Macintosh, I had to install my own Fortran:
-# FC = /usr/caradoc/bin/gfortran
 CC = gcc
 #ARCHOPT = -arch x86_64
 #ARCHOPT = -arch i386
@@ -34,11 +31,13 @@ INSTALL_INC = /usr/local/include
 CPPFLAGS = -Dsun -D__linux -D__linux_gfortran -Dmac -Dmac64 $(ARCHOPT)
 CPP = cpp
 
-FOBJECTS = getdat.o idenc.o putdat.o clavdb.o getdim.o iflun.o setdim.o getnam.o mvnbc.o cluvdb.o getnd.o bnsrch.o drserr.o seterr.o getind.o compnm.o dictlk.o putvdm.o setnam.o setdat.o setvdm.o getrge.o savdb.o putdat1.o getdat1.o getvdim.o inqlun.o inqdict.o prdict.o rdtrans.o wrtrans.o setrep.o gettbuf.o getrge2.o getelemd.o setcdim.o getcdim.o getedim.o confnm.o putdic.o getpelem.o mimem.o redat.o wrdat.o cllun.o readhd.o writehd.o wrdic.o redic.o aslun.o drssync.o drsreadb.o drsautosync.o midate.o d_floor.o mac.o
+FOBJECTS = getdat.o idenc.o putdat.o clavdb.o getdim.o iflun.o setdim.o getnam.o mvnbc.o cluvdb.o getnd.o bnsrch.o drserr.o seterr.o getind.o compnm.o dictlk.o putvdm.o setnam.o setdat.o setvdm.o getrge.o savdb.o putdat1.o getdat1.o getvdim.o inqlun.o inqdict.o prdict.o rdtrans.o wrtrans.o setrep.o gettbuf.o getrge2.o getelemd.o setcdim.o getcdim.o getedim.o confnm.o putdic.o getpelem.o mimem.o redat.o wrdat.o cllun.o readhd.o writehd.o wrdic.o redic.o aslun.o drssync.o drsreadb.o drsautosync.o midate.o d_floor.o mac.o cddrsfwrap.o
+# .. cddrsfwrap.o is a Fortran wrapper for libcdms; not really part of libdrs.
 FINCLUDES = drsdef.h drscom.h cycle.h
 FSOURCES = $(FOBJECTS:.o=.F)
 
-COBJECTS = ctoi.o getslab.o drsc.o drstrunc.o macintosh.o
+COBJECTS = ctoi.o getslab.o drsc.o drstrunc.o macintosh.o cddrs_fc.o
+# ... cddrs_fc.o is C code to support the Fortran wrapper for libcdms; not really part of libdrs.
 CINCLUDES = drscdf.h
 CSOURCES = $(COBJECTS:.o=.c)
 
@@ -55,7 +54,7 @@ libdrs.a: $(OBJECTS)
 	ar rv libdrs.a $?
 
 libdrs.so: $(OBJECTS)
-	$(CC) $(ARCHOPT) -lgfortran  -shared -o libdrs.so $(OBJECTS)
+	$(CC) $(ARCHOPT) -headerpad_max_install_names -lgfortran  -L${UVCDAT_SETUP_PATH}/Library/Frameworks/Python.framework/Versions/2.7/lib -L${UVCDAT_SETUP_PATH}/Externals/lib -lcdms -L/usr/local/lib/ -lnetcdf -lgrib2c -l quadmath -L /usr/local/lib/gcc/x86_64-apple-darwin10.7.0/4.6.0 -lgcc -shared -o libdrs.so $(OBJECTS)
 
 drsdef.h: drsdef.HH
 	$(CPP) -P $(CPPFLAGS) drsdef.HH drsdef.h
@@ -80,7 +79,7 @@ clean:
 	-rm -f *.o
 	-rm -f *~
 	-rm -f core
-	
+
 .SUFFIXES: .F .o
 
 .F.o:

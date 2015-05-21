@@ -1,12 +1,64 @@
-*.[oa]
-*~
-*#
-#*
+# adapted from https://gist.github.com/octocat/9257657
+
+# libdrs-specific exclusions, executables and other binaries
+##########################################################
+drs_get2
+drs_get2a
+drs_get3
+drs_put2
+drs_put3
+drstmp*.dic
+test1?
+test2?
+testinq
+printdict
+
+# Compiled source #
+###################
+*.com
+*.class
+*.dll
+*.exe
+*.s
+*.i
+*.o
+*.so
+*.a
 *.pyc
-Test/CMIP5
-Makefile
-build
-config.log
-compile_line.txt
-config.status
-setup.py
+a.out
+ 
+# Packages #
+############
+# it's better to unpack these files and commit the raw source
+# git has its own built in compression methods
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+ 
+# Logs databases, backups, debugging #
+######################################
+*.log
+*.sql
+*.sqlite
+*.bak
+*.bup
+*_bup
+*~
+*.trace
+ 
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+*.dSYM
+ehthumbs.db
+Thumbs.db
+Resources 

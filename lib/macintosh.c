@@ -45,7 +45,6 @@ int mapf_( char * inPathName, int *PathNameLen ) {
   char PathName[1024];    /* <<<< is there an existing parameter I can use for max path length? <<< */
   strncpy(PathName,inPathName,*PathNameLen);
   PathName[*PathNameLen]='\0';
-  printf( "jfp mapping %s length %i\n", inPathName,*PathNameLen );
   return MapFile( PathName, &Data, &DataLen );
 }
 int unmapf_() {
@@ -90,7 +89,6 @@ int MapFile( char * inPathName, void ** outDataPtr, size_t * outDataLength )
         else
         {
             // Map the file into a read-only memory region.
-	    // jfp added write permission
             *outDataPtr = mmap(NULL,
                                 statInfo.st_size,
                                 PROT_READ | PROT_WRITE,
@@ -109,7 +107,6 @@ int MapFile( char * inPathName, void ** outDataPtr, size_t * outDataLength )
         }
  
         // Now close the file. The kernel doesn’t use our file descriptor.
-	printf( "jfp finishing mmap with a close\n" );
         close( fileDescriptor );
     }
  
