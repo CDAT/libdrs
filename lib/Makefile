@@ -1,1 +1,1 @@
-Makefile.LINUX.gfortran
+Makefile.Mac.gfortran
