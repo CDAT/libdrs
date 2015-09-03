@@ -15,9 +15,6 @@ c     Thus you also need a C file, cddrs_fc.c.
       ierr = fc_aslun(plud,dicfilin,plu,datfilin,pistat,
      1     dicfilmax, dicfillen,datfilmax,datfillen)
       fcw_aslun = ierr
-c      if ( ierr.ne.0 ) then
-c         print *,"jfp ***** in fcw_aslun ierr=",ierr," *****"
-c      endif
       end function fcw_aslun
 
 
@@ -36,8 +33,8 @@ c      endif
       namlen = len_trim(iname)
       timax = len(ititle)
       tilen = len_trim(ititle)
-      unlen = len(iunits)
       unmax = len(iunits)
+      unlen = len_trim(iunits)
       typmax = len(ityped)
       typlen = len_trim(ityped)
 
@@ -45,9 +42,6 @@ c      endif
      1     srcmax, srclen, nammax, namlen, timax, tilen,
      2     unmax, unlen, typmax, typlen )
       fcw_setname = ierr
-c      if ( ierr.ne.0 ) then
-c         print *,"jfp ***** in fcw_setname ierr=",ierr," *****"
-c      endif
       end function fcw_setname
 
 
@@ -80,11 +74,7 @@ c      endif
      2     srcmax, srclen, nammax, namlen, timax, tilen, unmax, unlen,
      3     datmax, datlen, timmax, timlen, typmax, typlen )
 
-      typlen = len( ityped )
       fcw_getname = ierr
-c      if ( ierr.ne.0 ) then
-c         print *,"jfp ***** in fcw_getname ierr=",ierr," *****"
-c      endif
       end function fcw_getname
 
 
@@ -110,9 +100,6 @@ c      endif
      1     srcmax, srclen, namax, nalen, timax, tilen, unmax, unlen )
 
       fcw_getedim = ierr
-c      if ( ierr.ne.0 ) then
-c         print *,"jfp ***** in fcw_getedim ierr=",ierr," *****"
-c      endif
       end function fcw_getedim
 
 
@@ -139,9 +126,6 @@ c      endif
      1     retlen,
      2     srcmax, srclen, nmmax, nmlen, timax, tilen, unmax, unlen )
       fcw_getcdim = ierr
-c      if ( ierr.ne.0 ) then
-c         print *,"jfp ***** in fcw_getcdim ierr=",ierr," *****"
-c      endif
       end function fcw_getcdim
 
 
@@ -168,20 +152,16 @@ c     version in older versions of libcdms.
       ierr = fc_setdim( pn, dnain, dunin, pidim, df, dl,
      1     namax, nalen, unmax, unlen )
       fcw_setdim = ierr
-c      if ( ierr.ne.0 ) then
-c         print *,"jfp ***** in fcw_setdim ierr=",ierr," *****"
-c      endif
       end function fcw_setdim
 
 
-      integer function fcw_drstest( ierr )
-      integer new_ierr
+      logical function fcw_drstest( ierr )
+      implicit none
+      integer ierr
+      logical new_ierr
       integer fc_drstest
       new_ierr = fc_drstest( ierr )
       fcw_drstest = new_ierr
-c      if ( ierr.ne.0 ) then
-c         print *,"jfp ***** in fcw_drstest ierr=",ierr," *****"
-c      endif
       end function fcw_drstest
 
 
@@ -200,9 +180,6 @@ c      endif
 ! This problem arises with gfortran 4.6.0 on a Macintosh.
 !      nosense = sin(real(ierr))
       fcw_getdat = ierr
-c      if ( ierr.ne.0 ) then
-c         print *,"jfp ***** in fcw_getdat ierr=",ierr," *****"
-c      endif
       end function fcw_getdat
 
 
@@ -211,12 +188,92 @@ c      endif
       integer ierr, fc_cluvdb
       ierr = fc_cluvdb()
       fcw_cluvdb = ierr
-c      if ( ierr.ne.0 ) then
-c         print *,"jfp ***** in fcw_cluvdb ierr=",ierr," *****"
-c      endif
       return
       end function fcw_cluvdb
 
+      integer function fcw_seterr( pierrlun, preportlevel )
+      implicit none
+      integer pierrlun, preportlevel
+      integer ierr
+      integer fc_seterr
+      ierr = fc_seterr( pierrlun, preportlevel )
+      fcw_seterr = ierr
+      end function fcw_seterr
+
+      integer function fcw_getslab( plu, prank, order, fe, le, slbcycle,
+     1     slbdata, datadim )
+      implicit none
+      integer plu, prank
+      integer order(*), datadim(*)
+      real*4 fe(*), le(*), slbcycle(*)
+      integer slbdata
+      integer ierr
+      integer fc_getslab
+
+      ierr = fc_getslab( plu, prank, order, fe, le, slbcycle, slbdata,
+     1     datadim )
+      fcw_getslab = ierr
+      end function fcw_getslab
+
+      integer function fcw_putdat( plu, data )
+      implicit none
+      integer plu, data, ierr
+      integer fc_putdat
+      ierr = fc_putdat( plu, data )
+      fcw_putdat = ierr
+      end function fcw_putdat
+
+      integer function fcw_putvdim( plu, plen, dimvar, i1, i2 )
+      implicit none
+      integer plu, plen, ierr
+      real*4 dimvar(*)
+      integer i1(*), i2(*)
+      integer fc_putvdim
+      ierr = fc_putvdim( plu, plen, dimvar, i1, i2 )
+      fcw_putvdim = ierr
+      end function fcw_putvdim
+
+      integer function fcw_setvdim( pn, dsoin, dnain, dtiin, dunin,
+     1     pdf, pdl )
+c     Fortran wrapper for cw_setvdim
+c     This is coded in analogy to fcw_setdim; see its comments on pdf, pdl.
+      implicit none
+      integer ierr, pn
+      integer somax, solen, namax, nalen, timax, tilen, unmax, unlen
+      character dsoin*(*), dnain*(*), dtiin*(*), dunin*(*)
+      real*4 pdf,pdl
+      real*8 df,dl
+      integer fc_setvdim
+      
+      df = dble(pdf)
+      dl = dble(pdl)
+      namax = len(dnain)
+      nalen = len_trim(dnain)
+      somax = len(dsoin)
+      solen = len_trim(dsoin)
+      timax = len(dtiin)
+      tilen = len_trim(dtiin)
+      unmax = len(dunin)
+      unlen = len_trim(dunin)
+
+      ierr = fc_setvdim( pn, dsoin, dnain, dtiin, dunin, df, dl,
+     1     somax, solen, namax, nalen, timax, tilen, unmax, unlen )
+      fcw_setvdim = ierr
+      end function fcw_setvdim
+
+      integer function fcw_error( fmtin )
+c     Fortran wrapper for cw_error.  But the only argument this takes is a
+c     format string, no additional arguments.
+      implicit none
+      integer ierr, fc_error, fmtmax, fmtlen
+      character fmtin*(*)
+
+      fmtmax = len( fmtin )
+      fmtlen = len_trim( fmtin )
+      ierr = fc_error( fmtin, fmtlen, fmtmax )
+      fcw_error = ierr
+      end function fcw_error
+>>>>>>> e0dae62f6bb5a3f73ceba8fa314ab3b0387ef039
 
 !!$  interface 
 !!$     function cw_setdim(pn, dnain, dunin, pidim, pdf, pdl, nalen, unlen) result (ierr)

@@ -54,7 +54,7 @@ libdrs.a: $(OBJECTS)
 	ar rv libdrs.a $?
 
 libdrs.so: $(OBJECTS)
-	$(CC) $(ARCHOPT) -headerpad_max_install_names -lgfortran  -L/Users/painter1/bin/uvcdat-2014.10.08//Library/Frameworks/Python.framework/Versions/2.7/lib -L${HOME}/bin/uvcdat-2014.10.08/Externals/lib -lcdms -L/usr/local/lib/ -lnetcdf -lgrib2c -l quadmath -L /usr/local/lib/gcc/x86_64-apple-darwin10.7.0/4.6.0 -lgcc -shared -o libdrs.so $(OBJECTS)
+	$(CC) $(ARCHOPT) -headerpad_max_install_names -lgfortran  -L${UVCDAT_SETUP_PATH}/Library/Frameworks/Python.framework/Versions/2.7/lib -L${UVCDAT_SETUP_PATH}/Externals/lib -lcdms -L/usr/local/lib/ -lnetcdf -lgrib2c -l quadmath -L /usr/local/lib/gcc/x86_64-apple-darwin10.7.0/4.6.0 -lgcc -shared -o libdrs.so $(OBJECTS)
 
 drsdef.h: drsdef.HH
 	$(CPP) -P $(CPPFLAGS) drsdef.HH drsdef.h

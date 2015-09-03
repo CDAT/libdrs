@@ -4,6 +4,7 @@
 #include "drscdf.h"
 #include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 static char namestr1[IDRS_FILENAMELEN];	     /* C-style string for names */
 static char namestr2[IDRS_FILENAMELEN];	     /* C-style string for names */
@@ -14,8 +15,9 @@ static char namestr6[IDRS_FILENAMELEN];	     /* C-style string for names */
 static char namestr7[IDRS_FILENAMELEN];	     /* C-style string for names */
 
 int fstr2cstr( const char * const fstr, char * cstr, const int fstrlen ) {
-  /* copies a Fortran string to a C string.  The Fortran string length should be exclusive
-   of blank padding - that is, the Fortran code should pass something like len_trim(fstr). */
+  /* copies a Fortran string to a new C string.  The Fortran string length should
+     be exclusive of blank padding - that is, the Fortran code should pass something like
+     len_trim(fstr). */
   if ( fstrlen >= IDRS_FILENAMELEN ) {
     printf( "ERROR in string conversion: F str=%s has len=%i but DRS max filename length==%i\n",fstr,fstrlen,IDRS_FILENAMELEN );
     return IDRS_BADCHARLEN;}
@@ -24,7 +26,7 @@ int fstr2cstr( const char * const fstr, char * cstr, const int fstrlen ) {
   return IDRS_SUCCESS;
 }
 int cstr2fstr( const char * const cstr, char * fstr, const int fstrmax ) {
-  /* copies a C string to a Fortran string, padding with blanks as necessary.
+  /* copies a C string to an existing Fortran string, padding with blanks as necessary.
    The Fortran string's length (allocated size) is fstrmax. */
   int i, cstrlen;
   cstrlen = strlen(cstr);
@@ -32,7 +34,6 @@ int cstr2fstr( const char * const cstr, char * fstr, const int fstrmax ) {
     printf( "ERROR in string conversion: C str=%s has len=%i but Fortran max length==%i\n",cstr,cstrlen,fstrmax );
     return IDRS_BADCHARLEN;}
   strncpy( fstr, cstr, cstrlen );
-  //printf("jfp fstr=%s(max %i)\n",fstr,fstrmax);  // sometimes could miss null terminator
   for ( i=cstrlen; i<fstrmax; ++i ) {
     fstr[i] = ' ';
   }
@@ -81,18 +82,6 @@ int fc_setname_( char* isource, char* iname, char* ititle, char* iunits, char* t
   if ( ierr != IDRS_SUCCESS ) return ierr;
 
   ierr = cw_setname( namestr1, namestr2, namestr3, namestr4, namestr5 );
-  if ( ierr != IDRS_SUCCESS ) return ierr;
-
-  /* Don't change input strings - sometimes they're a constant, and they won't be looked at anyway.*/
-  /* ierr = cstr2fstr( namestr1, isource, *srcmax ); */
-  /* if ( ierr != IDRS_SUCCESS ) return ierr; */
-  /* ierr = cstr2fstr( namestr2, iname, *nammax ); */
-  /* if ( ierr != IDRS_SUCCESS ) return ierr; */
-  /* ierr = cstr2fstr( namestr3, ititle, *timax ); */
-  /* if ( ierr != IDRS_SUCCESS ) return ierr; */
-  /* ierr = cstr2fstr( namestr4, iunits, *unmax ); */
-  /* if ( ierr != IDRS_SUCCESS ) return ierr; */
-  /* ierr = cstr2fstr( namestr5, typed, *typmax ); */
   return ierr;
 }
 
@@ -226,8 +215,10 @@ int fc_setdim_( int *pn, char *dnain, char *dunin, int *pidim, double *pdf, doub
 }
 
 
-int fc_drstest_( int ierr ) {
-  return cw_drstest( ierr );
+int fc_drstest_( int *ierr ) {
+  int new_ierr;
+  new_ierr = cw_drstest( *ierr );
+  return new_ierr;
 }
 
 
@@ -241,9 +232,99 @@ int fc_cluvdb_() {
 }
 
 int fcw_inqdict_(int *plu,int *poper){
-  printf("*plu=%i, *poper=%i\n",*plu,*poper);
   return cw_inqdict( *plu, *poper );
 }
 int fcw_cllun_(int *plu){
   return cw_cllun( *plu );
+}
+
+int fc_seterr_( int *pierrlun, int *preportlevel ) {
+  /* Fortran wrapper for cw_seterr.  The arguments are the same are the arguments of cw_seterr,
+     except that they are int* rather than int.
+  */
+  int ierr;
+  ierr = cw_seterr( *pierrlun, *preportlevel );
+  return ierr;
+}
+
+int fc_getslab_( int *plu, int *prank, int* order, float* fe, float* le, float* cycle, void* data,
+		int* datadim ) {
+  /* Fortran wrapper for cw_getslab.  The int and int* arguments of cw_getslab are int* arguments
+     here. The float* arguments of cw_getslab are also float* here.
+  */
+  int ierr;
+  ierr = cw_getslab( *plu, *prank, order, fe, le, cycle, data, datadim );
+  return ierr;
+}
+
+int fc_putdat_( int *plu, void* data ) {
+  /* Fortran wrapper for cw_putdat. */
+  int ierr;
+  ierr = cw_putdat( *plu, data );
+  return ierr;
+}
+
+int fc_putvdim_( int *plu, int *len, float* dimvar, int* i1, int* i2 ) {
+  /* Fortran wrapper for cw_putvdim. */
+  int ierr;
+  ierr = cw_putvdim( *plu, *len, dimvar, i1, i2 );
+  return ierr;
+}
+
+int fc_setvdim_( int *pn, char* dsoin, char* dnain, char* dtiin, char* dunin,
+		 double *pdf, double *pdl,
+		 const int * const somax, const int * const solen,
+		 const int * const nammax, const int * const nalen,
+		 const int * const timmax, const int * const tilen,
+		 const int * const unmax, const int * const unlen )  {
+  /* Fortran wrapper for cw_setvdim. */
+  /* Probably this is like cw_setdim_ in that
+     pdf,pdl were float (not double) in earlier versions of libcdms */
+  int ierr;
+  ierr = fstr2cstr( dsoin, namestr1, *solen );
+  if ( ierr != IDRS_SUCCESS ) return ierr;
+  ierr = fstr2cstr( dnain, namestr2, *nalen );
+  if ( ierr != IDRS_SUCCESS ) return ierr;
+  ierr = fstr2cstr( dtiin, namestr3, *tilen );
+  if ( ierr != IDRS_SUCCESS ) return ierr;
+  ierr = fstr2cstr( dunin, namestr4, *unlen );
+  if ( ierr != IDRS_SUCCESS ) return ierr;
+
+  ierr = cw_setvdim( *pn, namestr1, namestr2, namestr3, namestr4, *pdf, *pdl );
+  if ( ierr != IDRS_SUCCESS ) return ierr;
+  return ierr;
+}
+    
+int fc_varid( int *fileid, char* dsoin, char* dnain, char* dtiin, char* dunin,
+	      const int * const somax, const int * const solen,
+	      const int * const nammax, const int * const nalen,
+	      const int * const timmax, const int * const tilen,
+	      const int * const unmax, const int * const unlen )  {
+  /* Fortran wrapper for cw_varid */
+  /*int cw_varid(int fileid, const char* source, const char* name, const char* title, const char* units)*/
+  int ierr, varid;
+  char *source, *name, *title, *units;
+  ierr = fstr2cstr( dsoin, namestr1, *solen );
+  if ( ierr != IDRS_SUCCESS ) return ierr;
+  ierr = fstr2cstr( dnain, namestr2, *nalen );
+  if ( ierr != IDRS_SUCCESS ) return ierr;
+  ierr = fstr2cstr( dtiin, namestr3, *tilen );
+  if ( ierr != IDRS_SUCCESS ) return ierr;
+  ierr = fstr2cstr( dunin, namestr4, *unlen );
+  if ( ierr != IDRS_SUCCESS ) return ierr;
+
+  varid = cw_varid( *fileid, namestr1, namestr2, namestr3, namestr4 );
+  return varid;
+}
+
+int fc_error_( char *fmtin,
+	       const int * const fmtmax, const int * const fmtlen ) {
+  /* Fortran wrapper for cw_error.  Takes no arguments other than an output string.  */
+  /* void cw_error(char *fmt, ...) */
+  int ierr;
+  ierr = IDRS_SUCCESS;
+  ierr = fstr2cstr( fmtin, namestr1, *fmtlen );
+  if ( ierr != IDRS_SUCCESS ) return ierr;
+  cw_error( namestr1 );
+  return IDRS_SUCCESS;
 }

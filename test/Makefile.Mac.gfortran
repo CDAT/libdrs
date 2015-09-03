@@ -11,8 +11,6 @@
 
 # If you're lucky, this Fortran will work:
 FC = /usr/local/bin/gfortran
-# jfp: I wasn't lucky.  On my Macintosh, I had to install my own Fortran:
-# FC = /usr/caradoc/bin/gfortran
 DRSLIB = ../lib
 DRSINC = $(DRSLIB)
 DRSDIR = $(DRSLIB)
