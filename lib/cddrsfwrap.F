@@ -273,7 +273,6 @@ c     format string, no additional arguments.
       ierr = fc_error( fmtin, fmtlen, fmtmax )
       fcw_error = ierr
       end function fcw_error
->>>>>>> e0dae62f6bb5a3f73ceba8fa314ab3b0387ef039
 
 !!$  interface 
 !!$     function cw_setdim(pn, dnain, dunin, pidim, pdf, pdl, nalen, unlen) result (ierr)
