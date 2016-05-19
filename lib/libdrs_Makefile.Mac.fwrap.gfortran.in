@@ -44,23 +44,23 @@ SOURCES = $(FSOURCES) $(CSOURCES)
 INCLUDES = $(FINCLUDES) $(CINCLUDES)
 #--------------------------------------------------------------------
 
-all: drsdef.h libdrs.a libdrs.so
+all: drsdef.h libdrsfortran.a libdrsfortran.so
 
-shared: drsdef.h libdrs.so
+shared: drsdef.h libdrsfortran.so
 
-libdrs.a: $(OBJECTS)
-	ar rv libdrs.a $?
+libdrsfortran.a: $(OBJECTS)
+	ar rv libdrsfortran.a $?
 
 # formerly in libdrs.so, needed for Fortran->cdms link: -lcdms
-libdrs.so: $(OBJECTS)
-	$(CC) $(ARCHOPT) -headerpad_max_install_names -L/usr/X11R6/lib -L/usr/local/gfortran/lib -lgfortran  -L/usr/local/lib/ -L@cdat_EXTERNALS@/lib -lnetcdf -lgrib2c  -lquadmath -lcdms -shared -lpng15 -ljasper -o libdrs.so $(OBJECTS)
+libdrsfortran.so: $(OBJECTS)
+	$(CC) $(ARCHOPT) -headerpad_max_install_names -L/usr/X11R6/lib -L/usr/local/gfortran/lib -lgfortran  -L/usr/local/lib/ -L@cdat_EXTERNALS@/lib -lnetcdf -lgrib2c  -lquadmath -lcdms -shared -lpng15 -ljasper -o libdrsfortran.so $(OBJECTS)
 
 drsdef.h: drsdef.HH
 	$(CPP) -P $(CPPFLAGS) drsdef.HH drsdef.h
 #--------------------------------------------------------------------
 
-install: libdrs.a
-	cp libdrs.a $(INSTALL_LIB); chmod 644 $(INSTALL_LIB)/libdrs.a
+install: libdrsfortran.a
+	cp libdrsfortran.a $(INSTALL_LIB); chmod 644 $(INSTALL_LIB)/libdrsfortran.a
 	cp drsdef.h $(INSTALL_INC); chmod 644 $(INSTALL_INC)/drsdef.h
 	cp drscdf.h $(INSTALL_INC); chmod 644 $(INSTALL_INC)/drscdf.h
 #	install -f $(INSTALL_LIB) -m 644 libdrs.a
