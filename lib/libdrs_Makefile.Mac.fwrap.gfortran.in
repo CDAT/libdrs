@@ -11,7 +11,7 @@
 
 # DEBUG = -O
 DEBUG = -g -O -save-temps
-FC = /usr/local/bin/gfortran
+FC = gfortran
 CC = gcc
 #ARCHOPT = -arch x86_64
 #ARCHOPT = -arch i386
@@ -53,7 +53,7 @@ libdrsfortran.a: $(OBJECTS)
 
 # formerly in libdrs.so, needed for Fortran->cdms link: -lcdms
 libdrsfortran.so: $(OBJECTS)
-	$(CC) $(ARCHOPT) -headerpad_max_install_names -L/usr/X11R6/lib -L/usr/local/gfortran/lib -lgfortran  -L/usr/local/lib/ -L@cdat_EXTERNALS@/lib -lnetcdf -lgrib2c  -lquadmath -lcdms -shared -lpng -ljasper -o libdrsfortran.so $(OBJECTS)
+	$(CC) $(ARCHOPT) -headerpad_max_install_names -L@cdat_EXTERNALS@/lib -lgfortran -lnetcdf -lgrib2c -lquadmath -lcdms -shared -lpng -ljasper -o libdrsfortran.so $(OBJECTS)
 
 drsdef.h: drsdef.HH
 	$(CPP) -P $(CPPFLAGS) drsdef.HH drsdef.h
