@@ -53,7 +53,7 @@ libdrsfortran.a: $(OBJECTS)
 
 # formerly in libdrs.so, needed for Fortran->cdms link: -lcdms
 libdrsfortran.so: $(OBJECTS)
-	$(CC) $(ARCHOPT) -headerpad_max_install_names -lgfortran -L@cdat_EXTERNALS@/lib -lnetcdf -lgrib2c  -lquadmath -lcdms -shared -lpng -ljasper -o libdrsfortran.so $(OBJECTS)
+	$(CC) $(ARCHOPT) -headerpad_max_install_names -L@cdat_EXTERNALS@/lib -lgfortran -lnetcdf -lgrib2c -lquadmath -lcdms -shared -lpng -ljasper -o libdrsfortran.so $(OBJECTS)
 
 drsdef.h: drsdef.HH
 	$(CPP) -P $(CPPFLAGS) drsdef.HH drsdef.h
