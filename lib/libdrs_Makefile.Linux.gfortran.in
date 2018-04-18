@@ -9,8 +9,8 @@
 
 #jfp was DEBUG = -O
 DEBUG = -g -O
-FC = @FC@
-CC = @CC@
+#FC = @FC@
+#CC = @CC@
 ARCHOPT = -mtune=native
 #ARCHOPT = -arch i386
 #ARCHOPT =
@@ -24,7 +24,7 @@ INSTALL_INC = @cdat_EXTERNALS@/include
 #CPPFLAGS = -Dmac -Dsun -D__linux -D__linux_pgi $(ARCHOPT)
 CPPFLAGS = -D__linux $(ARCHOPT) -fpic
 #CPPFLAGS = -Dmac $(ARCHOPT) -Dsun -byteswapio
-CPP = cpp
+#CPP = cpp
 
 FOBJECTS = getdat.o idenc.o putdat.o clavdb.o getdim.o iflun.o setdim.o getnam.o mvnbc.o cluvdb.o getnd.o bnsrch.o drserr.o seterr.o getind.o compnm.o dictlk.o putvdm.o setnam.o setdat.o setvdm.o getrge.o savdb.o putdat1.o getdat1.o getvdim.o inqlun.o inqdict.o prdict.o rdtrans.o wrtrans.o setrep.o gettbuf.o getrge2.o getelemd.o setcdim.o getcdim.o getedim.o confnm.o putdic.o getpelem.o mimem.o redat.o wrdat.o cllun.o readhd.o writehd.o wrdic.o redic.o aslun.o drssync.o drsreadb.o drsautosync.o midate.o d_floor.o cddrsfwrap.o
 FINCLUDES = drsdef.h drscom.h cycle.h
