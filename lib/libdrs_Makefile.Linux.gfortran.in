@@ -10,15 +10,15 @@
 #jfp was DEBUG = -O
 DEBUG = -g -O
 FC = gfortran
-CC = gcc
+CC = @CC@
 ARCHOPT = -mtune=native
 #ARCHOPT = -arch i386
 #ARCHOPT =
 FOPTS = -fcray-pointer $(ARCHOPT) -W
 # FFLAGS = $(DEBUG) $(FOPTS) -Dsun -D__linux -D__linux_pgi -byteswapio
-FFLAGS = $(DEBUG) $(FOPTS) -Dgfortran -Dsun -D__linux -D__linux_gfortran -fpic
+FFLAGS = @FFLAGS@ $(DEBUG) $(FOPTS) -Dgfortran -Dsun -D__linux -D__linux_gfortran -fpic
 # FFLAGS = $(DEBUG) $(FOPTS) -Dsun -D__linux -D__linux_pgi -Dgfortran -Dmac
-CFLAGS = $(DEBUG) $(ARCHOPT) -Dsun -D__linux -D__linux_gfortran -fpic
+CFLAGS = @CFLAGS@ $(DEBUG) $(ARCHOPT) -Dsun -D__linux -D__linux_gfortran -fpic
 INSTALL_LIB = @cdat_EXTERNALS@/lib
 INSTALL_INC = @cdat_EXTERNALS@/include
 #CPPFLAGS = -Dmac -Dsun -D__linux -D__linux_pgi $(ARCHOPT)
