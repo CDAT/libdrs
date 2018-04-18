@@ -16,9 +16,9 @@ ARCHOPT = -mtune=native
 #ARCHOPT =
 FOPTS = -fcray-pointer $(ARCHOPT) -W
 # FFLAGS = $(DEBUG) $(FOPTS) -Dsun -D__linux -D__linux_pgi -byteswapio
-FFLAGS = ${FFLAGS} $(DEBUG) $(FOPTS) -Dgfortran -Dsun -D__linux -D__linux_gfortran -fpic
+FFLAGS = $(DEBUG) $(FOPTS) -Dgfortran -Dsun -D__linux -D__linux_gfortran -fpic
 # FFLAGS = $(DEBUG) $(FOPTS) -Dsun -D__linux -D__linux_pgi -Dgfortran -Dmac
-CFLAGS = ${CFLAGS} $(DEBUG) $(ARCHOPT) -Dsun -D__linux -D__linux_gfortran -fpic
+CFLAGS = $(DEBUG) $(ARCHOPT) -Dsun -D__linux -D__linux_gfortran -fpic
 INSTALL_LIB = @cdat_EXTERNALS@/lib
 INSTALL_INC = @cdat_EXTERNALS@/include
 #CPPFLAGS = -Dmac -Dsun -D__linux -D__linux_pgi $(ARCHOPT)
