@@ -31,4 +31,6 @@ python ./prep_for_build.py  -b ${BRANCH}
 
 conda build ${PKG_NAME}_c -c conda-forge 
 conda build ${PKG_NAME}_f -c conda-forge 
-anaconda -t $CONDA_UPLOAD_TOKEN upload -u $USER -l $LABEL $CONDA_BLD_PATH/$OS/$PKG_NAME-$VERSION.`date +%Y*`0.tar.bz2 --force
+echo  upload -u $USER -l $LABEL $CONDA_BLD_PATH/$OS/$PKG_NAME-$VERSION.`date +%Y*`0.tar.bz2
+anaconda -t $CONDA_UPLOAD_TOKEN upload -u $USER -l $LABEL $CONDA_BLD_PATH/$OS/${PKG_NAME}_c-$VERSION.`date +%Y*`0.tar.bz2 --force
+anaconda -t $CONDA_UPLOAD_TOKEN upload -u $USER -l $LABEL $CONDA_BLD_PATH/$OS/${PKG_NAME}_f-$VERSION.`date +%Y*`0.tar.bz2 --force
