@@ -70,7 +70,7 @@ workflows:
   libdrs:
       jobs:
         - macos_libdrs
-#        - linux_libdrs
+        - linux_libdrs
 
 
        
