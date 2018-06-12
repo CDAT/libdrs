@@ -54,6 +54,8 @@ drsdef.h: drsdef.HH
 #--------------------------------------------------------------------
 
 install: libdrs.a
+	mkdir -p $(INSTALL_LIB)
+	mkdir -p $(INSTALL_INC)
 	cp libdrs.a $(INSTALL_LIB); chmod 644 $(INSTALL_LIB)/libdrs.a
 	cp drsdef.h $(INSTALL_INC); chmod 644 $(INSTALL_INC)/drsdef.h
 	cp drscdf.h $(INSTALL_INC); chmod 644 $(INSTALL_INC)/drscdf.h
