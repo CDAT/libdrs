@@ -11,8 +11,8 @@
 
 # DEBUG = -O
 DEBUG = -g -O -save-temps
-FC = gfortran
-CC = gcc
+# FC = gfortran
+# CC = gcc
 #ARCHOPT = -arch x86_64
 #ARCHOPT = -arch i386
 ARCHOPT = -m64
