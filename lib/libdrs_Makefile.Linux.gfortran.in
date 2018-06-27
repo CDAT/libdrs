@@ -9,8 +9,8 @@
 
 #jfp was DEBUG = -O
 DEBUG = -g -O
-FC = gfortran
-CC = gcc
+# FC = gfortran
+# CC = gcc
 ARCHOPT = -mtune=native
 #ARCHOPT = -arch i386
 #ARCHOPT =
