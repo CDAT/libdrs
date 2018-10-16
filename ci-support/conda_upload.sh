@@ -26,7 +26,6 @@ git clone git://github.com/CDAT/conda-recipes
 cd conda-recipes
 # uvcdat creates issues for build -c uvcdat confises package and channel
 export BRANCH=${CIRCLE_BRANCH}
-python ./prep_for_build.py  -b ${BRANCH}
 if [[ -d uvcdat ]]; then
     rm -rf uvcdat
 fi
@@ -38,7 +37,11 @@ if [[ -d libdrs_f ]]; then
 fi
 ln -s ../recipe/libdrs_c libdrs_c
 ln -s ../recipe/libdrs_f libdrs_f
+python ./prep_for_build.py  -b ${BRANCH}
+echo "STARTING THE BUILD NOW FOR LIBDRS_C"
 conda build ${PKG_NAME}_c -c conda-forge 
+echo "STARTING THE BUILD NOW FOR LIBDRS_F"
 conda build ${PKG_NAME}_f -c conda-forge 
+echo "OK NOW UPLAODING THIS"
 anaconda -t $CONDA_UPLOAD_TOKEN upload -u $USER -l $LABEL $CONDA_BLD_PATH/$OS/${PKG_NAME}-$VERSION.`date +%Y*`0.tar.bz2 --force
 anaconda -t $CONDA_UPLOAD_TOKEN upload -u $USER -l $LABEL $CONDA_BLD_PATH/$OS/${PKG_NAME}_f-$VERSION.`date +%Y*`0.tar.bz2 --force
