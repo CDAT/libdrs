@@ -36,8 +36,8 @@ fi
 if [[ -d libdrs_f ]]; then
     rm -rf libdrs_f
 fi
-ln -s ../recipe/libdrs_c .
-ln -s ../recipe/libdrs_f .
+ln -s ../recipe/libdrs_c libdrs_c
+ln -s ../recipe/libdrs_f libdrs_f
 conda build ${PKG_NAME}_c -c conda-forge 
 conda build ${PKG_NAME}_f -c conda-forge 
 anaconda -t $CONDA_UPLOAD_TOKEN upload -u $USER -l $LABEL $CONDA_BLD_PATH/$OS/${PKG_NAME}-$VERSION.`date +%Y*`0.tar.bz2 --force
