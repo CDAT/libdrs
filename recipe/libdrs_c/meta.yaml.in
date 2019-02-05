@@ -1,6 +1,8 @@
+{% set name = "libdrs" %}
+
 package:
-    name: libdrs
-    version: @VERSION@
+  name: {{ name|lower }}
+  version: @VERSION@
 
 source:
     git_rev: @UVCDAT_BRANCH@
@@ -8,6 +10,7 @@ source:
 
 build:
   number: @BUILD_NUMBER@
+  skip: True  # [win]
  
 requirements:
   build:
@@ -26,4 +29,22 @@ about:
     license_file: bsd-3-clause.txt
 
 
+test:
+  commands:
+    - test -f $PREFIX/lib/libdrs.a 
 
+about:
+  home:  http://uvcdat.llnl.gov
+  license: CCLRC
+  summary: 'Data Retrieval and Storage DRS software C library'
+  description: |            
+    libdrs is suitable for the data generated and used in climate model research. 
+    It is oriented toward use with models generating very large datasets on 
+    supercomputers, as well as with graphics workstations used for analysis and 
+    display of smaller subsets of data. 
+  dev_url: http://github.com/UV-CDAT/libdrs
+
+extra:
+  recipe-maintainers:
+    - dnadeau4
+    - doutriaux1

@@ -53,8 +53,8 @@ drsdef.h: drsdef.HH
 	$(CPP) -P $(CPPFLAGS) drsdef.HH drsdef.h
 #--------------------------------------------------------------------
 
-install: libdrs.a
-	cp libdrs.a $(INSTALL_LIB); chmod 644 $(INSTALL_LIB)/libdrs.a
+install: libdrs.so
+	cp libdrs.so $(INSTALL_LIB); chmod 644 $(INSTALL_LIB)/libdrs.so
 	cp drsdef.h $(INSTALL_INC); chmod 644 $(INSTALL_INC)/drsdef.h
 	cp drscdf.h $(INSTALL_INC); chmod 644 $(INSTALL_INC)/drscdf.h
 #	install -f $(INSTALL_LIB) -m 644 libdrs.a
