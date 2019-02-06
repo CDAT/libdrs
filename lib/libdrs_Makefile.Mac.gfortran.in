@@ -48,7 +48,7 @@ SOURCES = $(FSOURCES) $(CSOURCES)
 INCLUDES = $(FINCLUDES) $(CINCLUDES)
 #--------------------------------------------------------------------
 
-all: drsdef.h libdrs.a libdrs.so
+all: drsdef.h libdrs.a libdrs.dylib
 
 shared: drsdef.h libdrs.so
 
@@ -56,8 +56,8 @@ libdrs.a: $(OBJECTS)
 	ar rv libdrs.a $?
 
 # formerly in libdrs.so, needed for Fortran->cdms link: -lcdms
-libdrs.so: $(OBJECTS)
-	$(CC) $(ARCHOPT) -headerpad_max_install_names -lgfortran -L@cdat_EXTERNALS@/lib -lnetcdf -lgrib2c  -lquadmath -shared -o libdrs.so $(OBJECTS)
+libdrs.dylib: $(OBJECTS)
+	$(CC) $(ARCHOPT) -headerpad_max_install_names -lgfortran -L@cdat_EXTERNALS@/lib -lnetcdf -lgrib2c  -lquadmath -shared -o libdrs.dylib $(OBJECTS)
 
 drsdef.h: drsdef.HH
 	$(CPP) -P $(CPPFLAGS) drsdef.HH drsdef.h
