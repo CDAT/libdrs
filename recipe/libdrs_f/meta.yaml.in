@@ -1,6 +1,8 @@
+{% set name = "libdrs_f" %}
+
 package:
-    name: libdrs_f
-    version: @VERSION@
+  name: {{ name|lower }}
+  version: @VERSION@
 
 source:
     git_rev: @UVCDAT_BRANCH@
@@ -8,11 +10,13 @@ source:
 
 build:
   number: @BUILD_NUMBER@
- 
+  skip: True  # [win]
+
 requirements:
+
   build:
-    - {{ compiler('c') }}
     - {{ compiler('fortran') }}
+    - {{ compiler('c') }}
   host:
     - g2clib
     - libcdms
@@ -22,10 +26,23 @@ requirements:
     - libcdms
     - libpng
 
+test:
+  commands:
+    - test -f $PREFIX/lib/libdrsfortran.a
+
 about:
-    home:  http://github.com/CDAT/libdrs
-    license: BSD
-    license_file: bsd-3-clause.txt
+  home:  http://uvcdat.llnl.gov
+  license: BSD
+  license_file: bsd-3-clause.txt
+  summary: 'Data Retrieval and Storage DRS software Fortran library'
+  description: |
+    libdrs is suitable for the data generated and used in climate model research.
+    It is oriented toward use with models generating very large datasets on
+    supercomputers, as well as with graphics workstations used for analysis and
+    display of smaller subsets of data.
+  dev_url: http://github.com/CDAT/libdrs
 
-
-
+extra:
+  recipe-maintainers:
+    - dnadeau4
+    - doutriaux1
