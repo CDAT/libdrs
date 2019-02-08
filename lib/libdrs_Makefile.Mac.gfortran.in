@@ -57,7 +57,8 @@ libdrs.a: $(OBJECTS)
 
 # formerly in libdrs.so, needed for Fortran->cdms link: -lcdms
 libdrs.dylib: $(OBJECTS)
-	$(CC) $(ARCHOPT) -headerpad_max_install_names -lgfortran -L@cdat_EXTERNALS@/lib -lnetcdf -lgrib2c  -lquadmath -shared -o libdrs.dylib $(OBJECTS)
+    $(CC) -shared -Wl,-force_load -lgfortran -L@cdat_EXTERNALS@/lib -lnetcdf -lgrib2c  -lquadmath -shared -o libdrs.dylib $(OBJECTS)
+#	$(CC) $(ARCHOPT) -headerpad_max_install_names -lgfortran -L@cdat_EXTERNALS@/lib -lnetcdf -lgrib2c  -lquadmath -shared -o libdrs.dylib $(OBJECTS)
 
 drsdef.h: drsdef.HH
 	$(CPP) -P $(CPPFLAGS) drsdef.HH drsdef.h
