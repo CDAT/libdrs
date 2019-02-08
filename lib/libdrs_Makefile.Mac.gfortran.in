@@ -50,7 +50,7 @@ INCLUDES = $(FINCLUDES) $(CINCLUDES)
 
 all: drsdef.h libdrs.a libdrs.dylib
 
-shared: drsdef.h libdrs.so
+shared: drsdef.h libdrs.dylib
 
 libdrs.a: $(OBJECTS)
 	ar rv libdrs.a $?
@@ -66,7 +66,7 @@ drsdef.h: drsdef.HH
 install: libdrs.a shared
 	mkdir -p $(INSTALL_LIB)
 	mkdir -p $(INSTALL_INC)
-	cp libdrs.so $(INSTALL_LIB); chmod 644 $(INSTALL_LIB)/libdrs.so
+	cp libdrs.dylib $(INSTALL_LIB); chmod 644 $(INSTALL_LIB)/libdrs.dylib
 	cp libdrs.a $(INSTALL_LIB); chmod 644 $(INSTALL_LIB)/libdrs.a
 	cp drsdef.h $(INSTALL_INC); chmod 644 $(INSTALL_INC)/drsdef.h
 	cp drscdf.h $(INSTALL_INC); chmod 644 $(INSTALL_INC)/drscdf.h
