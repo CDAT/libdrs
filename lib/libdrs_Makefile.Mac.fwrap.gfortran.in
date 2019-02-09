@@ -53,7 +53,7 @@ libdrsfortran.a: $(OBJECTS)
 
 # formerly in libdrs.so, needed for Fortran->cdms link: -lcdms
 libdrsfortran.dylib $(OBJECTS)
-	$(CC) -shared -Wl,-force_load ./libdrsfortran.a -L@cdat_EXTERNALS@/lib -lnetcdf -lgrib2c  -lquadmath -lgfortran -shared -o @cdat_EXTERNALS@/lib/libdrsfortran.dylib
+	$(CC) -shared -Wl,-force_load ./libdrsfortran.a -L@cdat_EXTERNALS@/lib -lcdms -lpng -ljasper -lnetcdf -lgrib2c  -lquadmath -lgfortran -shared -o @cdat_EXTERNALS@/lib/libdrsfortran.dylib
 	# $(CC) -shared -o $(LIBDIR)/libdrs.dylib -Wl,-force_load libdrs.a @NCOPTS@ @HDFOPTS@ @DRSOPTS@  @GRIB2LIB@ @LIBS@
 
 drsdef.h: drsdef.HH
