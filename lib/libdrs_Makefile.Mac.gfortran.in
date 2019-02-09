@@ -50,14 +50,16 @@ INCLUDES = $(FINCLUDES) $(CINCLUDES)
 
 all: drsdef.h libdrs.a libdrs.dylib
 
-shared: drsdef.h libdrs.so
+shared: drsdef.h libdrs.dylib
 
 libdrs.a: $(OBJECTS)
 	ar rv libdrs.a $?
 
 # formerly in libdrs.so, needed for Fortran->cdms link: -lcdms
 libdrs.dylib: $(OBJECTS)
-	$(CC) $(ARCHOPT) -headerpad_max_install_names -lgfortran -L@cdat_EXTERNALS@/lib -lnetcdf -lgrib2c  -lquadmath -shared -o libdrs.dylib $(OBJECTS)
+	$(CC) -shared -Wl,-force_load ./libdrs.a -L@cdat_EXTERNALS@/lib -lnetcdf -lgrib2c  -lquadmath -lgfortran -shared -o @cdat_EXTERNALS@/lib/libdrs.dylib
+#   $(CC) $(ARCHOPT) -headerpad_max_install_names -L@cdat_EXTERNALS@/lib -lgfortran -lnetcdf -lgrib2c -lquadmath -lcdms -shared -lpng -ljasper -o @cdat_EXTERNALS@/lib/libdrsfortran.dylib $(OBJECTS)
+#	$(CC) $(ARCHOPT) -headerpad_max_install_names -lgfortran -L@cdat_EXTERNALS@/lib -lnetcdf -lgrib2c  -lquadmath -shared -o libdrs.dylib $(OBJECTS)
 
 drsdef.h: drsdef.HH
 	$(CPP) -P $(CPPFLAGS) drsdef.HH drsdef.h
@@ -66,7 +68,7 @@ drsdef.h: drsdef.HH
 install: libdrs.a shared
 	mkdir -p $(INSTALL_LIB)
 	mkdir -p $(INSTALL_INC)
-	cp libdrs.so $(INSTALL_LIB); chmod 644 $(INSTALL_LIB)/libdrs.so
+	cp libdrs.dylib $(INSTALL_LIB); chmod 644 $(INSTALL_LIB)/libdrs.dylib
 	cp libdrs.a $(INSTALL_LIB); chmod 644 $(INSTALL_LIB)/libdrs.a
 	cp drsdef.h $(INSTALL_INC); chmod 644 $(INSTALL_INC)/drsdef.h
 	cp drscdf.h $(INSTALL_INC); chmod 644 $(INSTALL_INC)/drscdf.h
