@@ -11,8 +11,8 @@
 
 # DEBUG = -O
 DEBUG = -g -O -save-temps
-FC = gfortran
-CC = gcc
+#FC = gfortran
+#CC = gcc
 #ARCHOPT = -arch x86_64
 #ARCHOPT = -arch i386
 ARCHOPT = -m64
@@ -44,16 +44,17 @@ SOURCES = $(FSOURCES) $(CSOURCES)
 INCLUDES = $(FINCLUDES) $(CINCLUDES)
 #--------------------------------------------------------------------
 
-all: drsdef.h libdrsfortran.a libdrsfortran.so
+all: drsdef.h libdrsfortran.a libdrsfortran.dylib
 
-shared: drsdef.h libdrsfortran.so
+shared: drsdef.h libdrsfortran.dylib
 
 libdrsfortran.a: $(OBJECTS)
 	ar rv libdrsfortran.a $?
 
 # formerly in libdrs.so, needed for Fortran->cdms link: -lcdms
-libdrsfortran.so: $(OBJECTS)
-	$(CC) $(ARCHOPT) -headerpad_max_install_names -L@cdat_EXTERNALS@/lib -lgfortran -lnetcdf -lgrib2c -lquadmath -lcdms -shared -lpng -ljasper -o libdrsfortran.so $(OBJECTS)
+libdrsfortran.dylib $(OBJECTS)
+	$(CC) -shared -Wl,-force_load ./libdrsfortran.a -L@cdat_EXTERNALS@/lib -lnetcdf -lgrib2c  -lquadmath -lgfortran -shared -o @cdat_EXTERNALS@/lib/libdrsfortran.dylib
+	# $(CC) -shared -o $(LIBDIR)/libdrs.dylib -Wl,-force_load libdrs.a @NCOPTS@ @HDFOPTS@ @DRSOPTS@  @GRIB2LIB@ @LIBS@
 
 drsdef.h: drsdef.HH
 	$(CPP) -P $(CPPFLAGS) drsdef.HH drsdef.h
