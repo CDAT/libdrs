@@ -25,6 +25,8 @@ requirements:
     - g2clib
     - libcdms
     - libpng
+    - clang [osx]
+    - clang_osx-64 [osx]
 
 test:
   commands:
